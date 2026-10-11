@@ -1,0 +1,7 @@
+interface:
+  display_name: EmberBSD Shared Contributions
+  short_description: Submit a tested shared change through its accepted channel
+  icon_small: "./assets/emberbsd-logo.png"
+  icon_large: "./assets/emberbsd-logo.png"
+  default_prompt: Use $emberbsd-contribute to prepare and submit my authorized shared
+    EmberBSD change.

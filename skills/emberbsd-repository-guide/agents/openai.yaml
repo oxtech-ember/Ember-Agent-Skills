@@ -1,6 +1,7 @@
 interface:
-  display_name: "EmberBSD Repository Guide"
-  short_description: "Build EmberBSD applications and contribute tested fixes"
+  display_name: EmberBSD Repository Guide
+  short_description: Select the repository and skill for an EmberBSD task
   icon_small: "./assets/emberbsd-logo.png"
   icon_large: "./assets/emberbsd-logo.png"
-  default_prompt: "Use $emberbsd-repository-guide to develop my EmberBSD application, verify its dependencies, and test the result."
+  default_prompt: Use $emberbsd-repository-guide to identify the repository and skill
+    for my EmberBSD task.

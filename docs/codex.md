@@ -16,8 +16,8 @@ codex plugin add emberbsd-development@ember-agent-skills
 
 The first command registers the Git catalog, the second lists its packages,
 and the third installs the chosen plugin. The listing should include
-`emberbsd-development@ember-agent-skills` at version `0.3.8`. Start a new
-conversation and select `$emberbsd-repository-guide`. In the desktop app,
+`emberbsd-development@ember-agent-skills` at version `0.4.0`. Start a new
+conversation and select the task skill, such as `$emberbsd-build-kernel`. In the desktop app,
 check the Plugins view for the installed package.
 
 | Identifier | Meaning |
@@ -49,7 +49,7 @@ allows installation; this skills-only package needs no account authentication.
 There is no duplicate `.codex-plugin/plugin.json` overlay. Inline OpenAI
 metadata replaces that entire compatibility overlay when present, as described
 in the [official packaging guide](https://developers.openai.com/plugins/build/plugins).
-The skill's `agents/openai.yaml` adds display text, icons and a suggested prompt.
+Each skill's `agents/openai.yaml` adds display text, icons and a suggested prompt.
 These files do not replace the portable manifest or `SKILL.md`.
 
 ### Icon packaging lesson
@@ -76,7 +76,7 @@ its JSON output does not expose the icon fields.
 ## What was checked
 
 Local consistency, native discovery and native plugin/skill icon path resolution
-passed with **Codex CLI 0.159.2** on **2026-10-11** for package **0.3.8**.
+passed with **Codex CLI 0.159.2** on **2026-10-11** for package **0.4.0**.
 
 ```sh
 ruby scripts/check-package.rb --codex

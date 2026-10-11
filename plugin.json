@@ -1,8 +1,8 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "emberbsd-development",
-  "version": "0.3.8",
-  "description": "Portable Agent Skills for EmberBSD applications, board bring-up, ports, and tested contributions.",
+  "version": "0.4.0",
+  "description": "Task-specific AI skills for EmberBSD applications, kernels, boards, software ports, static base sets, and shared contributions.",
   "author": {
     "name": "neonix20b",
     "url": "https://github.com/neonix20b"
@@ -10,13 +10,20 @@
   "homepage": "https://github.com/oxtech-ember/Ember-Agent-Skills",
   "repository": "https://github.com/oxtech-ember/Ember-Agent-Skills",
   "license": "MIT",
-  "keywords": ["emberbsd", "netbsd", "embedded", "development", "skills", "agent-plugins"],
+  "keywords": [
+    "emberbsd",
+    "netbsd",
+    "embedded",
+    "development",
+    "skills",
+    "agent-plugins"
+  ],
   "extensions": {
     "com.openai": {
       "interface": {
         "displayName": "EmberBSD Development",
         "shortDescription": "Build EmberBSD applications and contribute tested fixes.",
-        "longDescription": "Develop applications using real EmberBSD interfaces and examples. Add your board with boot/build integration and hardware evidence. Validate behavior, contribute reusable fixes and ports through tested PRs, and keep guidance current.",
+        "longDescription": "Select a small skill for application development, GCC16 kernel builds, board support, software ports, static base sets, shared submissions, or AI skill maintenance.",
         "developerName": "neonix20b",
         "category": "Developer Tools",
         "websiteURL": "https://github.com/oxtech-ember/Ember-Agent-Skills",

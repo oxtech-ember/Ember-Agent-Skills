@@ -8,8 +8,9 @@ These primary references were checked on **2026-10-08**.
 
 `plugin.json` identifies `emberbsd-development`; its `$schema` declares the
 Agent Plugins format version. The package's release version is a separate
-field. The shared instructions live in `skills/emberbsd-repository-guide/`,
-with `SKILL.md` and its bundled references.
+field. Each of the eight task skills lives in `skills/<name>/`.
+Each directory contains its own `SKILL.md`, references, metadata, and icon.
+The legacy repository guide is a short selector.
 
 This repository also supplies optional client metadata:
 
@@ -67,7 +68,10 @@ unrelated device operations.
 
 Run `ruby scripts/check-package.rb` from the repository root. It checks this
 package's identity, JSON catalog, skill metadata, icon assets and bundled
-references using Ruby's standard library. It is a consistency check, not a full implementation
+references using Ruby's standard library. It checks all bundled Markdown links
+inside each owning skill, including deep references, and enforces the prose limits
+in [the authoring rules](skill-writing.md). Run `ruby scripts/test-check-package.rb`
+for negative fixtures and parser regressions. It is a consistency check, not a full implementation
 of either specification's validator.
 
 When Codex is available, also run `ruby scripts/check-package.rb --codex` and
@@ -79,10 +83,18 @@ or prove desktop icon rendering.
 The [Codex guide](codex.md) describes that adapter. Record equivalent evidence
 before claiming another client's installation or behavior has been tested.
 
+Select the narrow skill directly from its description. Do not require the
+repository selector first. Install one complete skill directory in isolation
+and verify that its links, metadata, and icon remain usable.
+
 After installing in a test environment, exercise these skill scenarios:
 
 | Prompt or situation | Expected behavior |
 | --- | --- |
+| Cross-build a kernel without an application sysroot | Select `emberbsd-build-kernel`; load its own references only |
+| Create a new application | Select `emberbsd-develop-app`; keep independent application conventions |
+| Build a static base set | Select `emberbsd-build-static-base`; require complete tools and runtime |
+| Edit AI discovery descriptions or icons | Select `emberbsd-maintain-skills`; check all standalone bundles |
 | Operate a device or customize an existing app in personal Ports | Route to EmberBSD-User-Skills; do not require a contribution merely because source editing is involved |
 | Build an application in a user's own repository | Read its conventions, reuse real public interfaces/examples, and keep application code in that repository |
 | A private application discovers a reusable EmberBSD bug | Isolate the minimal fix; preserve private material and obtain publication permission if it is outside the task |
@@ -114,8 +126,20 @@ After installing in a test environment, exercise these skill scenarios:
 These are manual acceptance scenarios. Package discovery alone does not prove
 that an assistant will satisfy them or improve over an unassisted baseline.
 
+On **2026-10-11**, version **0.4.0** passed local consistency and all 21 validator
+regressions. **Codex CLI 0.159.2** discovered all eight skills and resolved every
+plugin and skill icon path. Eight isolated folders passed local reference,
+metadata, icon, and prose checks; all ten bundled shell blocks parsed with `sh -n`.
+All entries remain below the 250-word prose limit.
+
+Read-only source review used OS `d472eb8fecc3ff70b6aa231888b301414985845c` and
+Ports `19ca1d49aae3f6775bba27390aac948e5e277039`. The kernel recipe accepts
+`--kernel` without an application sysroot. The OS builder requires an absolute
+output directory outside its source tree. These source checks do not rerun the
+compiler or establish target execution. Desktop rendering remains untested.
+
 Maintain the reusable rules in the skill's bundled
-[maintenance reference](../skills/emberbsd-repository-guide/references/maintenance.md).
+[maintenance reference](../skills/emberbsd-maintain-skills/references/skill-changes.md).
 Update commands and compatibility cases when a verified change invalidates them.
 Do not copy machine-local build logs, private network addresses or credentials
 into published examples or prompts.

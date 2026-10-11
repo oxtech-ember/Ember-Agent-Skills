@@ -1,0 +1,7 @@
+interface:
+  display_name: EmberBSD GCC16 Kernel Build
+  short_description: Prepare GCC16 tools and cross-build an EmberBSD kernel
+  icon_small: "./assets/emberbsd-logo.png"
+  icon_large: "./assets/emberbsd-logo.png"
+  default_prompt: Use $emberbsd-build-kernel to cross-build my EmberBSD kernel with
+    GCC16 on host and target.

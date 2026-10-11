@@ -1,0 +1,7 @@
+interface:
+  display_name: EmberBSD Application Development
+  short_description: Create an EmberBSD application with verified interfaces
+  icon_small: "./assets/emberbsd-logo.png"
+  icon_large: "./assets/emberbsd-logo.png"
+  default_prompt: Use $emberbsd-develop-app to create and test an application in my
+    repository.
