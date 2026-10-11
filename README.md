@@ -5,7 +5,7 @@ Skills for people building applications with
 packaged with the open [Agent Plugins](https://agent-plugins.org/) format and
 [Agent Skills](https://agentskills.io/home) for compatible development environments.
 
-Version **0.3.7** includes one skill with focused supporting references:
+Version **0.3.8** includes one skill with focused supporting references:
 
 | Skill | Purpose |
 | --- | --- |
@@ -140,17 +140,17 @@ repository `oxtech-ember/Ember-Agent-Skills`; then install the
 
 The catalog resolves to the repository root, where
 `.claude-plugin/plugin.json` exposes the bundled `skills/` directory. The
-Codex catalog and the portable manifest remain unchanged.
+root `plugin.json` remains canonical; each client reads its own catalog.
 
 ### Validation status
 
-Local package checks pass for version **0.3.7**. The `.claude-plugin` catalog
+Local package checks pass for version **0.3.8**. The `.claude-plugin` catalog
 and plugin manifest were verified against the marketplace and plugin manifest
 locations and name rules that the ZCode and Claude Code loaders probe; native
-Codex discovery passed for **0.3.4** with **Codex CLI 0.162.0-alpha.17.2**
-(earlier checks used 0.160.1). These checks do not install into the user's
+Codex discovery and plugin/skill icon path resolution passed for **0.3.8** with
+**Codex CLI 0.159.2** on **2026-10-11**. These checks do not install into the user's
 saved configuration or execute the skill. Installation and behavior in other
-clients have not been tested for this release.
+clients and desktop icon rendering have not been tested for this release.
 
 ## Package structure
 
@@ -163,6 +163,7 @@ assets/emberbsd-logo.png           Marketplace icon, resized from the EmberBSD b
 skills/emberbsd-repository-guide/
   SKILL.md                         Skill instructions and discovery metadata
   agents/openai.yaml               Codex skill presentation
+  assets/emberbsd-logo.png          Bundled skill icon for Codex and standalone installs
   references/developing-applications.md  User application workflow and scope
   references/adding-boards.md       Board bring-up, evidence and contribution workflow
   references/static-builds.md       Static userland: verified flags, race catalog, verification
@@ -197,8 +198,9 @@ ruby scripts/check-package.rb --codex
 
 The Codex check uses a temporary profile and command-line marketplace override.
 It does not register or install the plugin in your saved settings. It checks
-that Codex discovers the intended plugin identifier and version. It does not
-execute the skill or certify acceptance into OpenAI's public directory.
+that Codex discovers the intended plugin identifier and version, and resolves
+the plugin and skill icon paths through `plugin/read`. It does not execute the
+skill, prove desktop rendering or certify acceptance into OpenAI's public directory.
 
 See [portable packaging and validation](docs/packaging.md) before adding skills
 or tools. Client-specific setup is documented separately; the package format

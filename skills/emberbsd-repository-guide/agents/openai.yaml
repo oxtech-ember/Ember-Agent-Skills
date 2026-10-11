@@ -1,4 +1,6 @@
 interface:
   display_name: "EmberBSD Repository Guide"
   short_description: "Build EmberBSD applications and contribute tested fixes"
+  icon_small: "./assets/emberbsd-logo.png"
+  icon_large: "./assets/emberbsd-logo.png"
   default_prompt: "Use $emberbsd-repository-guide to develop my EmberBSD application, verify its dependencies, and test the result."

@@ -16,7 +16,7 @@ codex plugin add emberbsd-development@ember-agent-skills
 
 The first command registers the Git catalog, the second lists its packages,
 and the third installs the chosen plugin. The listing should include
-`emberbsd-development@ember-agent-skills` at version `0.3.7`. Start a new
+`emberbsd-development@ember-agent-skills` at version `0.3.8`. Start a new
 conversation and select `$emberbsd-repository-guide`. In the desktop app,
 check the Plugins view for the installed package.
 
@@ -49,14 +49,34 @@ allows installation; this skills-only package needs no account authentication.
 There is no duplicate `.codex-plugin/plugin.json` overlay. Inline OpenAI
 metadata replaces that entire compatibility overlay when present, as described
 in the [official packaging guide](https://developers.openai.com/plugins/build/plugins).
-The skill's `agents/openai.yaml` adds display text and a suggested prompt.
+The skill's `agents/openai.yaml` adds display text, icons and a suggested prompt.
 These files do not replace the portable manifest or `SKILL.md`.
+
+### Icon packaging lesson
+
+ZCode and Claude Code read the `icon` URL in `.claude-plugin/marketplace.json`.
+Codex reads separate metadata: `extensions.com.openai.interface.composerIcon`
+and `logo` in `plugin.json`, using `./assets/emberbsd-logo.png` relative to the
+**plugin root**. An icon supplied only to the other clients' catalog leaves
+Codex's icon fields empty.
+
+In each skill's `agents/openai.yaml`, `interface.icon_small` and `icon_large`
+use `./assets/emberbsd-logo.png` relative to the **skill directory**, not the
+`agents/` directory. Each skill bundles its own copy so installing that skill
+separately retains the icon. The checker compares these copies with the root
+logo. Use the PNG directly; the existing root SVG wraps an external PNG.
+
+These fields and path bases were checked against Codex's
+[plugin parser](https://github.com/openai/codex/blob/8c0f7011674145da7e10627769fb221c74fbf7a0/codex-rs/core-plugins/src/manifest.rs)
+and [skill metadata reference](https://github.com/openai/codex/blob/8c0f7011674145da7e10627769fb221c74fbf7a0/codex-rs/skills/src/assets/samples/skill-creator/references/openai_yaml.md),
+then exercised with the installed CLI's `plugin/read` app-server method. A
+successful `codex plugin list` only verifies discovery and release metadata;
+its JSON output does not expose the icon fields.
 
 ## What was checked
 
-Native discovery passed with **Codex CLI 0.162.0-alpha.17.2** on **2026-10-09**
-for package **0.3.4**. Earlier package versions were checked with CLI 0.160.1.
-The command syntax was also inspected with the local CLI's help.
+Local consistency, native discovery and native plugin/skill icon path resolution
+passed with **Codex CLI 0.159.2** on **2026-10-11** for package **0.3.8**.
 
 ```sh
 ruby scripts/check-package.rb --codex
@@ -64,9 +84,11 @@ ruby scripts/check-package.rb --codex
 
 The check supplies a temporary profile and a local marketplace through a `-c`
 override, then verifies the discovered plugin ID and release. This prevents an
-installed older release from hiding the candidate in the available list. It
-does not register a source, install or update the user's plugin, or execute
-the skill. See the portable
+installed older release from hiding the candidate in the available list. A
+separate temporary app-server profile reads the candidate through `plugin/read`
+and checks the resolved `composerIcon`, `logo`, `iconSmall` and `iconLarge`
+paths. It does not register a source, install or update the user's plugin, or
+execute the skill. Desktop icon rendering remains unverified. See the portable
 [manual acceptance scenarios](packaging.md#checks-and-evidence) for behavior
 that package discovery cannot establish.
 

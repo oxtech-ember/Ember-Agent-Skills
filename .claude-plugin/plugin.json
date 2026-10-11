@@ -1,6 +1,6 @@
 {
   "name": "emberbsd-development",
-  "version": "0.3.7",
+  "version": "0.3.8",
   "description": "Portable Agent Skills for EmberBSD applications, board bring-up, ports, and tested contributions.",
   "author": {
     "name": "neonix20b",

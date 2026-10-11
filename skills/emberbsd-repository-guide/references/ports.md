@@ -43,6 +43,40 @@ replacing it with a shared library. Preserve functionality rather than silently
 dropping a backend to make the build green. Document any temporary restriction
 and its removal condition; do not label the restricted result fully supported.
 
+## Select host and target compilers
+
+Record the resolved executable, version and target triplet for each compiler
+before building. Inspect CMake/Meson caches as well as `CC`, `CXX`, `HOST_CC`
+and the cross prefix. A preinstalled Linux compiler is an environment input;
+it does not define EmberBSD's development profile. Select the current Ports
+GCC16 explicitly for the requested development workflow. Keep a recorded older
+bootstrap compiler confined to the stage that requires it.
+
+At OS revision `ea4addbc8543cad1f3d0abe2cec1dd4b47ef9cbb`, `build.sh` still
+bootstraps GCC 12.5. The kernel wrapper's cross mode alone therefore does not
+select GCC16. Its `EMBER_EXTERNAL_TOOLCHAIN` selects the GNU cross prefix;
+changing the host's `PATH` or `CC` alone is insufficient. Recheck the
+[OS cross-build guide](https://github.com/oxtech-ember/EmberBSD/blob/main/ember/boot/cross-build.md)
+and the actual wrapper when this source revision changes.
+
+Choose prerequisites by artifact:
+
+| Artifact | Required target inputs |
+| --- | --- |
+| Kernel and modules | The fork's sources, generated kernel headers and matching cross compiler/binutils; no inherent dependency on an installed userland or C++ runtime |
+| Linked C/C++ applications | A provenance-checked EmberBSD sysroot with target libc, startup objects and the selected GCC16 headers/runtime |
+| Host contracts and build generators | Host executables and host libraries; target binaries cannot run merely because their CPU architecture matches |
+
+The [Ports GCC16 cross recipe](https://github.com/oxtech-ember/EmberBSD-Ports/tree/main/profiles/development-toolchain/cross)
+offers a `--kernel` mode without a userland sysroot; its application mode still
+requires provenanced target libc, startup objects and headers/runtime. Use the
+owning recipe instead of creating a private compiler helper or a dummy/mixed
+sysroot. Its host-math helper selects the language mode needed by GMP6.3.0
+and runs the upstream dependency tests while retaining the selected compiler.
+Keep compiler/runtime compatibility repairs in Ports and source-contract fixes
+in the OS, then recheck their callers. Skills select these implementations;
+they do not duplicate temporary setup workarounds.
+
 ## Test what a developer will use
 
 | Change | Useful acceptance evidence |

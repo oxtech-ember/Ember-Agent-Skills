@@ -22,7 +22,8 @@ This repository also supplies optional client metadata:
 | `.agents/plugins/marketplace.json` | Catalog for Codex's marketplace loader |
 | `.claude-plugin/marketplace.json` | Catalog for the ZCode and Claude Code marketplace loaders |
 | `.claude-plugin/plugin.json` | Plugin manifest for ZCode and Claude Code; exposes `skills/` |
-| `assets/emberbsd-logo.png` | Marketplace icon referenced by the ZCode and Claude Code catalog |
+| `assets/emberbsd-logo.png` | Codex plugin icons and the ZCode/Claude Code catalog icon |
+| `skills/*/assets/emberbsd-logo.png` | Bundled Codex skill icons, including standalone skill installs |
 
 Client metadata does not define the skill's workflow. A client uses the
 extensions it understands. The shared package does not need a second manifest
@@ -65,14 +66,16 @@ unrelated device operations.
 ## Checks and evidence
 
 Run `ruby scripts/check-package.rb` from the repository root. It checks this
-package's identity, JSON catalog, skill metadata and bundled references using
-Ruby's standard library. It is a consistency check, not a full implementation
+package's identity, JSON catalog, skill metadata, icon assets and bundled
+references using Ruby's standard library. It is a consistency check, not a full implementation
 of either specification's validator.
 
 When Codex is available, also run `ruby scripts/check-package.rb --codex` and
 record `codex --version`. This uses a temporary profile and command-line
 marketplace configuration, so an installed release cannot mask the candidate.
-It does not register or install the package in saved settings.
+It also checks native plugin and skill icon paths through an isolated app-server
+`plugin/read` request. It does not register or install the package in saved settings
+or prove desktop icon rendering.
 The [Codex guide](codex.md) describes that adapter. Record equivalent evidence
 before claiming another client's installation or behavior has been tested.
 
@@ -93,6 +96,9 @@ After installing in a test environment, exercise these skill scenarios:
 | A tested board contribution is ready | Include its board page and concise catalog/README row with code, checks and a focused PR; do not extend a wide all-board feature matrix |
 | Invoke the installed skill from a different working directory | Read its bundled repository map from the plugin location |
 | pkgsrc carries an older compiler or runtime | Verify current upstream, repair compatibility in Ports and test the affected dependency closure |
+| A Linux host has GCC14 but a GCC16 kernel cross build is requested without a userland sysroot | Verify host and target tools separately, select the GCC16 external prefix, and derive sysroot requirements from the kernel artifact |
+| A shared GCC16 prerequisite needs a compatibility repair | Fix the owning Ports recipe, retain its tests and use the corrected helper rather than copying a workaround into skills |
+| ZCode displays an icon but Codex does not | Inspect Codex plugin and skill icon fields, bundle assets at both path bases, and validate native resolved paths separately from desktop rendering |
 | TinyGo's recipe builds a private LLVM fork | Inspect fork patches/targets before adopting a common LLVM; distinguish an available recipe from a tested compiler |
 | A new compiler introduces two libstdc++ versions in one process | Reject fake SONAME fixes; rebuild and test the coherent runtime/consumer set |
 | A tested port is ready for contribution | Prepare an EmberBSD PR and the reusable upstream change, respecting actual submission and provenance rules |

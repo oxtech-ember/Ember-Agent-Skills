@@ -47,6 +47,12 @@ identified checkout.
 4. For cross-repository changes, identify the shared contract and its owner.
    Keep ABI definitions and build tools with their owning project; call them
    from skills instead of maintaining alternative implementations here.
+5. Before compiler selection or a cross build, read
+   [the toolchain distinctions](references/ports.md#select-host-and-target-compilers).
+   Verify the host compiler, target compiler and runtime separately. A system
+   `cc` or the OS wrapper's bootstrap default does not establish GCC16 readiness.
+   Determine sysroot requirements from the selected artifact, not from another
+   recipe's prerequisites.
 
 ## Make and validate the change
 

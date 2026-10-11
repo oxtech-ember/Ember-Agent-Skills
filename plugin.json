@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "emberbsd-development",
-  "version": "0.3.7",
+  "version": "0.3.8",
   "description": "Portable Agent Skills for EmberBSD applications, board bring-up, ports, and tested contributions.",
   "author": {
     "name": "neonix20b",
@@ -20,6 +20,8 @@
         "developerName": "neonix20b",
         "category": "Developer Tools",
         "websiteURL": "https://github.com/oxtech-ember/Ember-Agent-Skills",
+        "composerIcon": "./assets/emberbsd-logo.png",
+        "logo": "./assets/emberbsd-logo.png",
         "defaultPrompt": [
           "Use $emberbsd-repository-guide to identify the repository and checks for my EmberBSD task."
         ]

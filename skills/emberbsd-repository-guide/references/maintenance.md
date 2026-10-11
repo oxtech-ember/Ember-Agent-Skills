@@ -40,3 +40,22 @@ when they change. Explain prerequisites, a copyable command, expected output,
 and recovery or limits where relevant. Keep portable format checks separate
 from client-specific installation and behavior evidence. Record each tested
 client and version; do not infer package acceptance from a client support list.
+
+## Client icon metadata
+
+When changing these skills or their marketplace, inspect each client's native
+metadata. ZCode/Claude's catalog `icon` URL does not populate Codex icons.
+Codex uses `extensions.com.openai.interface.composerIcon` and `logo` in root
+`plugin.json`, with paths relative to the plugin root. Each skill uses
+`interface.icon_small` and `icon_large` in `agents/openai.yaml`, relative to the
+skill directory. Bundle the PNG inside each skill's `assets/` directory so
+standalone installs retain it; the root SVG's external image is not self-contained.
+
+The package checker verifies these assets and calls Codex's native `plugin/read`
+to check resolved paths. `plugin list` alone does not expose icon fields.
+These paths passed with Codex CLI0.159.2 on 2026-10-11; desktop rendering was
+not tested. Recheck the current parser when the client changes, and refresh an
+installed package through that client's supported workflow after publication.
+See the source package's
+[Codex adapter](https://github.com/oxtech-ember/Ember-Agent-Skills/blob/main/docs/codex.md)
+for parser references and the actual verification command.
