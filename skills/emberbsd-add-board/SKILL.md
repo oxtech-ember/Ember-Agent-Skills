@@ -5,7 +5,7 @@ description: Use when adding an EmberBSD board or checking its kernel, boot, dev
 
 # Add a board
 
-Read the OS AGENTS.md and `ember/boards/adding-a-board.md`.
+Read `README.ember.md` and `ember/boards/adding-a-board.md` in the OS repository.
 Read [board evidence](references/board-evidence.md).
 
 1. Record the exact board model, revision, firmware, and boot path.

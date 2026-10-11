@@ -5,7 +5,7 @@ description: Use when changing EmberBSD AI skill instructions, task boundaries, 
 
 # Maintain AI skills
 
-Read the source package's AGENTS.md and packaging documents.
+Read the source package's README and packaging documents.
 Read [skill changes](references/skill-changes.md).
 For icon faults, read [icon metadata](references/icon-metadata.md).
 

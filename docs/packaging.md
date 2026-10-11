@@ -48,8 +48,7 @@ that client. Record actual client names, versions and checks separately.
 4. Update the README and package version, then run the checks below.
 
 Do not maintain another source copy under a client's skill search directory.
-Install or refresh from these canonical sources. Root `AGENTS.md` governs this
-repository; it is not an instruction file to overwrite in users' applications.
+Install or refresh from these canonical sources. Preserve users' application instructions.
 Retain the MIT notice when redistributing the package or a standalone skill.
 
 ## Add tools when implemented
@@ -126,7 +125,7 @@ After installing in a test environment, exercise these skill scenarios:
 These are manual acceptance scenarios. Package discovery alone does not prove
 that an assistant will satisfy them or improve over an unassisted baseline.
 
-On **2026-10-11**, version **0.4.0** passed local consistency and all 21 validator
+On **2026-10-11**, version **0.4.1** passed local consistency and all 21 validator
 regressions. **Codex CLI 0.159.2** discovered all eight skills and resolved every
 plugin and skill icon path. Eight isolated folders passed local reference,
 metadata, icon, and prose checks; all ten bundled shell blocks parsed with `sh -n`.

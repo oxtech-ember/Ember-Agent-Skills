@@ -2,7 +2,7 @@
 
 Task-specific instructions for AI agents working on [EmberBSD](https://github.com/oxtech-ember/EmberBSD).
 The package uses [Agent Plugins](https://agent-plugins.org/) and [Agent Skills](https://agentskills.io/specification).
-Version **0.4.0** contains eight independently installable skills.
+Version **0.4.1** contains eight independently installable skills.
 
 | Skill | Task |
 | --- | --- |
@@ -33,7 +33,7 @@ before calling them. This package contains no MCP server or device runtime.
 operation, installation, diagnostics, personal application changes, and user GitHub work.
 Editing an existing program for personal use does not require a contribution PR.
 Independent applications keep their own conventions, language, license, and publication scope.
-Root `AGENTS.md` governs this plugin repository. Do not copy it over application instructions.
+Keep the application's existing instructions when you install skills.
 
 ## Add your board
 
@@ -127,7 +127,7 @@ The last command requires Codex. It uses temporary profiles and reads native
 plugin and skill icon paths without changing saved client settings.
 The checks enforce prose limits and skill-local links. They do not certify the
 full ASD-STE100 dictionary or prove assistant behavior, device support, or desktop rendering.
-Version **0.4.0** passed local consistency, 21 validation regressions, native Codex
+Version **0.4.1** passed local consistency, 21 validation regressions, native Codex
 discovery, and all plugin/skill icon paths with **Codex CLI 0.159.2** on **2026-10-11**.
 All eight folders also passed isolated reference, metadata, icon, and prose checks.
 

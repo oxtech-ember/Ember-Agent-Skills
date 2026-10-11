@@ -5,7 +5,7 @@ description: Use when preparing a GCC16 cross compiler or building an EmberBSD k
 
 # Build a GCC16 kernel
 
-Read the OS and Ports AGENTS.md files.
+Read the OS and Ports build guides.
 Read [compiler preparation](references/compiler-preparation.md).
 Read [kernel checks](references/kernel-checks.md).
 

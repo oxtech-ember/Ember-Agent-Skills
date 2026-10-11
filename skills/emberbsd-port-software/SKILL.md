@@ -5,7 +5,7 @@ description: Use when adding or repairing a shared EmberBSD Ports recipe, depend
 
 # Port shared software
 
-Read the Ports AGENTS.md and owning profile.
+Read the Ports README and owning profile.
 Read [recipe checks](references/recipe-checks.md).
 
 1. Verify the selected upstream release and pinned package sources.
@@ -18,8 +18,10 @@ Read [recipe checks](references/recipe-checks.md).
 
 For runtime or media failures, read [runtime checks](references/runtime-checks.md).
 For a known compatibility case, read only the matching [case reference](references/compatibility-cases.md).
-Historical versions are evidence, not permanent version requirements.
-Retest a workaround when its upstream condition changes.
+Use current standard EmberBSD tools and shared supported dependencies.
+Never install older compilers or libraries to satisfy dependency builds.
+Patch incompatible consumers instead of adding parallel legacy versions.
+Historical versions remain evidence.
 
 Use `emberbsd-build-kernel` for kernel compiler preparation.
 Use `emberbsd-personal-ports` for a personal application patch.

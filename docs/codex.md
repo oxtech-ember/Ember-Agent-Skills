@@ -16,7 +16,7 @@ codex plugin add emberbsd-development@ember-agent-skills
 
 The first command registers the Git catalog, the second lists its packages,
 and the third installs the chosen plugin. The listing should include
-`emberbsd-development@ember-agent-skills` at version `0.4.0`. Start a new
+`emberbsd-development@ember-agent-skills` at version `0.4.1`. Start a new
 conversation and select the task skill, such as `$emberbsd-build-kernel`. In the desktop app,
 check the Plugins view for the installed package.
 
@@ -76,7 +76,7 @@ its JSON output does not expose the icon fields.
 ## What was checked
 
 Local consistency, native discovery and native plugin/skill icon path resolution
-passed with **Codex CLI 0.159.2** on **2026-10-11** for package **0.4.0**.
+passed with **Codex CLI 0.159.2** on **2026-10-11** for package **0.4.1**.
 
 ```sh
 ruby scripts/check-package.rb --codex

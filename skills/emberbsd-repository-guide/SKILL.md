@@ -23,6 +23,6 @@ For device operation, select `emberbsd-user-guide` from that package.
 Source editing alone does not require publication.
 
 If the selected skill is absent, read the owning repository's public instructions.
-Read its applicable AGENTS.md before changes.
+Read its README and contribution rules before changes.
 Use verified CLI or API calls.
 Keep private material outside shared changes.

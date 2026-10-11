@@ -5,7 +5,7 @@ description: Use when creating or developing an EmberBSD application or public e
 
 # Develop an application
 
-Read the application's AGENTS.md and build files.
+Read the application's instructions and build files.
 Keep its language, license, and publication scope.
 Read [application checks](references/application-checks.md).
 
