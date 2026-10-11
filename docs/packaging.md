@@ -152,6 +152,7 @@ into published examples or prompts.
 ## Analysis guidance acceptance
 
 On **2026-10-11**, version **0.4.2** passed local consistency and all 21 validator regressions.
+The 0.4.3 add-board first-port guidance passed the same local checks on **2026-10-11**.
 Native discovery and icon resolution passed with **Codex CLI 0.162.0-alpha.17.2**.
 The six development workflows retain skill-local references and the existing eight-skill catalog.
 Manual instruction review covered port baselines, target configuration, unsupported Valgrind platforms,

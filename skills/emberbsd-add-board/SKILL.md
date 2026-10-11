@@ -17,6 +17,10 @@ Read [board evidence](references/board-evidence.md).
 
 A shared SoC does not prove peripheral support.
 A DTS alone does not add an installed DTB or loader entry.
+When the platform has no fork support, run a first port.
+Search upstream NetBSD, mainline Linux device trees, and community ports for prior art.
+Treat GPL code as documentation only.
+Record the boot chain, its image contract, and the console path before kernel code.
 Continue source and build work when physical access is absent.
 State the missing hardware checks.
 

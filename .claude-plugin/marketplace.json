@@ -6,13 +6,13 @@
   },
   "metadata": {
     "description": "AI skills for EmberBSD applications, kernels, boards, software ports, static base sets, and shared submissions.",
-    "version": "0.4.2"
+    "version": "0.4.3"
   },
   "plugins": [
     {
       "name": "emberbsd-development",
       "source": "./",
-      "version": "0.4.2",
+      "version": "0.4.3",
       "description": "Select a task skill for EmberBSD development and verify the result with real tools.",
       "category": "developer-tools",
       "icon": "https://raw.githubusercontent.com/oxtech-ember/Ember-Agent-Skills/main/assets/emberbsd-logo.png"

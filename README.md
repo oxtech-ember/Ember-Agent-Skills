@@ -2,7 +2,7 @@
 
 Task-specific instructions for AI agents working on [EmberBSD](https://github.com/oxtech-ember/EmberBSD).
 The package uses [Agent Plugins](https://agent-plugins.org/) and [Agent Skills](https://agentskills.io/specification).
-Version **0.4.2** contains eight independently installable skills.
+Version **0.4.3** contains eight independently installable skills.
 
 | Skill | Task |
 | --- | --- |
@@ -134,6 +134,7 @@ The checks enforce prose limits and skill-local links. They do not certify the
 full ASD-STE100 dictionary or prove assistant behavior, device support, or desktop rendering.
 Version **0.4.2** passed local consistency, 21 validation regressions, native Codex
 discovery, and all plugin/skill icon paths with **Codex CLI 0.162.0-alpha.17.2** on **2026-10-11**.
+Version **0.4.3** passed the same local checks on **2026-10-11**.
 All eight folders passed skill-local reference, metadata, icon, and prose checks.\nThe new analysis scenarios were reviewed as instructions; assistant execution was not evaluated.
 
 Review the [manual scenarios](docs/packaging.md#checks-and-evidence) after behavior changes.
