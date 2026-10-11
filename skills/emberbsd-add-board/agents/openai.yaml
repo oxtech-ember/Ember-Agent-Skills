@@ -1,0 +1,7 @@
+interface:
+  display_name: EmberBSD Board Development
+  short_description: Add board build and boot support with measured evidence
+  icon_small: "./assets/emberbsd-logo.png"
+  icon_large: "./assets/emberbsd-logo.png"
+  default_prompt: Use $emberbsd-add-board to add my board with build, boot, and hardware
+    evidence.

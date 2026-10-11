@@ -1,208 +1,137 @@
 # Ember Agent Skills
 
-Skills for people building applications with
-[EmberBSD](https://github.com/oxtech-ember/EmberBSD) and their AI coding assistants,
-packaged with the open [Agent Plugins](https://agent-plugins.org/) format and
-[Agent Skills](https://agentskills.io/home) for compatible development environments.
+Task-specific instructions for AI agents working on [EmberBSD](https://github.com/oxtech-ember/EmberBSD).
+The package uses [Agent Plugins](https://agent-plugins.org/) and [Agent Skills](https://agentskills.io/specification).
+Version **0.4.0** contains eight independently installable skills.
 
-Version **0.3.7** includes one skill with focused supporting references:
-
-| Skill | Purpose |
+| Skill | Task |
 | --- | --- |
-| [`emberbsd-repository-guide`](skills/emberbsd-repository-guide/SKILL.md) | Develop applications, add boards, test ports, and contribute reusable fixes with clear evidence |
+| [`emberbsd-repository-guide`](skills/emberbsd-repository-guide/SKILL.md) | Select a repository and task skill when ownership is unclear |
+| [`emberbsd-develop-app`](skills/emberbsd-develop-app/SKILL.md) | Create or develop an application or public example using verified interfaces |
+| [`emberbsd-build-kernel`](skills/emberbsd-build-kernel/SKILL.md) | Prepare GCC16 tools and cross-build a kernel without an application sysroot |
+| [`emberbsd-port-software`](skills/emberbsd-port-software/SKILL.md) | Repair shared recipes and test dependencies and installed consumers |
+| [`emberbsd-add-board`](skills/emberbsd-add-board/SKILL.md) | Integrate board build and boot support with measured hardware evidence |
+| [`emberbsd-build-static-base`](skills/emberbsd-build-static-base/SKILL.md) | Build and inspect a static base set |
+| [`emberbsd-contribute`](skills/emberbsd-contribute/SKILL.md) | Submit an authorized shared change through the accepted channel |
+| [`emberbsd-maintain-skills`](skills/emberbsd-maintain-skills/SKILL.md) | Maintain AI instructions, task boundaries, and client metadata |
 
-This version provides repository and contribution workflows. SDK scaffolding, Wasm packaging,
-documentation search through MCP, and hardware tools are future integrations.
-No MCP server, account connection, or device access is included.
+Each entry has a narrow task description and its own references, client metadata,
+and icon. The old repository-guide name remains a short selector. Its previous
+reference paths remain as small migration notes. No skill requires sibling files.
+Descriptions and procedures use simplified English in the style of ASD-STE100.
+See the [authoring rules](docs/skill-writing.md) for limits and verification boundaries.
 
 ## Purpose and related projects
 
-This repository gives developers and AI coding assistants a maintained workflow for
-building EmberBSD applications, adapting dependencies and contributing tested
-fixes. SDK and Runtime own the application contracts and implementation; skills
-help developers use the available tools and understand their actual results.
+Use the [repository map](skills/emberbsd-repository-guide/references/repositories.md)
+to locate the owning public source. OS builds and drivers belong to EmberBSD.
+Third-party recipes belong to Ports. Public demonstrations belong to Examples.
+SDK and Runtime currently contain design documents; verify implemented interfaces
+before calling them. This package contains no MCP server or device runtime.
 
-[EmberBSD](https://github.com/oxtech-ember/EmberBSD#emberbsd-ecosystem) is the
-central project and the entry point for the ecosystem.
-
-- [EmberBSD](https://github.com/oxtech-ember/EmberBSD) — OS, drivers, boards and system builds.
-- [EmberBSD-Ports](https://github.com/oxtech-ember/EmberBSD-Ports) — third-party recipes, portability patches and native dependencies.
-- [EmberBSD-Examples](https://github.com/oxtech-ember/EmberBSD-Examples) — standalone applications and reproducible demonstrations.
-- [EmberBSD-Runtime](https://github.com/oxtech-ember/EmberBSD-Runtime) — application execution and device operations; design stage.
-- [EmberBSD-SDK](https://github.com/oxtech-ember/EmberBSD-SDK) — application contracts and development tools; design stage.
-
-## Choose the right skills
-
-| Package | Scope |
-| --- | --- |
-| **Ember-Agent-Skills** (`emberbsd-development`) | Application development, OS changes, board bring-up, shared ports and tested contributions |
-| [**EmberBSD-User-Skills**](https://github.com/oxtech-ember/EmberBSD-User-Skills) (`emberbsd-user`) | Device operation, application configuration, diagnostics, personal Ports and the user's GitHub workflows |
-
-Editing and building an existing program for personal use stays in the user
-package. It does not require a contribution PR. Move a reusable fix into this
-developer workflow when that contribution is requested. Both packages can be
-installed; choose by the intended outcome, not simply by the presence of code.
-
-## Rules for developers and their assistants
-
-Start with [developing an application](skills/emberbsd-repository-guide/references/developing-applications.md).
-These public instructions work without the maintainers' private wiki or lab.
-The repository's root `AGENTS.md` governs work on this plugin's sources; the
-installed workflow is in `SKILL.md` and its bundled references. Do not copy our
-root `AGENTS.md` over your application's instructions.
-
-| Your task | Assistant workflow |
-| --- | --- |
-| Build an application using EmberBSD | Work in your repository, follow your conventions, use actual APIs/examples, and document tested build/run commands |
-| Add or validate your board | Inspect the nearest platform, integrate kernel/boot/build changes, record hardware evidence, and contribute a board page through a tested PR |
-| Fix a reusable defect or add a port | Reproduce, implement, test, and open a focused PR from a contribution branch or fork when publication is authorized |
-| Find a bug without a tested fix | Preserve a minimal reproducer and describe the gap; use an authorized issue/report instead of an empty PR |
-| Discover a useful workaround or an obsolete instruction | Update the owning documentation and relevant skill reference with evidence, affected versions and a removal condition |
-
-Contributions to EmberBSD use English, retain licenses and provenance, and
-include relevant checks. Independently owned applications keep their own
-language and licensing choices. A successful build, VM test and physical-board
-test support different claims. See the [contribution workflow](skills/emberbsd-repository-guide/references/contributions.md)
-for PRs to EmberBSD and submissions to the original upstream.
+[EmberBSD-User-Skills](https://github.com/oxtech-ember/EmberBSD-User-Skills) handles
+operation, installation, diagnostics, personal application changes, and user GitHub work.
+Editing an existing program for personal use does not require a contribution PR.
+Independent applications keep their own conventions, language, license, and publication scope.
+Root `AGENTS.md` governs this plugin repository. Do not copy it over application instructions.
 
 ## Add your board
 
-Developers can use this package to bring their own board to EmberBSD. Start with
-the [board catalog](https://github.com/oxtech-ember/EmberBSD/tree/main/ember/boards)
-and [OS contribution guide](https://github.com/oxtech-ember/EmberBSD/blob/main/ember/boards/adding-a-board.md).
-The installed skill includes [the contributor workflow](skills/emberbsd-repository-guide/references/adding-boards.md).
-
-After loading the skill, open your EmberBSD checkout and ask, for example:
-
-> Use the emberbsd-repository-guide skill to add my board to EmberBSD. It is [model and
-> revision] with [SoC], booting through [firmware]. I have [serial console and
-> hardware access]. Compare it with existing support, implement the required
-> changes, test the available hardware, document the limits, and open a PR.
-
-The workflow covers kernel and device-tree/ACPI changes, firmware/boot selection,
-build outputs, validation and public documentation. Your board receives a short
-catalog entry and its own capability page. A shared SoC or successful build alone
-does not establish hardware support. Firmware, credentials and personalized
-images remain subject to their actual licenses and your publication scope.
+Start with `emberbsd-add-board`, the [board catalog](https://github.com/oxtech-ember/EmberBSD/tree/main/ember/boards),
+and the [OS board procedure](https://github.com/oxtech-ember/EmberBSD/blob/main/ember/boards/adding-a-board.md).
+Supply the model, revision, SoC, firmware, serial console, and available hardware access.
+The workflow covers kernel, DTS/ACPI, drivers, output bundles, boot selection, and evidence.
+Keep build, VM, and physical checks separate. A shared SoC does not prove peripheral support.
+An authorized shared change includes the board page and a concise catalog row.
 
 ## Use in your development environment
 
-The package source is
-[`oxtech-ember/Ember-Agent-Skills`](https://github.com/oxtech-ember/Ember-Agent-Skills).
-Choose the loading method your client documents:
+Install the repository root with a client that supports Agent Plugins and skills.
+Select the `emberbsd-development` plugin. Follow that client's documented Git,
+directory, or archive installation method.
 
-1. **Agent Plugins with skills support:** install or import the repository root,
-   which contains `plugin.json` and `skills/`. Select the `emberbsd-development`
-   package. Use the client's supported Git, directory or archive installation
-   method; the standard does not define a universal install command.
-2. **Agent Skills support:** load the complete
-   `skills/emberbsd-repository-guide/` directory through the client's skill
-   installer or documented search path. Keep `references/` beside `SKILL.md`.
-   Copying only the Markdown entry point loses the supporting instructions.
-3. **Manual reading:** ask the assistant to read that `SKILL.md` and its linked
-   references from a checkout. This supplies instructions for the conversation;
-   it does not register the skill for automatic discovery.
+For standalone Agent Skills, install the complete `skills/<name>/` directory.
+Keep its references, `agents/`, and assets together. Retain the MIT notice.
+For manual use, ask the agent to read the selected `SKILL.md` and required references.
+Manual reading does not register automatic discovery.
 
-Check the official [Agent Plugins client list](https://agent-plugins.org/compatible-clients)
-and [Agent Skills client showcase](https://agentskills.io/clients)
-for your environment's documentation. Neither listing is a test receipt for
-this package. Installation, refresh, permissions and invocation syntax remain
-client-specific. Preserve your application's existing instructions.
+Verify that the client lists all eight task names. For example:
 
-For automatic discovery, confirm the client lists `emberbsd-repository-guide`
-and can read its bundled repository map. Ask, for example:
+> Use emberbsd-build-kernel to cross-build my AArch64 EmberBSD kernel with GCC16 on host and target.
 
-> Use the emberbsd-repository-guide skill to build a UART decoder in my
-> application repository for EmberBSD AArch64. Find a suitable public example,
-> check the available interfaces, and document how to build and test it with
-> synthetic input. Report separately what still needs a physical board.
+> Use emberbsd-develop-app to create a UART decoder in my application repository and test synthetic input.
 
-Use your client's explicit skill selector if it has one; `$skill-name` is not
-required by the portable format. Refresh the installed package through the
-same client and verify its version after updates. A source checkout and an
-installed copy may be separate.
+Use the client's explicit selector when available. `$skill-name` is client syntax,
+not a requirement of the portable format. Refresh the installed copy through that
+client and verify its version after updates.
 
 ### Install in Codex
 
-See the [Codex installation and update guide](docs/codex.md) for its marketplace
-commands. This repository includes the catalog used by that client, while the
-canonical package remains the root Agent Plugins manifest.
+The [Codex guide](docs/codex.md) explains marketplace commands and icon path bases.
+
+```sh
+codex plugin marketplace add oxtech-ember/Ember-Agent-Skills --ref main
+codex plugin list --marketplace ember-agent-skills --available --json
+codex plugin add emberbsd-development@ember-agent-skills
+```
+
+These commands use the selected Git ref. An unmerged candidate requires its topic
+ref or a local test marketplace; `main` does not include draft changes.
 
 ### Install in ZCode and Claude Code
 
-Both clients discover the repository through the bundled
-`.claude-plugin/marketplace.json` catalog. In ZCode, open
-**Settings → Plugin Management → Discover**, press **`+`**, and add the GitHub
-repository `oxtech-ember/Ember-Agent-Skills`; then install the
-**emberbsd-development** plugin from the listing. In Claude Code, use
-`/plugin marketplace add oxtech-ember/Ember-Agent-Skills` followed by
-`/plugin install emberbsd-development@ember-agent-skills`.
+Both clients use `.claude-plugin/marketplace.json`. In ZCode, add
+`oxtech-ember/Ember-Agent-Skills` in **Settings → Plugin Management → Discover**
+and install **emberbsd-development**. In Claude Code:
 
-The catalog resolves to the repository root, where
-`.claude-plugin/plugin.json` exposes the bundled `skills/` directory. The
-Codex catalog and the portable manifest remain unchanged.
+```text
+/plugin marketplace add oxtech-ember/Ember-Agent-Skills
+/plugin install emberbsd-development@ember-agent-skills
+```
 
-### Validation status
-
-Local package checks pass for version **0.3.7**. The `.claude-plugin` catalog
-and plugin manifest were verified against the marketplace and plugin manifest
-locations and name rules that the ZCode and Claude Code loaders probe; native
-Codex discovery passed for **0.3.4** with **Codex CLI 0.162.0-alpha.17.2**
-(earlier checks used 0.160.1). These checks do not install into the user's
-saved configuration or execute the skill. Installation and behavior in other
-clients have not been tested for this release.
+The catalog points to the repository root. The Claude plugin manifest exposes `skills/`.
+The root `plugin.json` remains the canonical portable manifest.
 
 ## Package structure
 
 ```text
-.agents/plugins/marketplace.json   Codex marketplace catalog; points to ./
-.claude-plugin/marketplace.json    ZCode and Claude Code marketplace catalog
-.claude-plugin/plugin.json         ZCode and Claude Code plugin manifest
-plugin.json                        Agent Plugins manifest; optional client metadata
-assets/emberbsd-logo.png           Marketplace icon, resized from the EmberBSD branding logo
-skills/emberbsd-repository-guide/
-  SKILL.md                         Skill instructions and discovery metadata
-  agents/openai.yaml               Codex skill presentation
-  references/developing-applications.md  User application workflow and scope
-  references/adding-boards.md       Board bring-up, evidence and contribution workflow
-  references/static-builds.md       Static userland: verified flags, race catalog, verification
-  references/repositories.md       Public repository ownership map
-  references/ports.md              Current tools, porting checks and verified cases
-  references/contributions.md      Tested EmberBSD/upstream submission workflow
-  references/maintenance.md        Evidence, refresh and workaround retirement
-scripts/check-package.rb           Local consistency and native discovery checks
-docs/packaging.md                  Portable format and validation boundaries
-docs/codex.md                      Codex installation and metadata
-LICENSE                           MIT
+plugin.json                       Portable manifest and OpenAI plugin metadata
+.agents/plugins/marketplace.json  Codex catalog
+.claude-plugin/                   ZCode and Claude Code adapters
+assets/emberbsd-logo.png          Plugin icon
+skills/<name>/SKILL.md            One task and its discovery condition
+skills/<name>/references/         Only that task's bundled instructions
+skills/<name>/agents/openai.yaml  Codex skill presentation
+skills/<name>/assets/             Standalone skill icon
+scripts/check-package.rb         Package, prose, link, and optional native checks
+scripts/test-check-package.rb    Validation regressions
+docs/skill-writing.md             Task boundaries and simplified English rules
+docs/packaging.md                 Packaging and behavior scenarios
+docs/codex.md                     Codex commands and evidence
 ```
 
-The Codex, ZCode and Claude Code marketplace catalogs share this repository;
-each client reads its own. Other clients can load the portable package without
-using those catalogs. A future EmberBSD Wasm marketplace would distribute
-device applications, a different kind of package.
+The AI plugin marketplace distributes agent skills. A proposed EmberBSD Wasm
+application catalog is a separate SDK/Runtime contract.
 
 ## Validate a checkout
 
-Ruby with its standard library is sufficient for the consistency checks:
+Use Ruby with its standard library:
 
 ```sh
+ruby scripts/test-check-package.rb
 ruby scripts/check-package.rb
-```
-
-To additionally check discovery with your installed Codex CLI:
-
-```sh
 ruby scripts/check-package.rb --codex
 ```
 
-The Codex check uses a temporary profile and command-line marketplace override.
-It does not register or install the plugin in your saved settings. It checks
-that Codex discovers the intended plugin identifier and version. It does not
-execute the skill or certify acceptance into OpenAI's public directory.
+The last command requires Codex. It uses temporary profiles and reads native
+plugin and skill icon paths without changing saved client settings.
+The checks enforce prose limits and skill-local links. They do not certify the
+full ASD-STE100 dictionary or prove assistant behavior, device support, or desktop rendering.
+Version **0.4.0** passed local consistency, 21 validation regressions, native Codex
+discovery, and all plugin/skill icon paths with **Codex CLI 0.159.2** on **2026-10-11**.
+All eight folders also passed isolated reference, metadata, icon, and prose checks.
 
-See [portable packaging and validation](docs/packaging.md) before adding skills
-or tools. Client-specific setup is documented separately; the package format
-and workflow do not require Codex.
+Review the [manual scenarios](docs/packaging.md#checks-and-evidence) after behavior changes.
 
 ## License
 

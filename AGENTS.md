@@ -3,10 +3,18 @@
 This public repository packages developer skills for EmberBSD. Use English for
 all source, documentation, comments, and commit messages.
 
-- The installed skills address developers and external contributors. Keep
-  that guidance in `SKILL.md` and bundled references; this file is for editing
+- The installed skills instruct AI agents assisting developers and external
+  contributors. Use concise task triggers, conditional actions and verified
+  CLI/API commands; link owning tools instead of duplicating implementations.
+  Keep that guidance in `SKILL.md` and bundled references; this file is for editing
   the plugin repository. Do not export private maintainer permissions, lab
   paths or personal assistant rules as requirements for users' applications.
+- Use one task per skill. Follow [the authoring rules](docs/skill-writing.md).
+  Use ASD-STE100-style English: short active sentences, one instruction per
+  sentence, and consistent technical terms. Keep CLI/API literals exact.
+  Keep descriptions within 25 words, entry prose within 250 words, reference
+  prose within 500 words, and procedural sentences within 20 words.
+  Keep every bundled link within the owning skill for standalone installation.
 - User operations and personal Ports customization belong to EmberBSD-User-Skills.
   Source editing alone does not make a personal change a shared contribution.
 - Read `README.md` and `docs/packaging.md` before changing plugin packaging.

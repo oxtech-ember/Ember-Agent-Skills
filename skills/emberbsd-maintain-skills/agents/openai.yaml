@@ -1,0 +1,7 @@
+interface:
+  display_name: EmberBSD AI Skill Maintenance
+  short_description: Maintain small AI skills and client package metadata
+  icon_small: "./assets/emberbsd-logo.png"
+  icon_large: "./assets/emberbsd-logo.png"
+  default_prompt: Use $emberbsd-maintain-skills to update the AI skill package and
+    verify its task boundaries.

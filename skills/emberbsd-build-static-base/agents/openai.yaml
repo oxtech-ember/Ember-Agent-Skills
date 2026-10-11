@@ -1,0 +1,7 @@
+interface:
+  display_name: EmberBSD Static Base Build
+  short_description: Build and check a statically linked EmberBSD base set
+  icon_small: "./assets/emberbsd-logo.png"
+  icon_large: "./assets/emberbsd-logo.png"
+  default_prompt: Use $emberbsd-build-static-base to build and inspect my static EmberBSD
+    base set.

@@ -5,15 +5,15 @@
     "url": "https://github.com/neonix20b"
   },
   "metadata": {
-    "description": "Agent Skills for EmberBSD development: applications, boards, ports and tested contributions.",
-    "version": "0.3.7"
+    "description": "AI skills for EmberBSD applications, kernels, boards, software ports, static base sets, and shared submissions.",
+    "version": "0.4.0"
   },
   "plugins": [
     {
       "name": "emberbsd-development",
       "source": "./",
-      "version": "0.3.7",
-      "description": "Develop EmberBSD applications, add boards, maintain ports, and contribute tested fixes with clear evidence.",
+      "version": "0.4.0",
+      "description": "Select a task skill for EmberBSD development and verify the result with real tools.",
       "category": "developer-tools",
       "icon": "https://raw.githubusercontent.com/oxtech-ember/Ember-Agent-Skills/main/assets/emberbsd-logo.png"
     }
