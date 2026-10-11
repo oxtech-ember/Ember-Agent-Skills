@@ -3,8 +3,10 @@
 This public repository packages developer skills for EmberBSD. Use English for
 all source, documentation, comments, and commit messages.
 
-- The installed skills address developers and external contributors. Keep
-  that guidance in `SKILL.md` and bundled references; this file is for editing
+- The installed skills instruct AI agents assisting developers and external
+  contributors. Use concise task triggers, conditional actions and verified
+  CLI/API commands; link owning tools instead of duplicating implementations.
+  Keep that guidance in `SKILL.md` and bundled references; this file is for editing
   the plugin repository. Do not export private maintainer permissions, lab
   paths or personal assistant rules as requirements for users' applications.
 - User operations and personal Ports customization belong to EmberBSD-User-Skills.

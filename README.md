@@ -1,7 +1,7 @@
 # Ember Agent Skills
 
-Skills for people building applications with
-[EmberBSD](https://github.com/oxtech-ember/EmberBSD) and their AI coding assistants,
+Instructions for AI agents helping people develop
+[EmberBSD](https://github.com/oxtech-ember/EmberBSD) applications and components,
 packaged with the open [Agent Plugins](https://agent-plugins.org/) format and
 [Agent Skills](https://agentskills.io/home) for compatible development environments.
 
@@ -166,7 +166,7 @@ skills/emberbsd-repository-guide/
   assets/emberbsd-logo.png          Bundled skill icon for Codex and standalone installs
   references/developing-applications.md  User application workflow and scope
   references/adding-boards.md       Board bring-up, evidence and contribution workflow
-  references/static-builds.md       Static userland: verified flags, race catalog, verification
+references/static-builds.md       Static userland: flags, source checks and deployment evidence
   references/repositories.md       Public repository ownership map
   references/ports.md              Current tools, porting checks and verified cases
   references/contributions.md      Tested EmberBSD/upstream submission workflow

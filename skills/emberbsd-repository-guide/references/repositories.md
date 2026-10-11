@@ -1,31 +1,26 @@
-# EmberBSD repository ownership
+# Repository ownership
 
-These are ownership boundaries, not a support matrix. Inspect the current
-checkout and release documentation before relying on an implementation.
+Use this map to route changes; verify implementations in the selected checkout.
 
 | Repository | Owns |
 | --- | --- |
-| [EmberBSD](https://github.com/oxtech-ember/EmberBSD) | OS sources, drivers, board support, firmware integration, OS builds and checks |
-| [EmberBSD-Ports](https://github.com/oxtech-ember/EmberBSD-Ports) | Third-party recipes, source hashes, portability patches, pkgsrc overlays, common dependency profiles, and package build probes |
+| [EmberBSD](https://github.com/oxtech-ember/EmberBSD) | OS, drivers, board/firmware integration, system builds/checks |
+| [EmberBSD-Ports](https://github.com/oxtech-ember/EmberBSD-Ports) | Third-party recipes, hashes, patches, pkgsrc overlays and dependency profiles |
 | [EmberBSD-Examples](https://github.com/oxtech-ember/EmberBSD-Examples) | Standalone applications and reproducible demonstrations |
-| [EmberBSD-Runtime](https://github.com/oxtech-ember/EmberBSD-Runtime) | Application execution, installation, lifecycle, and shared device operations |
-| [EmberBSD-SDK](https://github.com/oxtech-ember/EmberBSD-SDK) | Application API/ABI, package contracts, developer tools, and compatibility checks |
-| [Ember-Agent-Skills](https://github.com/oxtech-ember/Ember-Agent-Skills) | Developer assistant instructions, tool adapters, and skill packaging |
-| [EmberBSD-User-Skills](https://github.com/oxtech-ember/EmberBSD-User-Skills) | User operations, application configuration, diagnostics, personal Ports and GitHub workflows |
+| [EmberBSD-Runtime](https://github.com/oxtech-ember/EmberBSD-Runtime) | Application installation, execution, lifecycle and shared device operations |
+| [EmberBSD-SDK](https://github.com/oxtech-ember/EmberBSD-SDK) | Application API/ABI, package contracts, developer tools/checks |
+| [Ember-Agent-Skills](https://github.com/oxtech-ember/Ember-Agent-Skills) | Developer AI instructions, adapters and skill packaging |
+| [EmberBSD-User-Skills](https://github.com/oxtech-ember/EmberBSD-User-Skills) | Operations, diagnostics, personal Ports and GitHub workflows |
 
-Examples own executable demonstrations; tutorials explain a learning sequence.
-Start from the [central project map](https://github.com/oxtech-ember/EmberBSD)
-and verify current repository contents. Ports owns adaptations to external
-software; changes to kernel interfaces remain in the OS repository.
-This package guides development assistants. EmberBSD-User-Skills guides device
-users and their local or remote assistants, including personal source changes.
-Neither package implements an on-device agent or supplies its runtime.
+Find an existing checkout first. Inspect tracked files and relevant definitions:
 
-The Agent Plugins package in this repository distributes developer skills.
-Its Codex marketplace catalog is one client adapter.
-An EmberBSD Wasm application catalog would distribute programs for devices and
-would use the application contracts owned by SDK and Runtime.
+```sh
+git -C "$repo" ls-files
+rg -n "$interface_or_command" "$repo"
+```
 
-SDK/Runtime instructions require actual released or checked-out interfaces.
-Until those exist for a task, use the available OS or example sources and state
-the missing contract explicitly. Do not infer an `ember` CLI from project names.
+SDK/Runtime currently contain design documents; verify source/releases before
+calling an API. Project names do not imply an `ember` CLI or hardware MCP server.
+Neither skills package implements an on-device agent. Agent Plugins distributes
+AI skills; a proposed Wasm application catalog is a separate SDK/Runtime contract.
+Use public project sources; a private wiki is not a prerequisite for these skills.

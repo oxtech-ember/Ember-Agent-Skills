@@ -1,93 +1,66 @@
-# Tested contributions to EmberBSD and upstream
+# Tested contributions
 
-Use this for a completed fix, new port, or reusable compatibility adaptation.
-The workflow applies to both EmberBSD repositories and the original upstream.
-Task-specific user instructions and the accepting project's current rules take
-precedence over a remembered branch or submission convention.
+Apply this to an authorized shared fix/port/example/documentation contribution.
+Personal application or Ports work does not require publication. If publication
+is outside task scope, complete a reviewable patch before requesting permission.
 
-For external contributions, use a topic branch based on the target's accepted
-base. Use the contributor's fork when they lack branch access. Inspect remotes
-before pushing; do not assume `origin` is either a personal fork or the official
-repository. Push that branch and open a PR against the verified target/base.
-Do not push directly to the upstream default branch merely because the local
-checkout uses it. Explicit maintainer workflows are separate from this default.
+## Inspect, test, submit
 
-Apply this workflow to reusable fixes, ports, examples and documentation offered
-to EmberBSD. It does not require publishing an application that merely uses
-EmberBSD. Complete an authorized contribution through PR creation after testing;
-if publication was not requested or permitted, prepare the patch and ask at that
-point. No skill installation alone grants publication or deployment permission.
+1. Identify owner, accepted base, existing issue/PR and current
+   AGENTS/CONTRIBUTING, tests, license and AI policy. A GitHub mirror may accept
+   only mailing-list patches or problem reports.
+2. Reproduce and fix the cause; retain a failing-before/passing-after regression.
+   A port needs real build/install/runtime evidence; package claims additionally
+   need install/remove/reinstall. Documentation needs instruction/link checks.
+3. Inspect remotes and changes. Use a topic branch; use a fork without upstream
+   branch access. Preserve unrelated work, authorship and private material.
+4. Run relevant checks on the proposed revision; real failures remain failures.
+   State unavailable validation and use a draft only when the target permits it.
+5. Push the verified topic branch and open/update the focused contribution.
+   Respect branch protection; do not overwrite others or auto-merge.
 
-## Before opening a PR
+For a GitHub PR target, set `repo`, `target` (`owner/name`), `base`, `branch`,
+`push_remote`, `source_owner`, `head` and `title` from inspected metadata.
+`source_owner` is the head repository's owner; CLI `head` is the branch for a
+same-repository PR or fork-owner:branch for a fork. Use an absolute `body_file`:
 
-1. Reproduce the issue or establish the requested behavior. Identify the owning
-   component and check for an existing fix, issue or PR before duplicating it.
-2. Read the target's current CONTRIBUTING/AGENTS guidance, supported branches,
-   required tests, patch format, licensing and AI-assistance policy. Verify that
-   the repository accepts PRs rather than assuming its GitHub mirror does.
-3. Implement the smallest complete change. Keep fixes, tests and necessary user
-   instructions together; split independent changes into separate contributions.
-4. Run relevant tests on the exact proposed revision. For a bug fix, show the
-   regression failing before and passing after. For a port, demonstrate build,
-   installation and a useful runtime scenario, with untested targets stated
-   explicitly. A source probe installed to a private prefix remains a probe;
-   a package claim also needs package install/remove/reinstall checks. A
-   documentation change needs link and instruction checks,
-   not an unrelated full OS build.
-5. Recheck the diff for unrelated files, generated binaries and private data.
-   Preserve upstream authorship and disclose AI assistance accurately.
-6. Open the tested contribution against the correct branch. Prefer updating an
-   existing related PR over creating a duplicate. Follow branch protection and
-   do not force-push, overwrite another developer's work or merge automatically.
-
-A genuine failing test remains a failure. Diagnose and fix it before presenting
-the contribution as ready. If required validation is unavailable, state the
-precise gap; only submit a draft when the task and target workflow permit it.
-A reproduced bug without a fix can justify an issue through the target's normal
-channel; do not create an empty PR to satisfy this rule.
-
-## Put the change in the right place
-
-An EmberBSD PR carries the recipe or fix needed by the project. A reusable
-upstream PR carries the minimal change against the original project's current
-accepted base, without EmberBSD-only packaging or unrelated adaptations.
-Test that rebased upstream change separately and cross-link both submissions.
-One passing downstream build does not establish upstream acceptance.
-
-If the project uses a mailing list, patch queue or problem report, use that
-documented channel instead of a PR to a mirror. Check task authorization before
-messages to new external recipients. Keep a prepared patch and report an exact
-permission or policy block rather than silently skipping the contribution.
-
-For example, the [pkgsrc submission guide](https://www.netbsd.org/docs/pkgsrc/submit.html)
-describes pkgsrc-wip, pkglint and a `pkg` problem report. The
-[NetBSD commit rules](https://www.netbsd.org/developers/commit-guidelines.html)
-require prior written core approval for committing LLM-generated code. Checked
-2026-10-06: re-read the applicable policy before submission. Do not conceal AI
-origin or treat tests as a substitute for required upstream approval.
-
-## Write a useful description
-
-Lead with the concrete problem and the resulting behavior. Explain why the
-change belongs here, how to reproduce it, what was tested, and what remains
-unverified. Follow the repository's own template; the following is a fallback:
-
-```markdown
-## Problem and change
-Concrete trigger, previous behavior, and resulting behavior.
-
-## Reproduce and validate
-- Source/base and tested commit:
-- OS, architecture, toolchain and relevant dependency versions:
-- Commands and actual results (including before/after regression):
-- Runtime/hardware limits and skipped tests:
-
-## Provenance and maintenance
-Original source/release and hashes for a port; patch authorship and license.
-AI assistance, upstream issue/PR links, and workaround removal condition.
+```sh
+git -C "$repo" status --short
+git -C "$repo" diff --check
+gh api -X GET "repos/$target/pulls" -f state=open -f head="$source_owner:$branch" -f base="$base" \
+    --jq '.[] | {number, html_url}'
+git -C "$repo" push -u "$push_remote" "$branch"
 ```
 
-Scale the description to the change; do not add irrelevant empty sections.
-Record the returned URL and actual state: prepared, submitted, reviewed, merged,
-or released. These states are not interchangeable. Handle review findings with
-focused fixes and relevant checks, then update the same PR and instructions.
+Set `number` from a unique matching PR, or empty if none; inspect ambiguous results.
+Update the match or create the missing PR:
+
+```sh
+if [ -n "$number" ]; then
+    gh api --method PATCH "repos/$target/pulls/$number" \
+        -f title="$title" -F body=@"$body_file"
+else
+    (cd "$repo" && gh pr create --repo "$target" --base "$base" --head "$head" \
+        --title "$title" --body-file "$body_file")
+fi
+```
+
+Write the exact description to `body_file` first;
+use the repository template.
+Lead with trigger and resulting behavior, then tested revision/platform/tools,
+commands/results, limits and provenance. Record returned URL and actual state:
+prepared, submitted, reviewed, merged or released. Address reviews in that PR.
+
+## Upstream and evidence
+
+An EmberBSD change includes project integration. A reusable upstream change is
+a minimal patch against upstream's current accepted base; test it separately and
+cross-link submissions. Send through its real channel only when authorized.
+A reproduced unfixed bug belongs in an authorized issue/report, not an empty PR.
+
+Read current [pkgsrc submission rules](https://www.netbsd.org/docs/pkgsrc/submit.html)
+for pkgsrc-wip/pkglint/problem reports and
+[NetBSD AI/commit policy](https://www.netbsd.org/developers/commit-guidelines.html)
+before submission. Prior written core approval for committing LLM-generated code
+was required when checked 2026-10-06; recheck the policy and disclose assistance.
+Tests do not replace an accepting project's approval.
