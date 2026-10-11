@@ -52,4 +52,3 @@ client and version; do not infer package acceptance from a client support list.
 - Run `ruby scripts/check-package.rb --codex` in each package. It checks assets
   and native `plugin/read` paths using temporary profiles. Do not infer desktop
   rendering from CLI results; use client help for installed-package refresh.
-
