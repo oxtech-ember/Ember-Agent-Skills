@@ -120,6 +120,11 @@ After installing in a test environment, exercise these skill scenarios:
 | A media fixture decodes every frame despite a truncated trailer | Check the trusted fixture length and decoder diagnostics as well as frames, timestamps and EOF |
 | A QEMU guest's `/netbsd` differs from the host's direct boot input | Record the loader-selected artifact and its hash; do not identify the running kernel from the guest file alone |
 | A gpsd PTY check fails in a single-user VM | Check PTY/ptyfs preparation before patching gpsd; synthetic tests do not establish receiver support |
+| A C/C++ port adds a memory warning | Compare pinned upstream and patched findings with the same target settings; repair the cause with a regression |
+| A Cppcheck run uses host headers for an EmberBSD target | Correct the compilation database, target ABI, macros and includes before interpreting the result |
+| Valgrind is unavailable for the host or target | Record the exact support gap and alternative memory checks; never report a Valgrind pass |
+| A kernel driver passes a user-space memory model | Keep native kernel, DMA, concurrency and hardware acceptance separate |
+| An analyzer warns in imported code | Record ownership and impact; justify only narrow suppressions and retain unsuppressed new defects |
 | Upstream removes the reason for a workaround | Retest and remove obsolete patch/guidance; preserve the source and acceptance state |
 
 These are manual acceptance scenarios. Package discovery alone does not prove
@@ -143,3 +148,12 @@ Update commands and compatibility cases when a verified change invalidates them.
 Do not copy machine-local build logs, private network addresses or credentials
 into published examples or prompts.
 
+
+## Analysis guidance acceptance
+
+On **2026-10-11**, version **0.4.2** passed local consistency and all 21 validator regressions.
+Native discovery and icon resolution passed with **Codex CLI 0.162.0-alpha.17.2**.
+The six development workflows retain skill-local references and the existing eight-skill catalog.
+Manual instruction review covered port baselines, target configuration, unsupported Valgrind platforms,
+kernel-contract limits, and inherited findings. No assistant behavior trial or desktop rendering check was run.
+These checks validate the guidance package, not any downstream program's memory safety.

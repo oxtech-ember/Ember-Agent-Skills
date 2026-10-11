@@ -31,3 +31,27 @@ The 2026-10-06 policy required prior written core approval for committing LLM-ge
 Recheck that rule.
 Disclose assistance.
 Tests do not replace the accepting project's approval.
+
+## Source and memory analysis
+
+For C/C++ changes, include Cppcheck results for the affected source and tests.
+For ports, compare the pinned upstream sources with the patched sources.
+Do not require executable checks for documentation-only changes.
+Use actual target headers, macros, ABI, and compile options, preferably from a compilation database.
+Add GCC `-fanalyzer` for C and Clang Static Analyzer for C/C++ where supported.
+Check analyzer support in the selected compiler version.
+Run executable tests with Valgrind Memcheck on a supported platform.
+Enable leak and uninitialized-value checks with a nonzero error exit status.
+Valgrind checks execution, not source text.
+If Valgrind is unavailable, record the platform gap and applicable ASan/UBSan or kernel checks.
+Do not label substitute checks as a Valgrind pass.
+Fix confirmed defects with regressions.
+Track unresolved inherited findings with their owner and impact.
+Explain each targeted suppression; do not disable whole diagnostic categories.
+Record tool versions, commands, scope, findings, and untested paths.
+Static analysis and memory checks supplement runtime and hardware acceptance.
+
+Tool references: [Cppcheck](https://cppcheck.sourceforge.io/manual.html),
+[GCC analyzer](https://gcc.gnu.org/onlinedocs/gcc/Static-Analyzer-Options.html),
+[Clang analyzer](https://clang.llvm.org/docs/ClangStaticAnalyzer.html),
+and [Valgrind platforms](https://valgrind.org/info/platforms.html).
