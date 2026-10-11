@@ -8,8 +8,8 @@ description: "Guide EmberBSD application development, board bring-up, shared por
 Establish where a change belongs and what the current sources actually support.
 Use this guide before selecting an EmberBSD build command, API, or example.
 
-These are instructions for EmberBSD developers and external contributors. They do
-not confer maintainer privileges or replace the user's project instructions.
+Assist EmberBSD developers and external contributors through available CLI/API
+tools. Preserve the user's project instructions and actual permissions.
 For an application in the user's own repository, read
 [developing applications](references/developing-applications.md). Keep its code
 there; route reusable fixes and ports to the owning EmberBSD repository.
@@ -47,12 +47,9 @@ identified checkout.
 4. For cross-repository changes, identify the shared contract and its owner.
    Keep ABI definitions and build tools with their owning project; call them
    from skills instead of maintaining alternative implementations here.
-5. Before compiler selection or a cross build, read
-   [the toolchain distinctions](references/ports.md#select-host-and-target-compilers).
-   Verify the host compiler, target compiler and runtime separately. A system
-   `cc` or the OS wrapper's bootstrap default does not establish GCC16 readiness.
-   Determine sysroot requirements from the selected artifact, not from another
-   recipe's prerequisites.
+5. For compiler/cross work, use the
+   [Ports CLI selection](references/ports.md#select-host-and-target-compilers).
+   Verify host/target/runtime identities; choose kernel or application mode.
 
 ## Make and validate the change
 

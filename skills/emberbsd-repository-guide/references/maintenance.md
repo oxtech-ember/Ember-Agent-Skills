@@ -43,19 +43,13 @@ client and version; do not infer package acceptance from a client support list.
 
 ## Client icon metadata
 
-When changing these skills or their marketplace, inspect each client's native
-metadata. ZCode/Claude's catalog `icon` URL does not populate Codex icons.
-Codex uses `extensions.com.openai.interface.composerIcon` and `logo` in root
-`plugin.json`, with paths relative to the plugin root. Each skill uses
-`interface.icon_small` and `icon_large` in `agents/openai.yaml`, relative to the
-skill directory. Bundle the PNG inside each skill's `assets/` directory so
-standalone installs retain it; the root SVG's external image is not self-contained.
+- `plugin.json`: set `extensions.com.openai.interface.composerIcon` and `logo`;
+  resolve `./assets/emberbsd-logo.png` from the plugin root.
+- `agents/openai.yaml`: set `interface.icon_small` and `icon_large`; resolve the
+  same path from each skill root and bundle its PNG for standalone installation.
+- ZCode/Claude's catalog `icon` does not populate Codex. Use the bundled PNG;
+  the root SVG references an external image.
+- Run `ruby scripts/check-package.rb --codex` in each package. It checks assets
+  and native `plugin/read` paths using temporary profiles. Do not infer desktop
+  rendering from CLI results; use client help for installed-package refresh.
 
-The package checker verifies these assets and calls Codex's native `plugin/read`
-to check resolved paths. `plugin list` alone does not expose icon fields.
-These paths passed with Codex CLI0.159.2 on 2026-10-11; desktop rendering was
-not tested. Recheck the current parser when the client changes, and refresh an
-installed package through that client's supported workflow after publication.
-See the source package's
-[Codex adapter](https://github.com/oxtech-ember/Ember-Agent-Skills/blob/main/docs/codex.md)
-for parser references and the actual verification command.

@@ -45,37 +45,29 @@ and its removal condition; do not label the restricted result fully supported.
 
 ## Select host and target compilers
 
-Record the resolved executable, version and target triplet for each compiler
-before building. Inspect CMake/Meson caches as well as `CC`, `CXX`, `HOST_CC`
-and the cross prefix. A preinstalled Linux compiler is an environment input;
-it does not define EmberBSD's development profile. Select the current Ports
-GCC16 explicitly for the requested development workflow. Keep a recorded older
-bootstrap compiler confined to the stage that requires it.
+Resolve the paths below from the owning [Ports recipe](https://github.com/oxtech-ember/EmberBSD-Ports/tree/main/profiles/development-toolchain/cross).
+Inspect `CC`, `CXX`, `HOST_CC`, cached CMake/Meson compilers and loaded runtimes.
+Verify host and target identities separately; require GCC16 for this workflow:
 
-At OS revision `ea4addbc8543cad1f3d0abe2cec1dd4b47ef9cbb`, `build.sh` still
-bootstraps GCC 12.5. The kernel wrapper's cross mode alone therefore does not
-select GCC16. Its `EMBER_EXTERNAL_TOOLCHAIN` selects the GNU cross prefix;
-changing the host's `PATH` or `CC` alone is insufficient. Recheck the
-[OS cross-build guide](https://github.com/oxtech-ember/EmberBSD/blob/main/ember/boot/cross-build.md)
-and the actual wrapper when this source revision changes.
+```sh
+command -v gcc g++
+gcc -dumpfullversion
+gcc -dumpmachine
+HOST_CC=gcc HOST_CXX=g++ \
+    sh "$ports/profiles/development-toolchain/cross/build.sh" --kernel \
+    "$pkgsrc" "$gcc_archive" "$tools" "$host_math" "$work"
+"$work/toolchain/bin/aarch64--netbsd-gcc" -dumpfullversion
+"$work/toolchain/bin/aarch64--netbsd-gcc" -dumpmachine
+HOST_CC=gcc HOST_CXX=g++ CC=gcc EMBER_EXTERNAL_TOOLCHAIN="$work/toolchain" \
+    sh "$os/ember/build-kernel.sh" "$output" EMBER64
+```
 
-Choose prerequisites by artifact:
-
-| Artifact | Required target inputs |
-| --- | --- |
-| Kernel and modules | The fork's sources, generated kernel headers and matching cross compiler/binutils; no inherent dependency on an installed userland or C++ runtime |
-| Linked C/C++ applications | A provenance-checked EmberBSD sysroot with target libc, startup objects and the selected GCC16 headers/runtime |
-| Host contracts and build generators | Host executables and host libraries; target binaries cannot run merely because their CPU architecture matches |
-
-The [Ports GCC16 cross recipe](https://github.com/oxtech-ember/EmberBSD-Ports/tree/main/profiles/development-toolchain/cross)
-offers a `--kernel` mode without a userland sysroot; its application mode still
-requires provenanced target libc, startup objects and headers/runtime. Use the
-owning recipe instead of creating a private compiler helper or a dummy/mixed
-sysroot. Its host-math helper selects the language mode needed by GMP6.3.0
-and runs the upstream dependency tests while retaining the selected compiler.
-Keep compiler/runtime compatibility repairs in Ports and source-contract fixes
-in the OS, then recheck their callers. Skills select these implementations;
-they do not duplicate temporary setup workarounds.
+- Kernel/modules: use `--kernel`; no application sysroot. The OS bootstrap
+  defaults to GCC12.5; verify the actual external prefix instead of trusting `cc`.
+- Linked applications: use the recipe's sysroot mode and compile/target test
+  helpers; require provenanced libc, startup objects and matching GCC16 runtime.
+- Never create a dummy/mixed sysroot or silently select GCC12/14. Fix shared
+  compatibility in Ports/OS, retain their tests, and call the corrected tools.
 
 ## Test what a developer will use
 
