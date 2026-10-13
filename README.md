@@ -110,6 +110,8 @@ skills/<name>/agents/openai.yaml  Codex skill presentation
 skills/<name>/assets/             Standalone skill icon
 scripts/check-package.rb         Package, prose, link, and optional native checks
 scripts/test-check-package.rb    Validation regressions
+scripts/org-grep                 Search every organization repository and report coverage
+scripts/org-grep-test            Offline regressions for org-grep
 docs/skill-writing.md             Task boundaries and simplified English rules
 docs/packaging.md                 Packaging and behavior scenarios
 docs/codex.md                     Codex commands and evidence

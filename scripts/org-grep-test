@@ -1,0 +1,76 @@
+#!/usr/bin/env bash
+# org-grep-test: run org-grep against toy local remotes, no network.
+# Covers: match with path and coverage; empty answer with full coverage (exit 1); several patterns;
+# case; new commit pickup; update failure (old copy, NOT UPDATED line, exit 3 instead of 1);
+# first-clone failure; output limit; usage error (exit 2); an empty repository is not a failure.
+set -u
+SUT="${1:-$(cd "$(dirname "$0")" && pwd)/org-grep}"
+T=$(mktemp -d); trap 'rm -rf "$T"' EXIT
+fail=0; n=0
+ok() { n=$((n + 1)); echo "ok    $1"; }
+no() { n=$((n + 1)); echo "FAIL  $1 — $2"; fail=1; }
+R="$T/remote"; mkdir -p "$R"
+mk() { # mk <name>: repository with branch main and one commit
+  git init -q -b main "$R/$1"
+  git -C "$R/$1" config user.email t@t; git -C "$R/$1" config user.name t
+}
+commit() { git -C "$R/$1" add -A && git -C "$R/$1" commit -q -m "$2"; }
+mk alpha; printf 'Raspberry Pi 5 notes\nBCM2712\n' > "$R/alpha/doc.md"; commit alpha c1
+mk beta;  printf 'nothing here\n' > "$R/beta/x.txt"; commit beta c1
+printf 'alpha main\nbeta main\n' > "$T/list"
+export ORG_GREP_CACHE="$T/cache" ORG_GREP_REPO_LIST="$T/list" ORG_GREP_REMOTE_BASE="file://$R" ORG_GREP_ORG=toy
+run() { OUT=$("$SUT" "$@" 2>&1); RC=$?; }
+
+run raspberry
+[ $RC -eq 0 ] && ok "match: exit 0" || no "match: exit 0" "rc=$RC"
+echo "$OUT" | grep -q '^alpha/doc.md:1:' && ok "path as repository/file:line" || no "path as repository/file:line" "$OUT"
+echo "$OUT" | grep -qE '^ +alpha +main +[0-9a-f]{7} ' && echo "$OUT" | grep -qE '^ +beta +main +[0-9a-f]{7} ' \
+  && ok "coverage: both repositories with SHA" || no "coverage: both repositories with SHA" "$OUT"
+echo "$OUT" | grep -q 'issues, pull requests and other branches were not searched' && ok "coverage limits are stated" || no "coverage limits are stated" "$OUT"
+
+run RASPBERRY
+[ $RC -eq 0 ] && ok "case does not matter" || no "case does not matter" "rc=$RC"
+
+run zzzqq
+[ $RC -eq 1 ] && ok "no match, full coverage: exit 1" || no "no match, full coverage: exit 1" "rc=$RC"
+echo "$OUT" | grep -q '0 matches' && echo "$OUT" | grep -qE '^ +beta ' && ok "an empty answer carries the coverage" || no "an empty answer carries the coverage" "$OUT"
+
+run bcm2712 nothing zzzqq
+echo "$OUT" | grep -q "'bcm2712': 1 matches" && echo "$OUT" | grep -q "'nothing': 1 matches" \
+  && echo "$OUT" | grep -q "'zzzqq': 0 matches" && ok "several patterns: a count for each" || no "several patterns: a count for each" "$OUT"
+
+printf 'rpi4 uses bcm2711\n' >> "$R/alpha/doc.md"; commit alpha c2
+run bcm2711
+[ $RC -eq 0 ] && echo "$OUT" | grep -q 'doc.md:3:' && ok "new commit is picked up" || no "new commit is picked up" "rc=$RC $OUT"
+
+mv "$R/beta" "$R/beta.gone"
+run zzzqq
+[ $RC -eq 3 ] && ok "update failure without matches: exit 3, not 1" || no "update failure without matches: exit 3, not 1" "rc=$RC"
+echo "$OUT" | grep -qE 'beta .*NOT UPDATED' && ok "NOT UPDATED line for beta" || no "NOT UPDATED line for beta" "$OUT"
+run raspberry
+[ $RC -eq 0 ] && echo "$OUT" | grep -q 'NOT UPDATED' && ok "update failure with a match: exit 0 and a warning" || no "update failure with a match: exit 0 and a warning" "rc=$RC"
+mv "$R/beta.gone" "$R/beta"
+
+printf 'gamma main\n' >> "$T/list"
+run zzzqq
+[ $RC -eq 3 ] && echo "$OUT" | grep -qE 'gamma .*NOT UPDATED' && ok "first-clone failure: exit 3" || no "first-clone failure: exit 3" "rc=$RC $OUT"
+mk gamma; printf 'x\n' > "$R/gamma/f"; commit gamma c1
+run zzzqq
+[ $RC -eq 1 ] && ok "after the remote is fixed: exit 1" || no "after the remote is fixed: exit 1" "rc=$RC $OUT"
+
+printf 'empty null\n' >> "$T/list"
+run zzzqq
+[ $RC -eq 1 ] && echo "$OUT" | grep -qE 'empty .*empty repository' && ok "empty repository is noted, not a failure" || no "empty repository is noted, not a failure" "rc=$RC $OUT"
+
+for i in $(seq 1 50); do echo "hit $i"; done > "$R/alpha/many.txt"; commit alpha c3
+run --max 5 'hit'
+[ "$(echo "$OUT" | grep -c '^alpha/many.txt:')" -eq 5 ] && echo "$OUT" | grep -q 'showing 5 of 50' && ok "output limit with an honest count" || no "output limit with an honest count" "$OUT"
+
+run -i -E 'raspberry|zzzqq'
+[ $RC -eq 0 ] && ok "usual -i and -E are accepted" || no "usual -i and -E are accepted" "rc=$RC $OUT"
+
+run
+[ $RC -eq 2 ] && ok "no pattern: exit 2" || no "no pattern: exit 2" "rc=$RC"
+
+echo; echo "$n checks, $([ $fail -eq 0 ] && echo all passed || echo some failed)"
+exit $fail

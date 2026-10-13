@@ -1,0 +1,116 @@
+#!/usr/bin/env bash
+# org-grep: search every repository of a GitHub organization and report what was covered.
+#
+# Why: `gh search code` can return 0 for words that exist in new or private repositories, so an
+# empty answer proves nothing. Here ripgrep searches local shallow copies and the report always
+# lists which repositories were searched, at which commit, and when each copy was updated.
+#
+# Exit codes: 0 matches found; 1 no matches and full coverage; 2 usage error;
+#             3 no matches but coverage is incomplete (update or repository list failed).
+# simplified: default branch only; issues and pull requests are not searched. When they matter,
+#             use `gh search issues` and `gh pr list`.
+set -u
+ORG="${ORG_GREP_ORG:-oxtech-ember}"
+CACHE="${ORG_GREP_CACHE:-${XDG_CACHE_HOME:-$HOME/.cache}/ember-org-grep}"
+BASE="${ORG_GREP_REMOTE_BASE:-https://github.com/$ORG}"
+MAX=40; FIXED=""; SYNC=1; PATS=()
+
+usage() {
+  cat <<EOF
+Usage: org-grep [--no-sync] [-F] [--max N] <pattern> [<pattern>...]
+  Search (case-insensitive regex; -F for a plain string) the copies of all $ORG repositories
+  and print the coverage. With several patterns, each gets its own match count.
+  For a board question, also search the SoC name (Raspberry Pi 4B: bcm2711).
+  Exit codes: 0 matches; 1 none, full coverage; 2 usage error; 3 none, incomplete coverage.
+  Copies live in $CACHE (ORG_GREP_CACHE). --no-sync skips the update and searches old copies.
+  -i and -E are accepted and ignored: the search is already case-insensitive and uses regex.
+EOF
+}
+
+while [ $# -gt 0 ]; do
+  case "$1" in
+    -h|--help) usage; exit 0 ;;
+    --no-sync) SYNC=0 ;;
+    -F) FIXED="-F" ;;
+    -i|-E) ;;
+    --max) shift; case "${1:-}" in ''|*[!0-9]*) echo "org-grep: --max needs a number" >&2; exit 2 ;; esac; MAX="$1" ;;
+    --) shift; PATS+=("$@"); break ;;
+    -*) echo "org-grep: unknown option $1" >&2; usage >&2; exit 2 ;;
+    *) PATS+=("$1") ;;
+  esac
+  shift
+done
+[ ${#PATS[@]} -gt 0 ] || { usage >&2; exit 2; }
+command -v rg >/dev/null || { echo "org-grep: ripgrep (rg) is required" >&2; exit 2; }
+
+gitc() { git -c credential.helper='!gh auth git-credential' "$@"; }
+mkdir -p "$CACHE/.state" || exit 2
+
+LISTFAIL=""
+if [ -n "${ORG_GREP_REPO_LIST:-}" ]; then
+  LIST=$(cat "$ORG_GREP_REPO_LIST")
+elif LIST=$(gh repo list "$ORG" --limit 200 --json name,defaultBranchRef \
+      --jq '.[] | "\(.name) \(.defaultBranchRef.name)"' 2>&1); then :
+else
+  LISTFAIL="$(echo "$LIST" | tail -1)"
+  # simplified: on a list failure use the copies already present; new repositories stay invisible
+  LIST=$(for d in "$CACHE"/*/; do [ -d "$d/.git" ] && echo "$(basename "$d") $(git -C "$d" rev-parse --abbrev-ref HEAD)"; done)
+fi
+
+NAMES=(); LINES=(); INCOMPLETE=""
+while read -r name branch; do
+  [ -n "${name:-}" ] || continue
+  dir="$CACHE/$name"
+  if [ "$branch" = "null" ]; then
+    LINES+=("$(printf '  %-18s %s' "$name" 'empty repository, nothing to search')"); continue
+  fi
+  err=""
+  if [ "$SYNC" -eq 1 ]; then
+    if [ ! -d "$dir/.git" ]; then
+      err=$(gitc clone -q --depth 1 --branch "$branch" --single-branch "$BASE/$name" "$dir" 2>&1 </dev/null) || err="${err:-clone failed}"
+    else
+      err=$(gitc -C "$dir" fetch -q --depth 1 origin "$branch" 2>&1 </dev/null && git -C "$dir" reset -q --hard FETCH_HEAD 2>&1) || err="${err:-update failed}"
+    fi
+    [ -z "$err" ] && date -u +%Y-%m-%dT%H:%MZ > "$CACHE/.state/$name"
+  fi
+  if [ ! -d "$dir/.git" ]; then
+    LINES+=("$(printf '  %-18s %-8s %-7s NOT UPDATED: no copy%s' "$name" "$branch" '-' "${err:+ ($(echo "$err" | tail -1))}")")
+    INCOMPLETE=1; continue
+  fi
+  NAMES+=("$name")
+  sha=$(git -C "$dir" rev-parse --short=7 HEAD 2>/dev/null || echo '?')
+  when=$(cat "$CACHE/.state/$name" 2>/dev/null || echo 'unknown')
+  if [ -n "$err" ]; then
+    LINES+=("$(printf '  %-18s %-8s %-7s NOT UPDATED: %s (copy from %s)' "$name" "$branch" "$sha" "$(echo "$err" | tail -1)" "$when")")
+    INCOMPLETE=1
+  elif [ "$SYNC" -eq 0 ]; then
+    LINES+=("$(printf '  %-18s %-8s %-7s not updated by request, copy from %s' "$name" "$branch" "$sha" "$when")")
+  else
+    LINES+=("$(printf '  %-18s %-8s %-7s updated %s' "$name" "$branch" "$sha" "$when")")
+  fi
+done <<< "$LIST"
+[ -n "$LISTFAIL" ] && INCOMPLETE=1
+
+echo "Coverage ($ORG, default branch; issues, pull requests and other branches were not searched):"
+printf '%s\n' "${LINES[@]}"
+[ -n "$LISTFAIL" ] && echo "  NOT UPDATED: repository list unavailable ($LISTFAIL); new repositories are not covered"
+[ "$SYNC" -eq 0 ] && INCOMPLETE=1
+
+TOTAL=0
+for p in "${PATS[@]}"; do
+  out=$(cd "$CACHE" && rg -n -i --no-heading --hidden --no-ignore --glob '!.git' \
+        --max-columns 200 --max-columns-preview $FIXED -e "$p" -- "${NAMES[@]}" 2>/dev/null)
+  cnt=$(printf '%s' "$out" | grep -c . || true)
+  TOTAL=$((TOTAL + cnt))
+  echo
+  if [ "$cnt" -gt "$MAX" ]; then
+    echo "Pattern '$p': $cnt matches (showing $MAX of $cnt; narrow the pattern or use --max)"
+  else
+    echo "Pattern '$p': $cnt matches"
+  fi
+  [ "$cnt" -gt 0 ] && printf '%s\n' "$out" | head -n "$MAX"
+done
+
+[ "$TOTAL" -gt 0 ] && exit 0
+[ -n "$INCOMPLETE" ] && { echo; echo "No matches, but coverage is incomplete: absence is not proven."; exit 3; }
+exit 1
