@@ -6,12 +6,18 @@ Verify the selected repository's implemented commands and interfaces.
 | Repository | Owns |
 | --- | --- |
 | [EmberBSD](https://github.com/oxtech-ember/EmberBSD) | OS, drivers, boards, firmware integration, system builds |
+| [EmberBSD-DevBoards](https://github.com/oxtech-ember/EmberBSD-DevBoards) | Hardware references for boards, carriers, SoCs, interfaces, and bootloaders |
 | [EmberBSD-Ports](https://github.com/oxtech-ember/EmberBSD-Ports) | Recipes, source hashes, patches, pkgsrc overlays, dependency profiles |
 | [EmberBSD-Examples](https://github.com/oxtech-ember/EmberBSD-Examples) | Public applications and reproducible demonstrations |
 | [EmberBSD-Runtime](https://github.com/oxtech-ember/EmberBSD-Runtime) | Planned application execution and lifecycle tools |
 | [EmberBSD-SDK](https://github.com/oxtech-ember/EmberBSD-SDK) | Planned application contracts and developer tools |
 | [Ember-Agent-Skills](https://github.com/oxtech-ember/Ember-Agent-Skills) | Developer AI skills, adapters, packaging |
 | [EmberBSD-User-Skills](https://github.com/oxtech-ember/EmberBSD-User-Skills) | Device operations, diagnostics, personal changes, user GitHub work |
+
+DevBoards helps developers adapt reference platforms to their own devices.
+Start with its [reader guide](https://github.com/oxtech-ember/EmberBSD-DevBoards/blob/main/docs/reader-guide.md) and [catalog](https://github.com/oxtech-ember/EmberBSD-DevBoards/blob/main/catalog.json).
+Check current support in the [OS board catalog](https://github.com/oxtech-ember/EmberBSD/tree/main/ember/boards).
+OS and Ports remain the owners of implementation and executable checks.
 
 Find an existing checkout first.
 Set `repo` to its path.

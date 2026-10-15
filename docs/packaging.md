@@ -123,6 +123,8 @@ After installing in a test environment, exercise these skill scenarios:
 | A C/C++ port adds a memory warning | Compare pinned upstream and patched findings with the same target settings; repair the cause with a regression |
 | A Cppcheck run uses host headers for an EmberBSD target | Correct the compilation database, target ABI, macros and includes before interpreting the result |
 | Valgrind is unavailable for the host or target | Record the exact support gap and alternative memory checks; never report a Valgrind pass |
+| Research a custom carrier using DevBoards | Read the exact carrier and board sources; check design transfer assumptions and keep implementation checks in OS/Ports |
+| A related board has a different bootloader | Follow the selected board's loader contract; do not infer its image format from the SoC |
 | A kernel driver passes a user-space memory model | Keep native kernel, DMA, concurrency and hardware acceptance separate |
 | An analyzer warns in imported code | Record ownership and impact; justify only narrow suppressions and retain unsuppressed new defects |
 | Upstream removes the reason for a workaround | Retest and remove obsolete patch/guidance; preserve the source and acceptance state |
@@ -170,3 +172,12 @@ controls, separated host/guest budgets, and left historical equivalence unverifi
 These are fresh-context response trials, not executed port migrations or a statistical benchmark.
 The source method is linked from the skill's modernization reference; no external plugin or scripts are required.
 Desktop rendering, downstream memory safety, and hardware acceptance remain outside these checks.
+
+## DevBoards routing acceptance
+
+On **2026-10-15**, version **0.4.5** passed local consistency and all 21 validator regressions with Ruby **4.0.7**.
+Codex CLI **0.162.0-alpha.17.2** discovered all 8 skills and resolved plugin and skill icon paths.
+All 8 folders passed isolated reference, prose, metadata, icon, and license checks.
+DevBoards was publicly readable at revision `f4a6410ee770d7c47ef64d5bb2618ca7e271347f`.
+Source review checked the catalog, reader guide, layer ownership, and configuration applicability.
+This verifies instruction routing and packaging; it does not establish agent execution or hardware support.

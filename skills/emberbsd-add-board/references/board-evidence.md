@@ -8,6 +8,14 @@ rg --files "$os/ember/boards" "$os/ember/boot"
 rg -n "$board_or_soc" "$os/sys/arch" "$os/sys/dev" "$os/ember"
 ```
 
+For hardware design references, read [DevBoards](https://github.com/oxtech-ember/EmberBSD-DevBoards).
+Start with its [reader guide](https://github.com/oxtech-ember/EmberBSD-DevBoards/blob/main/docs/reader-guide.md) and [catalog](https://github.com/oxtech-ember/EmberBSD-DevBoards/blob/main/catalog.json).
+Read the exact board, carrier, SoC, and selected bootloader records.
+If a profile is absent, continue with vendor sources and the closest OS implementation.
+Check source revisions and configuration applicability before reuse.
+For a custom device, read the profile's design transfer notes.
+Keep reusable hardware findings in DevBoards and OS support evidence with the implementation.
+
 Record SoC, architecture, RAM, storage, serial settings, firmware chain, and DT/ACPI interface.
 Compare wiring, PHY, storage, power, and radio firmware with vendor documents.
 Inspect existing fork patches before applying another copy.
@@ -30,7 +38,7 @@ Add one board page with a two-column capability table.
 Add a concise catalog or README row.
 Submit code, boot integration, checks, and documentation together when authorized.
 Use a draft when required validation remains unavailable and the target permits drafts.
-Keep board-specific facts in OS documentation.
+Keep OS support evidence in OS documentation.
 
 ## Source and memory analysis
 

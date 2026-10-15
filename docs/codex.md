@@ -16,7 +16,7 @@ codex plugin add emberbsd-development@ember-agent-skills
 
 The first command registers the Git catalog, the second lists its packages,
 and the third installs the chosen plugin. The listing should include
-`emberbsd-development@ember-agent-skills` at version `0.4.1`. Start a new
+`emberbsd-development@ember-agent-skills` at version `0.4.5`. Start a new
 conversation and select the task skill, such as `$emberbsd-build-kernel`. In the desktop app,
 check the Plugins view for the installed package.
 

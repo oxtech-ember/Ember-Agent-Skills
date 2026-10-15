@@ -2,7 +2,7 @@
 
 Task-specific instructions for AI agents working on [EmberBSD](https://github.com/oxtech-ember/EmberBSD).
 The package uses [Agent Plugins](https://agent-plugins.org/) and [Agent Skills](https://agentskills.io/specification).
-Version **0.4.4** contains eight independently installable skills.
+Version **0.4.5** contains eight independently installable skills.
 
 | Skill | Task |
 | --- | --- |
@@ -50,6 +50,11 @@ Supply the model, revision, SoC, firmware, serial console, and available hardwar
 The workflow covers kernel, DTS/ACPI, drivers, output bundles, boot selection, and evidence.
 Keep build, VM, and physical checks separate. A shared SoC does not prove peripheral support.
 An authorized shared change includes the board page and a concise catalog row.
+
+[EmberBSD-DevBoards](https://github.com/oxtech-ember/EmberBSD-DevBoards) provides hardware references for developers building their own devices.
+It separates board, carrier, SoC, interface, and bootloader knowledge.
+Start with its [reader guide](https://github.com/oxtech-ember/EmberBSD-DevBoards/blob/main/docs/reader-guide.md) and [catalog](https://github.com/oxtech-ember/EmberBSD-DevBoards/blob/main/catalog.json), then check each profile's sources and applicability.
+Drivers, build procedures, and current support evidence remain in their implementation repositories.
 
 ## Use in your development environment
 
@@ -142,6 +147,9 @@ The port skill also passed standalone reference/metadata/icon checks and four CL
 Five fresh-context instruction trials included the comparator fault check and correct host resource sizing;
 five controls and the original skill omitted those two requirements.
 These bounded trials do not establish general assistant reliability or downstream port acceptance.
+
+Version **0.4.5** passed package checks, 21 validator regressions, isolated skill checks, and native Codex discovery on **2026-10-15**.
+See the [DevBoards routing checks](docs/packaging.md#devboards-routing-acceptance) for evidence and limits.
 
 Review the [manual scenarios](docs/packaging.md#checks-and-evidence) after behavior changes.
 

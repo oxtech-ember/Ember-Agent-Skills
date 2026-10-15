@@ -20,6 +20,10 @@ Run the owning portable contracts and applicable orchestration regression.
 Record native contract gaps explicitly.
 
 Identify the artifact that the loader actually selects.
+For physical boot, read the exact [OS board procedure](https://github.com/oxtech-ember/EmberBSD/tree/main/ember/boards).
+[DevBoards](https://github.com/oxtech-ember/EmberBSD-DevBoards) provides board and shared bootloader references.
+Locate the board through its [reader guide](https://github.com/oxtech-ember/EmberBSD-DevBoards/blob/main/docs/reader-guide.md) and [catalog](https://github.com/oxtech-ember/EmberBSD-DevBoards/blob/main/catalog.json).
+Follow the board's selected loader contract; a shared SoC does not establish its image format.
 QEMU `-kernel` can differ from the guest's `/netbsd` file.
 Compilation alone does not prove boot or peripheral support.
 Keep firmware and hardware checks within the requested device scope.
