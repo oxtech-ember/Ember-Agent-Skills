@@ -2,14 +2,14 @@
 
 Task-specific instructions for AI agents working on [EmberBSD](https://github.com/oxtech-ember/EmberBSD).
 The package uses [Agent Plugins](https://agent-plugins.org/) and [Agent Skills](https://agentskills.io/specification).
-Version **0.4.3** contains eight independently installable skills.
+Version **0.4.4** contains eight independently installable skills.
 
 | Skill | Task |
 | --- | --- |
 | [`emberbsd-repository-guide`](skills/emberbsd-repository-guide/SKILL.md) | Select a repository and task skill when ownership is unclear |
 | [`emberbsd-develop-app`](skills/emberbsd-develop-app/SKILL.md) | Create or develop an application or public example using verified interfaces |
 | [`emberbsd-build-kernel`](skills/emberbsd-build-kernel/SKILL.md) | Prepare GCC16 tools and cross-build a kernel without an application sysroot |
-| [`emberbsd-port-software`](skills/emberbsd-port-software/SKILL.md) | Repair shared recipes and test dependencies and installed consumers |
+| [`emberbsd-port-software`](skills/emberbsd-port-software/SKILL.md) | Port or modernize shared software and verify behavior against independent evidence |
 | [`emberbsd-add-board`](skills/emberbsd-add-board/SKILL.md) | Integrate board build and boot support with measured hardware evidence |
 | [`emberbsd-build-static-base`](skills/emberbsd-build-static-base/SKILL.md) | Build and inspect a static base set |
 | [`emberbsd-contribute`](skills/emberbsd-contribute/SKILL.md) | Submit an authorized shared change through the accepted channel |
@@ -38,6 +38,8 @@ Keep the application's existing instructions when you install skills.
 Development checks cover Cppcheck, GCC and Clang static analysis, and Valgrind Memcheck.
 The guidance includes upstream-versus-patch comparisons for ports, justified suppressions,
 and explicit platform limits. Kernel contracts and hardware acceptance remain separate.
+Version and dependency migrations use a small pilot, explicit behavior contracts,
+independent comparisons, and negative controls for the tests and comparator.
 
 
 ## Add your board
@@ -134,10 +136,12 @@ The last command requires Codex. It uses temporary profiles and reads native
 plugin and skill icon paths without changing saved client settings.
 The checks enforce prose limits and skill-local links. They do not certify the
 full ASD-STE100 dictionary or prove assistant behavior, device support, or desktop rendering.
-Version **0.4.2** passed local consistency, 21 validation regressions, native Codex
-discovery, and all plugin/skill icon paths with **Codex CLI 0.162.0-alpha.17.2** on **2026-10-11**.
-Version **0.4.3** passed the same local checks on **2026-10-11**.
-All eight folders passed skill-local reference, metadata, icon, and prose checks.\nThe new analysis scenarios were reviewed as instructions; assistant execution was not evaluated.
+Version **0.4.4** passed local consistency, all 21 validator regressions, native Codex
+discovery, and plugin/skill icon resolution with **Codex CLI 0.159.2** on **2026-10-15**.
+The port skill also passed standalone reference/metadata/icon checks and four CLI comparison cases.
+Five fresh-context instruction trials included the comparator fault check and correct host resource sizing;
+five controls and the original skill omitted those two requirements.
+These bounded trials do not establish general assistant reliability or downstream port acceptance.
 
 Review the [manual scenarios](docs/packaging.md#checks-and-evidence) after behavior changes.
 

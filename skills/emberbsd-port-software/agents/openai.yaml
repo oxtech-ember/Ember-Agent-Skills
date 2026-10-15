@@ -1,7 +1,7 @@
 interface:
   display_name: EmberBSD Shared Software Ports
-  short_description: Repair shared recipes and test installed consumers
+  short_description: Port shared software and verify behavior changes
   icon_small: "./assets/emberbsd-logo.png"
   icon_large: "./assets/emberbsd-logo.png"
-  default_prompt: Use $emberbsd-port-software to repair the shared Ports recipe and
-    verify installed behavior.
+  default_prompt: Use $emberbsd-port-software to port or modernize the shared Ports
+    recipe and verify installed behavior against independent evidence.

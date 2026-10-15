@@ -126,6 +126,11 @@ After installing in a test environment, exercise these skill scenarios:
 | A kernel driver passes a user-space memory model | Keep native kernel, DMA, concurrency and hardware acceptance separate |
 | An analyzer warns in imported code | Record ownership and impact; justify only narrow suppressions and retain unsuppressed new defects |
 | Upstream removes the reason for a workaround | Retest and remove obsolete patch/guidance; preserve the source and acceptance state |
+| Upgrade a shared dependency across an API or ABI change | Map used changes to consumers; complete one pilot before migrating the dependency closure |
+| The old release cannot run and trusted output is missing | Use independent target expectations; leave historical equivalence unverified without installing obsolete tools |
+| A migration check always reports success | Break a disposable candidate and alter a captured output byte; require both checks to detect the fault |
+| A small target VM is used for cross-build acceptance | Size compilation from host resources and target execution from guest resources |
+| A security repair intentionally changes malformed-input behavior | Test the supported contract and document the difference; do not restore the old defect |
 
 These are manual acceptance scenarios. Package discovery alone does not prove
 that an assistant will satisfy them or improve over an unassisted baseline.
@@ -149,12 +154,19 @@ Do not copy machine-local build logs, private network addresses or credentials
 into published examples or prompts.
 
 
-## Analysis guidance acceptance
+## Current port guidance acceptance
 
-On **2026-10-11**, version **0.4.2** passed local consistency and all 21 validator regressions.
-The 0.4.3 add-board first-port guidance passed the same local checks on **2026-10-11**.
-Native discovery and icon resolution passed with **Codex CLI 0.162.0-alpha.17.2**.
-The six development workflows retain skill-local references and the existing eight-skill catalog.
-Manual instruction review covered port baselines, target configuration, unsupported Valgrind platforms,
-kernel-contract limits, and inherited findings. No assistant behavior trial or desktop rendering check was run.
-These checks validate the guidance package, not any downstream program's memory safety.
+On **2026-10-15**, version **0.4.4** passed local consistency and all 21 validator regressions.
+Codex CLI **0.159.2** discovered all eight skills and resolved plugin/skill icons.
+The port skill passed standalone links, metadata, icons, and two shell-block syntax checks.
+Its entry has 211 prose words; the new modernization reference has 404.
+The CLI comparison accepted identical captures and rejected changed stdout, stderr, and status.
+
+The instruction trial used one repeated scenario: upgrade a shared codec with no runnable baseline,
+an empty CTest suite, old staged binaries, a 2 GiB execution VM, and deadline pressure.
+Five no-skill controls and one original-skill response omitted the output-byte comparator check
+and sized compilation from guest RAM. All five updated-skill responses required both fault
+controls, separated host/guest budgets, and left historical equivalence unverified.
+These are fresh-context response trials, not executed port migrations or a statistical benchmark.
+The source method is linked from the skill's modernization reference; no external plugin or scripts are required.
+Desktop rendering, downstream memory safety, and hardware acceptance remain outside these checks.
