@@ -2,7 +2,7 @@
 
 Task-specific instructions for AI agents working on [EmberBSD](https://github.com/oxtech-ember/EmberBSD).
 The package uses [Agent Plugins](https://agent-plugins.org/) and [Agent Skills](https://agentskills.io/specification).
-Version **0.4.5** contains eight independently installable skills.
+Version **0.4.6** contains eight independently installable skills.
 
 | Skill | Task |
 | --- | --- |
@@ -104,12 +104,25 @@ and install **emberbsd-development**. In Claude Code:
 The catalog points to the repository root. The Claude plugin manifest exposes `skills/`.
 The root `plugin.json` remains the canonical portable manifest.
 
+### Install in Kimi Code
+
+Kimi Code reads `kimi.plugin.json` at the repository root. The manifest exposes `skills/`.
+Install from the Plugins screen or run:
+
+```text
+/plugins install oxtech-ember/Ember-Agent-Skills
+```
+
+A ref can be added to the URL form, for example `oxtech-ember/Ember-Agent-Skills/tree/<ref>`.
+Reinstall the plugin after a release; Kimi Code does not update it automatically.
+
 ## Package structure
 
 ```text
 plugin.json                       Portable manifest and OpenAI plugin metadata
 .agents/plugins/marketplace.json  Codex catalog
 .claude-plugin/                   ZCode and Claude Code adapters
+kimi.plugin.json                  Kimi Code adapter
 assets/emberbsd-logo.png          Plugin icon
 skills/<name>/SKILL.md            One task and its discovery condition
 skills/<name>/references/         Only that task's bundled instructions
@@ -150,6 +163,8 @@ These bounded trials do not establish general assistant reliability or downstrea
 
 Version **0.4.5** passed package checks, 21 validator regressions, isolated skill checks, and native Codex discovery on **2026-10-15**.
 See the [DevBoards routing checks](docs/packaging.md#devboards-routing-acceptance) for evidence and limits.
+Version **0.4.6** added the Kimi Code manifest and passed package checks with 22 validator regressions on **2026-10-16**.
+See [Kimi Code manifest packaging](docs/packaging.md#kimi-code-manifest-packaging) for evidence and limits.
 
 Review the [manual scenarios](docs/packaging.md#checks-and-evidence) after behavior changes.
 
