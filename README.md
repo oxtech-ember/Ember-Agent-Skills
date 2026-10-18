@@ -2,11 +2,12 @@
 
 Task-specific instructions for AI agents working on [EmberBSD](https://github.com/oxtech-ember/EmberBSD).
 The package uses [Agent Plugins](https://agent-plugins.org/) and [Agent Skills](https://agentskills.io/specification).
-Version **0.4.6** contains eight independently installable skills.
+Version **0.4.7** contains nine independently installable skills.
 
 | Skill | Task |
 | --- | --- |
 | [`emberbsd-repository-guide`](skills/emberbsd-repository-guide/SKILL.md) | Select a repository and task skill when ownership is unclear |
+| [`emberbsd-prebuild-sdk`](skills/emberbsd-prebuild-sdk/SKILL.md) | Create, inspect and reuse a shared workspace; build the EmberBSD sysroot |
 | [`emberbsd-develop-app`](skills/emberbsd-develop-app/SKILL.md) | Create or develop an application or public example using verified interfaces |
 | [`emberbsd-build-kernel`](skills/emberbsd-build-kernel/SKILL.md) | Prepare GCC16 tools and cross-build a kernel without an application sysroot |
 | [`emberbsd-port-software`](skills/emberbsd-port-software/SKILL.md) | Port or modernize shared software and verify behavior against independent evidence |
@@ -26,8 +27,8 @@ See the [authoring rules](docs/skill-writing.md) for limits and verification bou
 Use the [repository map](skills/emberbsd-repository-guide/references/repositories.md)
 to locate the owning public source. OS builds and drivers belong to EmberBSD.
 Third-party recipes belong to Ports. Public demonstrations belong to Examples.
-SDK and Runtime currently contain design documents; verify implemented interfaces
-before calling them. This package contains no MCP server or device runtime.
+SDK provides Prebuild SDK workspace tools and sysroot orchestration.
+Stable application contracts and Runtime remain separate work. Verify implemented interfaces before calling them. This package contains no MCP server or device runtime.
 
 [EmberBSD-User-Skills](https://github.com/oxtech-ember/EmberBSD-User-Skills) handles
 operation, installation, diagnostics, personal application changes, and user GitHub work.
@@ -67,7 +68,9 @@ Keep its references, `agents/`, and assets together. Retain the MIT notice.
 For manual use, ask the agent to read the selected `SKILL.md` and required references.
 Manual reading does not register automatic discovery.
 
-Verify that the client lists all eight task names. For example:
+Verify that the client lists all nine task names. For example:
+
+> Use emberbsd-prebuild-sdk to reuse my shared SDK workspace and build the EmberBSD sysroot with GCC16.
 
 > Use emberbsd-build-kernel to cross-build my AArch64 EmberBSD kernel with GCC16 on host and target.
 

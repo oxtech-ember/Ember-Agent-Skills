@@ -8,7 +8,7 @@ These primary references were checked on **2026-10-08**.
 
 `plugin.json` identifies `emberbsd-development`; its `$schema` declares the
 Agent Plugins format version. The package's release version is a separate
-field. Each of the eight task skills lives in `skills/<name>/`.
+field. Each of the nine task skills lives in `skills/<name>/`.
 Each directory contains its own `SKILL.md`, references, metadata, and icon.
 The legacy repository guide is a short selector.
 
@@ -190,3 +190,22 @@ required `name` and `version`, display `interface` fields, and `skills` at `./sk
 The validator now rejects identity, version, description, license, skills-path, and interface
 disagreements between the Kimi manifest and the portable manifest.
 This verifies packaging only. Installation and skill loading in the Kimi Code client were not executed in this check.
+
+## Prebuild SDK routing
+
+Version **0.4.7** adds `emberbsd-prebuild-sdk` and SDK/sysroot routing.
+Local consistency and all 22 validator regressions pass. Codex CLI
+**0.163.0-alpha.10.2** discovers all nine skills in an isolated profile and
+resolves the native plugin and skill icon paths. These checks ran on macOS
+arm64 with Ruby **4.0.7**.
+
+The new entry and reference keep workspace layout, sysroot build, package
+closure and target execution separate. They route executable work to
+EmberBSD-SDK, OS and Ports, and remain usable as a standalone skill directory.
+Its bundled Python launcher passes seven transport contracts under CPython
+**3.15.0** with `-B -I -S`. The tests check literal argv, interpreter identity,
+source selection, command containment, child failure and a copied standalone script.
+Read-only inspection of an existing adopted workspace and sysroot help also
+pass through the actual SDK commands. No additional workspace is created.
+These packaging checks do not establish assistant behavior, an accepted
+sysroot build, Windows support or a redistributable binary SDK.

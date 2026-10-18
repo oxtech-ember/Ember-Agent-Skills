@@ -10,6 +10,7 @@ Select one skill for the requested result.
 
 | Task | Skill |
 | --- | --- |
+| Prepare a shared SDK workspace or sysroot | `emberbsd-prebuild-sdk` |
 | Create or develop an application or example | `emberbsd-develop-app` |
 | Cross-build a GCC16 kernel | `emberbsd-build-kernel` |
 | Change a shared third-party recipe | `emberbsd-port-software` |

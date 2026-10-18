@@ -1,0 +1,6 @@
+interface:
+  display_name: "EmberBSD Prebuild SDK"
+  short_description: "Prepare a shared GCC16 SDK workspace"
+  icon_small: "./assets/emberbsd-logo.png"
+  icon_large: "./assets/emberbsd-logo.png"
+  default_prompt: "Use $emberbsd-prebuild-sdk to build my EmberBSD sysroot with GCC16."

@@ -10,7 +10,7 @@ Verify the selected repository's implemented commands and interfaces.
 | [EmberBSD-Ports](https://github.com/oxtech-ember/EmberBSD-Ports) | Recipes, source hashes, patches, pkgsrc overlays, dependency profiles |
 | [EmberBSD-Examples](https://github.com/oxtech-ember/EmberBSD-Examples) | Public applications and reproducible demonstrations |
 | [EmberBSD-Runtime](https://github.com/oxtech-ember/EmberBSD-Runtime) | Planned application execution and lifecycle tools |
-| [EmberBSD-SDK](https://github.com/oxtech-ember/EmberBSD-SDK) | Planned application contracts and developer tools |
+| [EmberBSD-SDK](https://github.com/oxtech-ember/EmberBSD-SDK) | Prebuild SDK workspace tools, sysroot orchestration and planned application contracts |
 | [Ember-Agent-Skills](https://github.com/oxtech-ember/Ember-Agent-Skills) | Developer AI skills, adapters, packaging |
 | [EmberBSD-User-Skills](https://github.com/oxtech-ember/EmberBSD-User-Skills) | Device operations, diagnostics, personal changes, user GitHub work |
 
@@ -28,7 +28,7 @@ git -C "$repo" ls-files
 rg -n "$interface_or_command" "$repo"
 ```
 
-SDK and Runtime currently contain design documents.
+SDK implements workspace tools and sysroot orchestration. Runtime remains in design.
 Check sources or releases before calling an API.
 Project names do not establish an `ember` CLI or hardware MCP server.
 Neither skills package implements an on-device agent.

@@ -1,7 +1,7 @@
 {
   "name": "emberbsd-development",
-  "version": "0.4.6",
-  "description": "Task-specific AI skills for EmberBSD applications, kernels, boards, software ports, static base sets, and shared contributions.",
+  "version": "0.4.7",
+  "description": "Task-specific AI skills for EmberBSD SDK workspaces, applications, kernels, boards, software ports, static base sets, and shared contributions.",
   "author": {
     "name": "neonix20b",
     "url": "https://github.com/neonix20b"

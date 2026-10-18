@@ -16,7 +16,7 @@ Read [application checks](references/application-checks.md).
 5. Run its build, tests, and smallest useful demonstration.
 6. Record host results and target results separately.
 
-SDK and Runtime currently contain design documents.
+SDK provides workspace tools. Stable application contracts and Runtime remain separate work.
 Do not call a planned API as an implemented tool.
 Ask for missing information only when it blocks the requested work.
 
