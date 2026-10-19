@@ -11,9 +11,9 @@ Use the bundled [SDK launcher](scripts/sdk.py) to run these commands.
 Select the SDK source with `--sdk-source`.
 
 1. Identify the build host and target architecture.
-2. Inspect the shared workspace.
-3. For a new workspace, use the SDK `create` command.
-4. For an existing build tree, use `--adopt`.
+2. Inspect the shared workspace and its declared target.
+3. For a new workspace, use `create` with `--target`.
+4. For an existing target workspace, use `--adopt` with the same target.
 5. Select the common GCC16 compiler.
 6. Select the matching EmberBSD runtime inputs.
 7. Before a sysroot build, examine its `--plan` output.
@@ -24,6 +24,9 @@ Select the SDK source with `--sdk-source`.
 An empty workspace does not prove that a compiler or sysroot works.
 Before SDK distribution, check the matching packages and relocated files.
 Host and target platforms are independent inputs.
+Use one workspace for each target architecture.
+An alias name does not establish the target.
+An old layout with an unknown target needs explicit migration before a sysroot build.
 For a Windows host, use the documented build environment.
 Identify each untested host and target.
 Shared Python modules and build logic belong to EmberBSD-SDK.

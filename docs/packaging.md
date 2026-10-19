@@ -209,3 +209,23 @@ Read-only inspection of an existing adopted workspace and sysroot help also
 pass through the actual SDK commands. No additional workspace is created.
 These packaging checks do not establish assistant behavior, an accepted
 sysroot build, Windows support or a redistributable binary SDK.
+
+## Target workspace routing
+
+Version **0.4.8** selects one workspace for each target architecture.
+The canonical layout manifest declares the target and triplet.
+An alias name does not declare either value.
+The guidance keeps legacy inspection separate from target migration.
+
+Local consistency and all 22 validator regressions pass with Ruby **4.0.7**.
+Codex CLI **0.163.0-alpha.10.2** discovers all nine skills in an isolated
+profile and resolves plugin and skill icon paths.
+All seven launcher contracts pass under CPython **3.15.0** with `-B -I -S`.
+These checks ran on macOS arm64.
+The actual launcher also passed ten layout invocations and sysroot help against
+SDK `51a545b2917d589d2dd58fc0e5e424a9e3cb6d24` from an unrelated directory.
+The checks created both target layouts, inspected them, adopted a matching
+workspace, and repeated that adoption.
+Wrong-target and unknown-target adoption refused without changing the source.
+Legacy inspection preserved an unknown target and the existing files.
+They do not establish a target sysroot build or native Windows support.

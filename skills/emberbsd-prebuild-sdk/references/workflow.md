@@ -10,7 +10,7 @@ The SDK owns their checks.
 From this skill directory, run these commands:
 
 ```sh
-python3 scripts/sdk.py --sdk-source /absolute/EmberBSD-SDK inspect /absolute/prebuild-sdk
+python3 scripts/sdk.py --sdk-source /absolute/EmberBSD-SDK inspect /absolute/prebuild-sdk-aarch64
 python3 scripts/sdk.py --sdk-source /absolute/EmberBSD-SDK sysroot --help
 ```
 
@@ -21,20 +21,28 @@ The SDK command defines the build options.
 From the SDK checkout, use these commands to inspect or create a workspace:
 
 ```sh
-python3 scripts/inspect-prebuild-sdk.py /absolute/prebuild-sdk
-python3 scripts/create-prebuild-sdk.py /absolute/prebuild-sdk
+python3 scripts/create-prebuild-sdk.py /absolute/prebuild-sdk-aarch64 --target aarch64
+python3 scripts/inspect-prebuild-sdk.py /absolute/prebuild-sdk-aarch64
+python3 scripts/create-prebuild-sdk.py /absolute/prebuild-sdk-amd64 --target amd64
 ```
 
-For an existing build tree, use `--adopt`:
+For an existing target workspace, use `--adopt`:
 
 ```sh
-python3 scripts/create-prebuild-sdk.py /absolute/prebuild-sdk --adopt /absolute/build
+python3 scripts/create-prebuild-sdk.py /absolute/prebuild-sdk-aarch64 --target aarch64 --adopt /absolute/aarch64-build
 ```
 
 The `--adopt` option creates an alias to existing directories.
 It does not copy or relocate build outputs.
 Keep canonical paths until the build tools support relocation.
 A correct layout does not prove ABI compatibility or compiler operation.
+The canonical manifest declares the target.
+The alias name and host architecture do not declare it.
+An old layout can report an unknown target.
+Inspect it without changing its files.
+Do not infer a target or rewrite its build context.
+The new sysroot builder requires a matching declared target.
+Read the SDK migration boundary before changing an existing workspace.
 
 For sysroot builds, read the
 [sysroot procedure](https://github.com/oxtech-ember/EmberBSD-SDK/blob/main/docs/sysroot.md).
