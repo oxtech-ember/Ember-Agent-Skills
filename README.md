@@ -2,7 +2,7 @@
 
 Task-specific instructions for AI agents working on [EmberBSD](https://github.com/oxtech-ember/EmberBSD).
 The package uses [Agent Plugins](https://agent-plugins.org/) and [Agent Skills](https://agentskills.io/specification).
-Version **0.4.8** contains nine independently installable skills.
+Version **0.4.9** contains nine independently installable skills.
 
 | Skill | Task |
 | --- | --- |
@@ -119,6 +119,20 @@ Install from the Plugins screen or run:
 A ref can be added to the URL form, for example `oxtech-ember/Ember-Agent-Skills/tree/<ref>`.
 Reinstall the plugin after a release; Kimi Code does not update it automatically.
 
+### Install in Grok Build
+
+Grok Build reads `.grok-plugin/marketplace.json`:
+
+```sh
+grok plugin marketplace add oxtech-ember/Ember-Agent-Skills
+grok plugin install emberbsd-development --trust
+grok plugin details emberbsd-development
+```
+
+The catalog entry clones this repository from GitHub.
+Grok rejects a repository-root path such as `./` in a catalog entry.
+To update, run `grok plugin marketplace update` and `grok plugin update emberbsd-development`.
+
 ## Package structure
 
 ```text
@@ -126,6 +140,7 @@ plugin.json                       Portable manifest and OpenAI plugin metadata
 .agents/plugins/marketplace.json  Codex catalog
 .claude-plugin/                   ZCode and Claude Code adapters
 kimi.plugin.json                  Kimi Code adapter
+.grok-plugin/marketplace.json     Grok Build catalog
 assets/emberbsd-logo.png          Plugin icon
 skills/<name>/SKILL.md            One task and its discovery condition
 skills/<name>/references/         Only that task's bundled instructions
@@ -151,10 +166,13 @@ Use Ruby with its standard library:
 ruby scripts/test-check-package.rb
 ruby scripts/check-package.rb
 ruby scripts/check-package.rb --codex
+ruby scripts/check-package.rb --grok
 ```
 
-The last command requires Codex. It uses temporary profiles and reads native
+The `--codex` check requires Codex. It uses temporary profiles and reads native
 plugin and skill icon paths without changing saved client settings.
+The `--grok` check requires Grok Build. It installs the committed `HEAD` in a temporary `GROK_HOME`.
+It checks the installed version and every loaded skill.
 The checks enforce prose limits and skill-local links. They do not certify the
 full ASD-STE100 dictionary or prove assistant behavior, device support, or desktop rendering.
 Version **0.4.4** passed local consistency, all 21 validator regressions, native Codex
@@ -168,6 +186,8 @@ Version **0.4.5** passed package checks, 21 validator regressions, isolated skil
 See the [DevBoards routing checks](docs/packaging.md#devboards-routing-acceptance) for evidence and limits.
 Version **0.4.6** added the Kimi Code manifest and passed package checks with 22 validator regressions on **2026-10-16**.
 See [Kimi Code manifest packaging](docs/packaging.md#kimi-code-manifest-packaging) for evidence and limits.
+Version **0.4.9** added the Grok Build catalog.
+See [Grok Build marketplace packaging](docs/packaging.md#grok-build-marketplace-packaging) for evidence and limits.
 
 Review the [manual scenarios](docs/packaging.md#checks-and-evidence) after behavior changes.
 

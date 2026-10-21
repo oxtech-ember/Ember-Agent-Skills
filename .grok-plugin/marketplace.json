@@ -1,0 +1,29 @@
+{
+  "name": "ember-agent-skills",
+  "description": "AI skills for EmberBSD applications, kernels, boards, software ports, static base sets, and shared submissions.",
+  "owner": {
+    "name": "neonix20b",
+    "url": "https://github.com/neonix20b"
+  },
+  "plugins": [
+    {
+      "name": "emberbsd-development",
+      "description": "Select a task skill for EmberBSD development and verify the result with real tools.",
+      "version": "0.4.9",
+      "category": "developer-tools",
+      "homepage": "https://github.com/oxtech-ember/Ember-Agent-Skills",
+      "keywords": [
+        "emberbsd",
+        "netbsd",
+        "embedded",
+        "development",
+        "skills",
+        "agent-plugins"
+      ],
+      "source": {
+        "source": "url",
+        "url": "https://github.com/oxtech-ember/Ember-Agent-Skills.git"
+      }
+    }
+  ]
+}

@@ -23,6 +23,7 @@ This repository also supplies optional client metadata:
 | `.agents/plugins/marketplace.json` | Catalog for Codex's marketplace loader |
 | `.claude-plugin/marketplace.json` | Catalog for the ZCode and Claude Code marketplace loaders |
 | `.claude-plugin/plugin.json` | Plugin manifest for ZCode and Claude Code; exposes `skills/` |
+| `.grok-plugin/marketplace.json` | Catalog for the Grok Build marketplace loader; clones the repository URL |
 | `assets/emberbsd-logo.png` | Codex plugin icons and the ZCode/Claude Code catalog icon |
 | `skills/*/assets/emberbsd-logo.png` | Bundled Codex skill icons, including standalone skill installs |
 
@@ -79,6 +80,11 @@ marketplace configuration, so an installed release cannot mask the candidate.
 It also checks native plugin and skill icon paths through an isolated app-server
 `plugin/read` request. It does not register or install the package in saved settings
 or prove desktop icon rendering.
+When Grok Build is available, also run `ruby scripts/check-package.rb --grok`
+and record `grok --version`. It uses a temporary `GROK_HOME` and a local copy
+of the Grok catalog that clones this checkout. Commit the candidate first.
+Grok installs the committed `HEAD`, not uncommitted files. The check compares
+the installed version and the skills that `grok inspect --json` loads.
 The [Codex guide](codex.md) describes that adapter. Record equivalent evidence
 before claiming another client's installation or behavior has been tested.
 
@@ -229,3 +235,17 @@ workspace, and repeated that adoption.
 Wrong-target and unknown-target adoption refused without changing the source.
 Legacy inspection preserved an unknown target and the existing files.
 They do not establish a target sysroot build or native Windows support.
+
+## Grok Build marketplace packaging
+
+On **2026-10-21**, version **0.4.9** passed local consistency and all 24 validator regressions with Ruby **4.0.7**.
+Grok Build **1.0.62** reads `.grok-plugin/marketplace.json` before `.claude-plugin/marketplace.json`.
+It rejects the `.claude-plugin` entry source `./` with `marketplace path is empty`.
+Grok also rejects current-directory components in a catalog path.
+The Grok catalog entry therefore uses a `url` source with the repository Git URL.
+The entry has no `sha` pin, so an install follows the default branch.
+`grok plugin validate` accepts the root `plugin.json`.
+The `--grok` check installed the committed candidate in a temporary `GROK_HOME`.
+Grok loaded all 9 skills from the plugin.
+These checks ran on macOS arm64.
+This verifies packaging and skill discovery only. It does not establish assistant behavior.
