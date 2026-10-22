@@ -8,6 +8,7 @@ description: Use when adding, modernizing, or repairing shared EmberBSD Ports re
 Read the Ports README and owning profile.
 Read [recipe checks](references/recipe-checks.md).
 For version or dependency migrations, read [modernization checks](references/modernization-checks.md).
+For a Ports update request, read [agent-driven updates](references/update-ports.md).
 
 1. Record the supported behavior, target release, and dependency changes.
 2. Reproduce the failure with the real build or runtime path.

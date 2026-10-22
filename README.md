@@ -2,7 +2,7 @@
 
 Task-specific instructions for AI agents working on [EmberBSD](https://github.com/oxtech-ember/EmberBSD).
 The package uses [Agent Plugins](https://agent-plugins.org/) and [Agent Skills](https://agentskills.io/specification).
-Version **0.4.13** contains nine independently installable skills.
+Version **0.4.14** contains nine independently installable skills.
 
 | Skill | Task |
 | --- | --- |
@@ -41,6 +41,8 @@ The guidance includes upstream-versus-patch comparisons for ports, justified sup
 and explicit platform limits. Kernel contracts and hardware acceptance remain separate.
 Version and dependency migrations use a small pilot, explicit behavior contracts,
 independent comparisons, and negative controls for the tests and comparator.
+The port skill also covers agent-driven updates with the Ports collector and SDK planner.
+The tools preserve dependency graphs and result evidence; the development environment coordinates repairs.
 
 
 ## Add your board
