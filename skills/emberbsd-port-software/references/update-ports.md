@@ -25,3 +25,9 @@ Verify unchanged artifacts before reuse.
 Never record an old file as success after a failed producer.
 Do not weaken tests or introduce legacy dependencies to clear failures.
 Report artifact completion separately from installed behavior and hardware checks.
+
+For a release, follow the [SDK release procedure](https://github.com/oxtech-ember/EmberBSD-SDK/blob/main/docs/release-tags.md).
+Prepare the source `EMBER_VERSION` and source manifest before building.
+Bind the graph to that manifest with `--shared-input release-sources=FILE`.
+Finalize tags only after successful builds and the selected release checks.
+Never update the source version after testing and tag the older output.
