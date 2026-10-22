@@ -1,12 +1,9 @@
 # Design principles
 
-Apply these principles to every shared OS, Ports, or example change.
-
 ## Design first
 
 Design the layers and interfaces before you write code.
-Select the simplest and most elegant structure, not the first structure that works.
-This is most important for drivers and subsystems.
+Select the simplest structure.
 
 ## Follow the BSD way
 
@@ -20,31 +17,29 @@ This is most important for drivers and subsystems.
 
 ## Do not repeat code
 
-If a related driver or script already has the logic, move it to a shared layer first.
-Then write the new code on top of that layer.
-Do not copy a function and change its prefix.
+Use existing subsystem helpers first.
+Extract missing shared behavior before adding consumers.
+Matching function names do not justify a shared FullMAC firmware abstraction.
 
 ## Fix the cause
 
+Fix the component that causes the fault.
 Do not add workarounds.
-Fix the base component that causes the fault.
-A workaround does not complete a fix.
 
 ## Keep code modular and portable
 
-Make each part possible to disable:
+Allow each part to be disabled:
 
 - Use a kernel configuration option or an optional attach.
 - Do not add hard dependencies between optional parts.
 - Make userland features configurable.
 
-Make each part possible to reuse:
+Allow each part to be reused:
 
 - Put common logic in shared subsystem helpers.
 - Use clean interfaces and operation tables between layers.
 - Do not test for a specific board or driver in shared code.
-  For example, do not use `device_is_a("bwfm")` in platform code.
-  Set a generic `mac-address` device property instead.
+  Use generic device properties such as `mac-address`.
 
 ## Separate layers and responsibilities
 
@@ -59,17 +54,23 @@ Make each part possible to reuse:
 
 Examples:
 
-- Display: SoC KMS driver, shared DRM helpers for hotplug, EDID, polling, and vblank.
-- Graphics: one Mesa package with all GPU drivers; one Qt, KDE Frameworks, and Plasma stack.
-- Wi-Fi: one net80211 FullMAC layer, one firmware loader, and one MAC and region path.
-  The chip driver contains only its firmware protocol.
+- Display: reuse existing DRM helpers for hotplug, EDID, polling, and vblank.
+  Keep hardware IRQ and PHY operations in chip callbacks.
+- Graphics: one Mesa package with supported GPU drivers per ABI; one Qt, KDE Frameworks, and Plasma stack.
+- Wi-Fi: share net80211 behavior, firmware loading, MAC properties, and region handling.
+  Keep chip firmware protocols separate.
 
 ## Use one stack and one sysroot
 
-- Build one current package stack in one shared build directory.
+- Build one current package stack with shared objects and packages for each target ABI.
+- Keep incompatible ABIs in separate build roots.
 - Do not keep separate package sets or accepted snapshots for each device.
 - Update a device to the current stack before you test it.
-- Keep one clean and current sysroot. When it has stale packages or metadata, build a new sysroot next to it.
+- Each developer maintains one current sysroot per target ABI.
+  Build its replacement alongside it when packages or metadata become stale.
   Replace the old sysroot only after the new one passes acceptance.
-- Accept the stack once. On each device, test only its own layer: kernel, DTB, display, and GPU driver.
+- Reuse stack acceptance only when its revisions, ABI, package hashes, and checks match.
+- On each device, check its kernel, DTB, display, GPU driver, radio, and firmware integration.
+  Shared SAE acceptance does not validate another radio chip.
+- Repeat affected stack checks after shared changes.
 - Split packages into runtime and development parts. Install only runtime parts on devices.

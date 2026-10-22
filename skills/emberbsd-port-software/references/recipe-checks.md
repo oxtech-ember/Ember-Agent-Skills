@@ -62,8 +62,10 @@ and [Valgrind platforms](https://valgrind.org/info/platforms.html).
 
 ## One package stack
 
-Build every package in the one shared build directory and sysroot.
-Do not create package variants for one device.
+Use shared objects, packages, and the current sysroot for the selected target ABI.
+Keep incompatible ABIs separate.
+Do not create Mesa, Plasma, or other package variants for individual boards.
+Select only the runtime packages that the device needs.
 Split large toolchains into runtime and development packages.
 Target runtime packages must not depend on compilers, linkers, or test tools.
 Rebuild in a clean work directory after a version or file-list change.

@@ -53,6 +53,12 @@ Use GCC16 for target compilation.
 Keep native host tools and target ELF files separate.
 Record the source commits, tools, runtime receipts, configuration and output hashes.
 
+Use shared objects and packages for each target ABI.
+Do not create separate build roots for tasks or boards.
+Keep incompatible ABIs separate.
+Each developer maintains one current sysroot per target ABI.
+Build a stale sysroot's replacement alongside it.
+Replace the old sysroot after acceptance.
 Before object reuse, compare the recorded inputs with the current inputs.
 For compatible source changes, use the incremental build rules.
 Use separate install stages for runtime and developer packages.

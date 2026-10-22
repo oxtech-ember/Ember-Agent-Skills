@@ -8,7 +8,7 @@ rg --files "$os/ember/boards" "$os/ember/boot"
 rg -n "$board_or_soc" "$os/sys/arch" "$os/sys/dev" "$os/ember"
 ```
 
-For hardware design references, read [DevBoards](https://github.com/oxtech-ember/EmberBSD-DevBoards).
+Read [DevBoards](https://github.com/oxtech-ember/EmberBSD-DevBoards).
 Start with its [reader guide](https://github.com/oxtech-ember/EmberBSD-DevBoards/blob/main/docs/reader-guide.md) and [catalog](https://github.com/oxtech-ember/EmberBSD-DevBoards/blob/main/catalog.json).
 Read the exact board, carrier, SoC, and selected bootloader records.
 If a profile is absent, continue with vendor sources and the closest OS implementation.
@@ -38,7 +38,6 @@ Add one board page with a two-column capability table.
 Add a concise catalog or README row.
 Submit code, boot integration, checks, and documentation together when authorized.
 Use a draft when required validation remains unavailable and the target permits drafts.
-Keep OS support evidence in OS documentation.
 
 ## Source and memory analysis
 
@@ -67,7 +66,11 @@ and [Valgrind platforms](https://valgrind.org/info/platforms.html).
 ## Board layer
 
 Update the board to the current package stack first.
-Test only the board layer; install no development tools.
+Reuse stack evidence only with matching revisions, ABI, package hashes, and checks.
+Repeat affected stack checks after shared changes.
+Test the board's kernel, DTB, display, GPU driver, radio, and firmware integration.
+Shared SAE acceptance does not validate another radio chip.
+Install no development tools.
 Put pins, power, reset, MAC, and region in DT or ACPI.
 Use `mmc-pwrseq-simple` for SDIO power.
 Do not test board or driver names in shared code.
