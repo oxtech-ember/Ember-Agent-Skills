@@ -63,3 +63,12 @@ Tool references: [Cppcheck](https://cppcheck.sourceforge.io/manual.html),
 [GCC analyzer](https://gcc.gnu.org/onlinedocs/gcc/Static-Analyzer-Options.html),
 [Clang analyzer](https://clang.llvm.org/docs/ClangStaticAnalyzer.html),
 and [Valgrind platforms](https://valgrind.org/info/platforms.html).
+
+## Board layer
+
+Update the board to the current package stack first.
+Test only the board layer; install no development tools.
+Put pins, power, reset, MAC, and region in DT or ACPI.
+Use `mmc-pwrseq-simple` for SDIO power.
+Do not test board or driver names in shared code.
+Move logic that two drivers need into a shared helper first.

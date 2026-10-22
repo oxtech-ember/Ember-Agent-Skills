@@ -59,3 +59,14 @@ Tool references: [Cppcheck](https://cppcheck.sourceforge.io/manual.html),
 [GCC analyzer](https://gcc.gnu.org/onlinedocs/gcc/Static-Analyzer-Options.html),
 [Clang analyzer](https://clang.llvm.org/docs/ClangStaticAnalyzer.html),
 and [Valgrind platforms](https://valgrind.org/info/platforms.html).
+
+## One package stack
+
+Build every package in the one shared build directory and sysroot.
+Do not create package variants for one device.
+Split large toolchains into runtime and development packages.
+Target runtime packages must not depend on compilers, linkers, or test tools.
+Rebuild in a clean work directory after a version or file-list change.
+Check that each `PROVIDES` entry names a file in the package's `+CONTENTS`.
+Remove stale sysroot packages; clean and rebuild the sysroot when needed.
+Rebuild ABI consumers in the same change.

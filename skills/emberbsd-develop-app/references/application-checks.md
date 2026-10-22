@@ -54,3 +54,11 @@ Tool references: [Cppcheck](https://cppcheck.sourceforge.io/manual.html),
 [GCC analyzer](https://gcc.gnu.org/onlinedocs/gcc/Static-Analyzer-Options.html),
 [Clang analyzer](https://clang.llvm.org/docs/ClangStaticAnalyzer.html),
 and [Valgrind platforms](https://valgrind.org/info/platforms.html).
+
+## Portable structure
+
+Make optional features switchable through configuration.
+Use one script or service with parameters for all devices.
+Do not keep a copy for each device.
+Move repeated logic into a shared module before you add new code.
+Build on the development host; install only runtime files on the device.

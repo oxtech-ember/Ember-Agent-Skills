@@ -58,3 +58,11 @@ Tool references: [Cppcheck](https://cppcheck.sourceforge.io/manual.html),
 [GCC analyzer](https://gcc.gnu.org/onlinedocs/gcc/Static-Analyzer-Options.html),
 [Clang analyzer](https://clang.llvm.org/docs/ClangStaticAnalyzer.html),
 and [Valgrind platforms](https://valgrind.org/info/platforms.html).
+
+## Driver structure
+
+Attach drivers through autoconf(9); declare options and dependencies in `files.*`.
+Make each driver possible to disable with a configuration option.
+Do not add hard dependencies between optional drivers.
+Use shared helpers such as firmload(9), net80211, and DRM helpers.
+Add a man page for a new driver and follow style(9).

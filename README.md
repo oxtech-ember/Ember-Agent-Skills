@@ -2,7 +2,7 @@
 
 Task-specific instructions for AI agents working on [EmberBSD](https://github.com/oxtech-ember/EmberBSD).
 The package uses [Agent Plugins](https://agent-plugins.org/) and [Agent Skills](https://agentskills.io/specification).
-Version **0.4.10** contains nine independently installable skills.
+Version **0.4.11** contains nine independently installable skills.
 
 | Skill | Task |
 | --- | --- |
@@ -186,8 +186,10 @@ Version **0.4.5** passed package checks, 21 validator regressions, isolated skil
 See the [DevBoards routing checks](docs/packaging.md#devboards-routing-acceptance) for evidence and limits.
 Version **0.4.6** added the Kimi Code manifest and passed package checks with 22 validator regressions on **2026-10-16**.
 See [Kimi Code manifest packaging](docs/packaging.md#kimi-code-manifest-packaging) for evidence and limits.
-Version **0.4.10** added the Grok Build catalog.
+Version **0.4.9** added the Grok Build catalog.
 See [Grok Build marketplace packaging](docs/packaging.md#grok-build-marketplace-packaging) for evidence and limits.
+Version **0.4.10** added shared design principles to `emberbsd-contribute`.
+Version **0.4.11** added layer and stack checks to the board, port, application, and kernel skills.
 
 Review the [manual scenarios](docs/packaging.md#checks-and-evidence) after behavior changes.
 
