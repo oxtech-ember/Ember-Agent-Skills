@@ -7,6 +7,7 @@ description: Use when submitting an authorized shared EmberBSD fix, port, exampl
 
 Read the target's contribution rules, license, and current AI policy.
 Read [submission checks](references/submission-checks.md).
+Read [design principles](references/design-principles.md) before you change shared code.
 For GitHub, read [PR commands](references/github-pr.md).
 
 1. Identify the owner, accepted base, and actual submission channel.
