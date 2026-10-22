@@ -69,6 +69,7 @@ Examples:
 - Build one current package stack in one shared build directory.
 - Do not keep separate package sets or accepted snapshots for each device.
 - Update a device to the current stack before you test it.
-- Keep one clean and current sysroot. Clean and rebuild it when it has stale packages or metadata.
+- Keep one clean and current sysroot. When it has stale packages or metadata, build a new sysroot next to it.
+  Replace the old sysroot only after the new one passes acceptance.
 - Accept the stack once. On each device, test only its own layer: kernel, DTB, display, and GPU driver.
 - Split packages into runtime and development parts. Install only runtime parts on devices.

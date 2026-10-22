@@ -68,5 +68,6 @@ Split large toolchains into runtime and development packages.
 Target runtime packages must not depend on compilers, linkers, or test tools.
 Rebuild in a clean work directory after a version or file-list change.
 Check that each `PROVIDES` entry names a file in the package's `+CONTENTS`.
-Remove stale sysroot packages; clean and rebuild the sysroot when needed.
+Do not keep stale packages in the sysroot.
+Build a replacement sysroot next to the old one; replace the old one after acceptance.
 Rebuild ABI consumers in the same change.
