@@ -2,7 +2,7 @@
 
 Task-specific instructions for AI agents working on [EmberBSD](https://github.com/oxtech-ember/EmberBSD).
 The package uses [Agent Plugins](https://agent-plugins.org/) and [Agent Skills](https://agentskills.io/specification).
-Version **0.4.15** contains nine independently installable skills.
+Version **0.4.16** contains nine independently installable skills.
 
 | Skill | Task |
 | --- | --- |
@@ -25,9 +25,12 @@ See the [authoring rules](docs/skill-writing.md) for limits and verification bou
 ## Purpose and related projects
 
 Use the [repository map](skills/emberbsd-repository-guide/references/repositories.md)
-to locate the owning public source. OS builds and drivers belong to EmberBSD.
-Third-party recipes belong to Ports. Public demonstrations belong to Examples.
-SDK provides Prebuild SDK workspace tools and sysroot orchestration.
+to locate the owning public source. OS source build rules and drivers belong to EmberBSD.
+Keep OS documentation beside its subsystem; it is not a documentation umbrella for every project.
+Third-party recipes and upstream dependencies belong to Ports.
+Standalone UI applications and demonstrations belong to Examples or their own repositories.
+SDK owns common build orchestration, sysroots, release kits, and Prebuild SDK workspace tools.
+Skills provide concise routes to these owners without copying their implementation contracts.
 Stable application contracts and Runtime remain separate work. Verify implemented interfaces before calling them. This package contains no MCP server or device runtime.
 
 [EmberBSD-User-Skills](https://github.com/oxtech-ember/EmberBSD-User-Skills) handles
@@ -47,17 +50,21 @@ The tools preserve dependency graphs and result evidence; the development enviro
 
 ## Add your board
 
-Start with `emberbsd-add-board`, the [board catalog](https://github.com/oxtech-ember/EmberBSD/tree/main/ember/boards),
-and the [OS board procedure](https://github.com/oxtech-ember/EmberBSD/blob/main/ember/boards/adding-a-board.md).
+Start with `emberbsd-add-board` and the
+[OS development procedure](https://github.com/oxtech-ember/EmberBSD/blob/main/ember/development/adding-a-board.md).
 Supply the model, revision, SoC, firmware, serial console, and available hardware access.
 The workflow covers kernel, DTS/ACPI, drivers, output bundles, boot selection, and evidence.
 Keep build, VM, and physical checks separate. A shared SoC does not prove peripheral support.
-An authorized shared change includes the board page and a concise catalog row.
 
-[EmberBSD-DevBoards](https://github.com/oxtech-ember/EmberBSD-DevBoards) provides hardware references for developers building their own devices.
-It separates board, carrier, SoC, interface, and bootloader knowledge.
-Start with its [reader guide](https://github.com/oxtech-ember/EmberBSD-DevBoards/blob/main/docs/reader-guide.md) and [catalog](https://github.com/oxtech-ember/EmberBSD-DevBoards/blob/main/catalog.json), then check each profile's sources and applicability.
-Drivers, build procedures, and current support evidence remain in their implementation repositories.
+[EmberBSD-DevBoards](https://github.com/oxtech-ember/EmberBSD-DevBoards) owns hardware descriptions and current support guidance with explicit limits.
+It separates board, carrier, SoC, interface, bootloader, and storage-layout knowledge.
+Start with its [reader guide](https://github.com/oxtech-ember/EmberBSD-DevBoards/blob/main/docs/reader-guide.md)
+and [catalog](https://github.com/oxtech-ember/EmberBSD-DevBoards/blob/main/catalog.json).
+Check each profile's sources and applicability before adapting it to your device.
+Update that profile when support changes. Keep one canonical support description.
+Drivers, builder mechanics, API contracts, and executable checks stay beside their implementation in OS or Ports.
+OS image documentation describes the builder; DevBoards describes hardware applicability and the boot layout.
+Keep test chronology and duplicate support catalogs out of these guides.
 
 ## Use in your development environment
 

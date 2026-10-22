@@ -5,7 +5,7 @@ description: Use when building or checking a statically linked EmberBSD base set
 
 # Build a static base set
 
-Read `README.ember.md` and `ember/boot/aarch64-base-update.md` in the OS repository.
+Read `README.ember.md` and `ember/tools/docs/aarch64-base-update.md` in the OS repository.
 Read [static build inputs](references/static-inputs.md).
 Read [archive checks](references/archive-checks.md).
 

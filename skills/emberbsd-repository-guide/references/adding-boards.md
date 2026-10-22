@@ -3,4 +3,4 @@
 Use `emberbsd-add-board` for board development.
 This legacy path remains for existing links.
 Load the named skill when available.
-Otherwise, read the [owning public repository](https://github.com/oxtech-ember/EmberBSD/blob/main/ember/boards/adding-a-board.md).
+Otherwise, read the [owning public repository](https://github.com/oxtech-ember/EmberBSD/blob/main/ember/development/adding-a-board.md).

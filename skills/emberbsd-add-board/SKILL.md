@@ -5,14 +5,14 @@ description: Use when adding an EmberBSD board or checking its kernel, boot, dev
 
 # Add a board
 
-Read `README.ember.md` and `ember/boards/adding-a-board.md` in the OS repository.
-Read [board evidence](references/board-evidence.md), including its DevBoards route for hardware design references.
+Read `README.ember.md` and `ember/development/adding-a-board.md` in the OS repository.
+Read [board evidence](references/board-evidence.md), including its DevBoards route for hardware profiles and current support.
 
 1. Record the exact board model, revision, firmware, and boot path.
 2. Compare the closest platform with vendor wiring and interface documents.
 3. Integrate kernel, drivers, DTS/ACPI, build outputs, and boot selection.
 4. Run common regressions and available device checks.
-5. Add a board page and a short catalog entry.
+5. Update the canonical DevBoards profile and its support limits.
 6. Record source, build, VM, and physical results separately.
 
 A shared SoC does not prove peripheral support.

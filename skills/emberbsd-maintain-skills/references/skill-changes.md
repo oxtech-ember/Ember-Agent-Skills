@@ -14,6 +14,13 @@ Keep all linked instructions, icons, and metadata inside the skill directory.
 Refer to another skill by name instead of linking to its files.
 Provide an owning public procedure when the other skill can be absent.
 Do not require private wiki pages, lab paths, or credentials.
+Route hardware, SoC, bootloader, layout, and current support guidance to DevBoards.
+Keep OS mechanism documentation beside its subsystem.
+Route common build orchestration, sysroots, and release kits to SDK.
+Route dependency recipes and upstream patches to Ports.
+Route standalone UI applications to Examples or their own repository.
+Keep skills concise; link to owner contracts instead of copying them.
+Do not use OS documentation as an umbrella for other projects.
 
 For a compatibility lesson, record symptom, cause, affected versions, source, and checked revision.
 Add the verified remedy, check, limits, upstream state, and removal condition.

@@ -1,27 +1,28 @@
 # Board evidence
 
 Set `os` to the source checkout.
-Read the board catalog and closest board page.
+Inspect the closest implementation.
 
 ```sh
-rg --files "$os/ember/boards" "$os/ember/boot"
+rg --files "$os/ember/development" "$os/ember/boot" "$os/ember/image" "$os/ember/tools"
 rg -n "$board_or_soc" "$os/sys/arch" "$os/sys/dev" "$os/ember"
 ```
 
-Read [DevBoards](https://github.com/oxtech-ember/EmberBSD-DevBoards).
-Start with its [reader guide](https://github.com/oxtech-ember/EmberBSD-DevBoards/blob/main/docs/reader-guide.md) and [catalog](https://github.com/oxtech-ember/EmberBSD-DevBoards/blob/main/catalog.json).
-Read the exact board, carrier, SoC, and selected bootloader records.
-If a profile is absent, continue with vendor sources and the closest OS implementation.
-Check source revisions and configuration applicability before reuse.
-For a custom device, read the profile's design transfer notes.
-Keep reusable hardware findings in DevBoards and OS support evidence with the implementation.
+Start with the [DevBoards reader guide](https://github.com/oxtech-ember/EmberBSD-DevBoards/blob/main/docs/reader-guide.md) and [catalog](https://github.com/oxtech-ember/EmberBSD-DevBoards/blob/main/catalog.json).
+Read exact board, carrier, SoC, and bootloader records.
+For missing profiles, inspect vendor sources and the closest OS implementation.
+Check revisions and applicability before reuse.
+For custom devices, read the design transfer notes.
+Keep hardware descriptions, boot layouts, and current support limits in DevBoards.
+Keep software contracts, builders, and executable checks beside their implementation.
+OS image guides describe builder mechanics; DevBoards defines hardware applicability.
+Exclude test diaries and duplicate catalogs.
 
-Record SoC, architecture, RAM, storage, serial settings, firmware chain, and DT/ACPI interface.
+Record SoC, architecture, RAM, storage, console, firmware chain, and DT/ACPI.
 Compare wiring, PHY, storage, power, and radio firmware with vendor documents.
 Inspect existing fork patches before applying another copy.
 Preserve bindings, ABIs, firmware licenses, and source attribution.
-Keep external libraries in Ports.
-Keep standalone demonstrations in Examples.
+Keep libraries in Ports and demonstrations in Examples.
 
 Use the architecture's documented builder.
 Record source, configuration, compiler, firmware, and artifact hashes.
@@ -34,9 +35,8 @@ Check watchdog reset and actual audio capture or playback when relevant.
 Identify the target device and recovery path before writes.
 Record date, revisions, workload duration, measurements, failures, and untested interfaces.
 
-Add one board page with a two-column capability table.
-Add a concise catalog or README row.
-Submit code, boot integration, checks, and documentation together when authorized.
+Update the DevBoards profile with supported scenarios, limits, and sources.
+Submit implementation and profile changes to their owners when authorized.
 Use a draft when required validation remains unavailable and the target permits drafts.
 
 ## Source and memory analysis

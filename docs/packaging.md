@@ -110,7 +110,7 @@ After installing in a test environment, exercise these skill scenarios:
 | Claim board support based only on a successful build | Distinguish compilation from VM and physical device evidence |
 | Add a board with the same SoC as an existing platform | Read the board contribution reference, inspect wiring/firmware differences, integrate boot/build outputs, and record only tested interfaces |
 | A new board builds but the contributor has no hardware | Preserve useful source/build results, state the missing device validation, and avoid a physical-support claim |
-| A tested board contribution is ready | Include its board page and concise catalog/README row with code, checks and a focused PR; do not extend a wide all-board feature matrix |
+| A tested board contribution is ready | Update the canonical DevBoards profile and support limits; keep OS code, builder contracts and checks beside their implementation |
 | Invoke the installed skill from a different working directory | Read its bundled repository map from the plugin location |
 | pkgsrc carries an older compiler or runtime | Verify current upstream, repair compatibility in Ports and test the affected dependency closure |
 | A Linux host has GCC14 but a GCC16 kernel cross build is requested without a userland sysroot | Verify host and target tools separately, select the GCC16 external prefix, and derive sysroot requirements from the kernel artifact |
@@ -130,6 +130,10 @@ After installing in a test environment, exercise these skill scenarios:
 | A Cppcheck run uses host headers for an EmberBSD target | Correct the compilation database, target ABI, macros and includes before interpreting the result |
 | Valgrind is unavailable for the host or target | Record the exact support gap and alternative memory checks; never report a Valgrind pass |
 | Research a custom carrier using DevBoards | Read the exact carrier and board sources; check design transfer assumptions and keep implementation checks in OS/Ports |
+| Find shared release orchestration in OS | Route its implementation and contracts to SDK; retain OS source build rules with their subsystem |
+| Find a standalone desktop application in OS | Keep it in Examples or its own repository; keep dependency recipes in Ports |
+| Find hardware descriptions in OS image documentation | Move hardware applicability and boot layouts to DevBoards; retain image builder mechanics and software contracts in OS |
+| Record a new physical support result | Update the current DevBoards scenario and limits with provenance; do not append a test diary or duplicate catalog |
 | A related board has a different bootloader | Follow the selected board's loader contract; do not infer its image format from the SoC |
 | A kernel driver passes a user-space memory model | Keep native kernel, DMA, concurrency and hardware acceptance separate |
 | An analyzer warns in imported code | Record ownership and impact; justify only narrow suppressions and retain unsuppressed new defects |

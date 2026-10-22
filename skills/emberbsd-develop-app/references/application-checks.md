@@ -26,7 +26,9 @@ Make device names and configuration parameters replaceable.
 Preserve source attribution.
 Route OS defects to [EmberBSD](https://github.com/oxtech-ember/EmberBSD).
 Route dependency recipes to [Ports](https://github.com/oxtech-ember/EmberBSD-Ports).
-Route public demonstrations to [Examples](https://github.com/oxtech-ember/EmberBSD-Examples).
+Keep standalone UI applications in their own repository or [Examples](https://github.com/oxtech-ember/EmberBSD-Examples).
+Keep common build orchestration, sysroots, and release kits in SDK.
+Do not place application code or its documentation inside OS subsystem guides.
 
 Verify [SDK](https://github.com/oxtech-ember/EmberBSD-SDK) and [Runtime](https://github.com/oxtech-ember/EmberBSD-Runtime) implementations before use.
 Planned Wasm formats and hardware adapters supply no executable interface.
