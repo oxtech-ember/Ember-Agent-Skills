@@ -64,6 +64,8 @@ and [Valgrind platforms](https://valgrind.org/info/platforms.html).
 
 Use shared objects, packages, and the current sysroot for the selected target ABI.
 Keep incompatible ABIs separate.
+Make builds work on case-insensitive file systems.
+Fix a recipe that fails only on such a file system.
 Do not create Mesa, Plasma, or other package variants for individual boards.
 Select only the runtime packages that the device needs.
 Split large toolchains into runtime and development packages.

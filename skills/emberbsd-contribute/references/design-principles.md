@@ -74,3 +74,5 @@ Examples:
   Shared SAE acceptance does not validate another radio chip.
 - Repeat affected stack checks after shared changes.
 - Split packages into runtime and development parts. Install only runtime parts on devices.
+- Make builds work on case-insensitive file systems, such as the default macOS volume.
+  A failure only on such a file system is a recipe defect. Fix the recipe.
