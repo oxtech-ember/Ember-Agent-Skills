@@ -174,6 +174,20 @@ Do not copy machine-local build logs, private network addresses or credentials
 into published examples or prompts.
 
 
+## Shared dependency contribution acceptance
+
+On **2026-10-24**, version **0.4.18** passed local consistency and all 24 validator regressions
+with Ruby **4.0.8** on macOS arm64. All nine standalone bundles passed their local reference,
+prose, metadata, and icon checks. Their files matched the final skill sources.
+Codex CLI **0.163.0-alpha.11.2** discovered all nine skills and resolved plugin and skill icons.
+Grok Build **1.0.62** installed the committed candidate and loaded all nine skills in an isolated profile.
+
+Independent read-only review exercised four textual scenarios: an existing shared dependency,
+an authorized fork PR, missing publication permission, and an explicit refusal.
+The review checked owner selection, private application boundaries, and accurate submission states.
+These bounded checks do not establish actual agent execution, downstream builds, or PR acceptance.
+No user application or contribution was published by the scenario checks.
+
 ## Current port guidance acceptance
 
 On **2026-10-15**, version **0.4.4** passed local consistency and all 21 validator regressions.

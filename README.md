@@ -215,6 +215,7 @@ Board checks reuse matching stack evidence and cover the device layer.
 Shared changes require the affected stack checks.
 
 Review the [manual scenarios](docs/packaging.md#checks-and-evidence) after behavior changes.
+See the [shared dependency contribution checks](docs/packaging.md#shared-dependency-contribution-acceptance) for version **0.4.18** and their limits.
 
 ## License
 
