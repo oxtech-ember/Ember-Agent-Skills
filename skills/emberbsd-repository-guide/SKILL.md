@@ -22,6 +22,8 @@ Select one skill for the requested result.
 For retained personal third-party patches, select `emberbsd-personal-ports` from EmberBSD-User-Skills.
 For device operation, select `emberbsd-user-guide` from that package.
 Source editing alone does not require publication.
+Separate reusable platform repairs from personal behavior changes.
+Prepare those repairs at their public owner and submit them when authorized.
 
 If the selected skill is absent, read the owning repository's public instructions.
 Read its README and contribution rules before changes.

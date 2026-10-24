@@ -5,8 +5,8 @@ Inspect its pinned package sources before writing another recipe.
 
 ```sh
 git -C "$ports" submodule status
-rg --files "$ports/profiles" "$ports/probes" | rg '(README\.md|sources\.tsv|build\.sh|test.*\.sh)$'
-rg -n "$dependency" "$ports/profiles" "$ports/probes"
+rg --files "$ports/pkgsrc" "$ports/profiles" "$ports/probes" | rg '(README\.md|Makefile|distinfo|sources\.tsv|build\.sh|test.*\.sh)$'
+rg -n "$dependency" "$ports/pkgsrc" "$ports/profiles" "$ports/probes"
 ```
 
 Select current stable upstream or a justified supported LTS release.

@@ -19,6 +19,7 @@ Select the simplest structure.
 
 Use existing subsystem helpers first.
 Extract missing shared behavior before adding consumers.
+Reuse [Ports dependencies](https://github.com/oxtech-ember/EmberBSD-Ports/blob/main/docs/update-ports.md).
 Matching function names do not justify a shared FullMAC firmware abstraction.
 
 ## Fix the cause

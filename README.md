@@ -2,7 +2,7 @@
 
 Task-specific instructions for AI agents working on [EmberBSD](https://github.com/oxtech-ember/EmberBSD).
 The package uses [Agent Plugins](https://agent-plugins.org/) and [Agent Skills](https://agentskills.io/specification).
-Version **0.4.17** contains nine independently installable skills.
+Version **0.4.18** contains nine independently installable skills.
 
 | Skill | Task |
 | --- | --- |
@@ -38,6 +38,19 @@ operation, installation, diagnostics, personal application changes, and user Git
 Editing an existing program for personal use does not require a contribution PR.
 Independent applications keep their own conventions, language, license, and publication scope.
 Keep the application's existing instructions when you install skills.
+
+Reuse one current Ports recipe and patch set for each shared dependency.
+Include direct, transitive, and build dependencies when checking versions and affected consumers.
+Adapt consumers instead of adding old versions or copying patches into each application.
+Keep reusable repairs and regressions at their owning public source.
+The [dependency workflow](skills/emberbsd-port-software/references/shared-dependencies.md) separates local preparation from public availability.
+
+EmberBSD welcomes pull requests from external users.
+When submission is authorized, complete the PR through a topic branch or fork after the required checks.
+Otherwise, prepare a reviewable patch and evidence before asking for publication permission.
+Respect a refusal and keep private application material outside the patch.
+Installing these skills grants no upstream write or merge permission.
+A local repair or pending PR is not a released fix.
 
 Development checks cover Cppcheck, GCC and Clang static analysis, and Valgrind Memcheck.
 The guidance includes upstream-versus-patch comparisons for ports, justified suppressions,

@@ -3,6 +3,8 @@
 Read the [Ports cross-build procedure](https://github.com/oxtech-ember/EmberBSD-Ports/blob/main/profiles/development-toolchain/cross/README.md).
 Use its original archive URL and SHA256.
 Verify the selected Ports and pkgsrc revisions.
+Use current Ports recipes for compiler prerequisites, transitive dependencies, and host tools.
+Follow the [shared dependency contract](https://github.com/oxtech-ember/EmberBSD-Ports/blob/main/docs/update-ports.md) when updating them.
 Investigate a hash mismatch before extraction.
 
 Set `ports`, `pkgsrc`, `gcc_archive`, `tools`, and `work` to absolute paths.
@@ -33,6 +35,9 @@ Omit it only for a verified export from the selected revisions.
 The recipe builds isolated host math libraries when no accepted prefix is supplied.
 Its README defines optional host math reuse.
 Keep source hashes, patches, math repairs, and executable regressions in Ports.
+Submit tested shared repairs through the [contribution procedure](https://github.com/oxtech-ember/EmberBSD/blob/main/CONTRIBUTING.md) when publication is authorized.
+Without publication permission, present the tested patch before asking.
+Respect a refusal and report the repair as unsubmitted.
 Do not copy a compiler workaround into skills.
 The installed split-DWARF check verifies the driver's target tool lookup.
 Keep compiler versions, triplets, library hashes, and real test results.

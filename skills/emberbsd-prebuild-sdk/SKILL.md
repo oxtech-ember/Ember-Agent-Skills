@@ -33,5 +33,6 @@ Shared Python modules and build logic belong to EmberBSD-SDK.
 
 Use `emberbsd-build-kernel` for kernel-only compiler work.
 Use `emberbsd-port-software` for shared dependency recipes.
+Reuse current Ports recipes and patches instead of maintaining copies inside the SDK workspace.
 Use `emberbsd-develop-app` for application code.
 The public SDK procedure does not require these skills.

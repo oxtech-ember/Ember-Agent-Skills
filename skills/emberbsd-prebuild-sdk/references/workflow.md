@@ -49,6 +49,12 @@ For sysroot builds, read the
 Before you select inputs, read the script's help.
 The SDK uses EmberBSD build rules and the verified Ports runtime.
 It does not supply a different libc or compiler recipe.
+Reuse current dependencies from the [common Ports recipes](https://github.com/oxtech-ember/EmberBSD-Ports/tree/main/pkgsrc).
+Check direct, transitive, build, and test dependencies, including host tools.
+Use the [Ports update contract](https://github.com/oxtech-ember/EmberBSD-Ports/blob/main/docs/update-ports.md) for the shared graph and patch set.
+Move dependency repairs out of the sysroot or cache into Ports with their regressions.
+Use `emberbsd-contribute` or the [public contribution procedure](https://github.com/oxtech-ember/EmberBSD/blob/main/CONTRIBUTING.md) for authorized submissions.
+Prepare the shared patch before requesting any missing publication permission.
 Use GCC16 for target compilation.
 Keep native host tools and target ELF files separate.
 Record the source commits, tools, runtime receipts, configuration and output hashes.

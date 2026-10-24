@@ -40,3 +40,10 @@ For bounded recovery, invoke the real generation target through its make wrapper
 Reuse generated outputs only with matching source and configuration records.
 Inspect Ports host math dependencies when the host compiler crashes.
 Keep recovery commands in owning tools.
+
+Use current Ports recipes for direct, transitive, build, and test dependencies, including host tools.
+Follow the [shared dependency contract](https://github.com/oxtech-ember/EmberBSD-Ports/blob/main/docs/update-ports.md) while preserving native OS integration.
+Keep base build repairs in OS and shared third-party repairs in Ports.
+Prepare regressions and submit an authorized PR through the [contribution procedure](https://github.com/oxtech-ember/EmberBSD/blob/main/CONTRIBUTING.md).
+Without publication permission, present the tested patch before asking.
+Respect a refusal and report the repair as unsubmitted.
