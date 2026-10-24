@@ -1,5 +1,9 @@
 # Submission checks
 
+Apply the [SDK tool selection policy](https://github.com/oxtech-ember/EmberBSD-SDK/blob/main/docs/tool-selection.md) to build evidence.
+Reject implicit system tools, including native host compilers.
+Keep Clang analysis and diagnostic fuzz evidence separate from ordinary GCC16 builds.
+
 Read current upstream instructions before choosing a channel.
 A GitHub mirror can accept only mailing-list patches or problem reports.
 Use a topic branch and a fork when upstream branch access is absent.

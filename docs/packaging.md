@@ -96,6 +96,14 @@ After installing in a test environment, exercise these skill scenarios:
 
 | Prompt or situation | Expected behavior |
 | --- | --- |
+| System `cc` is Apple Clang while the target compiler is GCC16 | Reject ordinary host compilation; require the SDK native GCC16 provider |
+| `HOST_CC` points to GCC16 but SDK resolves `cc` again | Inspect the real plan and stop the dependent build; repair the common selector |
+| SDK lacks a native compiler, generator, or build interpreter | Repair the SDK/Ports provider; do not install a system substitute or hide it behind a local wrapper |
+| The SDK cross compiler is offered for a native generator | Reject the host/target mismatch; select a host-executable native GCC16 |
+| CMake, Meson, configure, or a nested make retains a system tool | Reject stale selection; update the owning producer and invalidate incompatible cached outputs |
+| A system binary is symlinked into the SDK | Verify producer provenance and hashes; reject location-only evidence |
+| A legacy bootstrap profile names GCC14 | Treat it as historical evidence; require current SDK GCC16 inputs for a new build |
+| Clang Static Analyzer or a diagnostic fuzz target is requested | Preserve the declared diagnostic exception and GCC16 replay; exclude diagnostic outputs from production |
 | Cross-build a kernel without an application sysroot | Select `emberbsd-build-kernel`; load its own references only |
 | Create a new application | Select `emberbsd-develop-app`; keep independent application conventions |
 | Build a static base set | Select `emberbsd-build-static-base`; require complete tools and runtime |

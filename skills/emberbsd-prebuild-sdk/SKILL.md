@@ -14,7 +14,7 @@ Select the SDK source with `--sdk-source`.
 2. Inspect the shared workspace and its declared target.
 3. For a new workspace, use `create` with `--target`.
 4. For an existing target workspace, use `--adopt` with the same target.
-5. Select the common GCC16 compiler.
+5. Select SDK cross GCC16 and SDK native GCC16 separately.
 6. Select the matching EmberBSD runtime inputs.
 7. Before a sysroot build, examine its `--plan` output.
 8. Before object reuse, check the recorded source, compiler, configuration and ABI.
@@ -22,6 +22,7 @@ Select the SDK source with `--sdk-source`.
 10. Record layout, build, package and target execution results separately.
 
 An empty workspace does not prove that a compiler or sysroot works.
+Reject system build tools, including native compiler fallbacks.
 Before SDK distribution, check the matching packages and relocated files.
 Host and target platforms are independent inputs.
 Use one workspace for each target architecture.

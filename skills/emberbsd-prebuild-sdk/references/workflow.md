@@ -2,47 +2,42 @@
 
 Read the [SDK README](https://github.com/oxtech-ember/EmberBSD-SDK).
 Read the [layout contract](https://github.com/oxtech-ember/EmberBSD-SDK/blob/main/docs/prebuild-sdk.md).
+Read the [SDK tool selection policy](https://github.com/oxtech-ember/EmberBSD-SDK/blob/main/docs/tool-selection.md), including current enforcement gaps.
 If an SDK source checkout exists, use it.
 
 The bundled `scripts/sdk.py` uses CPython 3.15 and its standard library.
+Set `sdk_python` to its verified absolute SDK interpreter path.
 It calls commands in the selected SDK checkout.
 The SDK owns their checks.
 From this skill directory, run these commands:
 
 ```sh
-python3 scripts/sdk.py --sdk-source /absolute/EmberBSD-SDK inspect /absolute/prebuild-sdk-aarch64
-python3 scripts/sdk.py --sdk-source /absolute/EmberBSD-SDK sysroot --help
+"$sdk_python" scripts/sdk.py --sdk-source /absolute/EmberBSD-SDK inspect /absolute/prebuild-sdk-aarch64
+"$sdk_python" scripts/sdk.py --sdk-source /absolute/EmberBSD-SDK sysroot --help
 ```
 
-The launcher passes its interpreter and SDK source to the sysroot builder.
-It also provides the `create` command.
-The SDK command defines the build options.
+The launcher passes its interpreter and SDK source to the builder.
 
 From the SDK checkout, use these commands to inspect or create a workspace:
 
 ```sh
-python3 scripts/create-prebuild-sdk.py /absolute/prebuild-sdk-aarch64 --target aarch64
-python3 scripts/inspect-prebuild-sdk.py /absolute/prebuild-sdk-aarch64
-python3 scripts/create-prebuild-sdk.py /absolute/prebuild-sdk-amd64 --target amd64
+"$sdk_python" scripts/create-prebuild-sdk.py /absolute/prebuild-sdk-aarch64 --target aarch64
+"$sdk_python" scripts/inspect-prebuild-sdk.py /absolute/prebuild-sdk-aarch64
+"$sdk_python" scripts/create-prebuild-sdk.py /absolute/prebuild-sdk-amd64 --target amd64
 ```
 
 For an existing target workspace, use `--adopt`:
 
 ```sh
-python3 scripts/create-prebuild-sdk.py /absolute/prebuild-sdk-aarch64 --target aarch64 --adopt /absolute/aarch64-build
+"$sdk_python" scripts/create-prebuild-sdk.py /absolute/prebuild-sdk-aarch64 --target aarch64 --adopt /absolute/aarch64-build
 ```
 
-The `--adopt` option creates an alias to existing directories.
-It does not copy or relocate build outputs.
-Keep canonical paths until the build tools support relocation.
-A correct layout does not prove ABI compatibility or compiler operation.
-The canonical manifest declares the target.
-The alias name and host architecture do not declare it.
-An old layout can report an unknown target.
-Inspect it without changing its files.
-Do not infer a target or rewrite its build context.
-The new sysroot builder requires a matching declared target.
-Read the SDK migration boundary before changing an existing workspace.
+`--adopt` creates an alias without relocating outputs.
+Keep canonical paths until relocation is supported.
+The manifest declares the target; the alias and host architecture do not.
+Inspect unknown legacy targets without rewriting their context.
+Read the SDK migration boundary before changes.
+The builder requires a matching declared target.
 
 For sysroot builds, read the
 [sysroot procedure](https://github.com/oxtech-ember/EmberBSD-SDK/blob/main/docs/sysroot.md).
@@ -55,8 +50,14 @@ Use the [Ports update contract](https://github.com/oxtech-ember/EmberBSD-Ports/b
 Move dependency repairs out of the sysroot or cache into Ports with their regressions.
 Use `emberbsd-contribute` or the [public contribution procedure](https://github.com/oxtech-ember/EmberBSD/blob/main/CONTRIBUTING.md) for authorized submissions.
 Prepare the shared patch before requesting any missing publication permission.
-Use GCC16 for target compilation.
-Keep native host tools and target ELF files separate.
+Use SDK cross GCC16 for targets and SDK native GCC16 for host programs.
+Require SDK provenance for all build tools, including interpreters and generators.
+Reject ambient PATH, system compilers, and host package-manager substitutes.
+Check resolved paths, hashes, driver-selected tools, cached configuration, and nested commands before compilation.
+HOST_CC/HOST_CXX do not suffice when the SDK overrides them.
+Missing selectors or tools require a shared SDK/Ports repair with refusal tests.
+Do not hide that gap with a local wrapper or PATH change.
+Keep host ABI inputs separate from target files.
 Record the source commits, tools, runtime receipts, configuration and output hashes.
 
 Use shared objects and packages for each target ABI.
@@ -78,5 +79,4 @@ Record the actual tests for each platform separately.
 
 Read the [distribution boundary](https://github.com/oxtech-ember/EmberBSD-SDK/blob/main/docs/distribution.md)
 before preparing a binary SDK.
-The shared object cache is not a portable SDK release.
-Publish only a verified SDK with its matching binary packages.
+Publish only a verified SDK with matching binary packages.

@@ -2,7 +2,7 @@
 
 Task-specific instructions for AI agents working on [EmberBSD](https://github.com/oxtech-ember/EmberBSD).
 The package uses [Agent Plugins](https://agent-plugins.org/) and [Agent Skills](https://agentskills.io/specification).
-Version **0.4.18** contains nine independently installable skills.
+Version **0.4.19** contains nine independently installable skills.
 
 | Skill | Task |
 | --- | --- |
@@ -40,6 +40,10 @@ Independent applications keep their own conventions, language, license, and publ
 Keep the application's existing instructions when you install skills.
 
 Reuse one current Ports recipe and patch set for each shared dependency.
+Build with SDK tools under the [tool selection policy](https://github.com/oxtech-ember/EmberBSD-SDK/blob/main/docs/tool-selection.md).
+Use SDK cross GCC16 for EmberBSD outputs and SDK native GCC16 for host programs.
+Reject implicit system tools, including bootstrap and generator compilers.
+Check actual producer selections; a PATH change does not repair a missing shared selector.
 Include direct, transitive, and build dependencies when checking versions and affected consumers.
 Adapt consumers instead of adding old versions or copying patches into each application.
 Keep reusable repairs and regressions at their owning public source.
