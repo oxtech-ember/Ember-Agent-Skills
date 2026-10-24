@@ -220,6 +220,7 @@ Shared changes require the affected stack checks.
 
 Review the [manual scenarios](docs/packaging.md#checks-and-evidence) after behavior changes.
 See the [shared dependency contribution checks](docs/packaging.md#shared-dependency-contribution-acceptance) for version **0.4.18** and their limits.
+See the [SDK tool selection checks](docs/packaging.md#sdk-tool-selection-acceptance) for version **0.4.19** and remaining enforcement gaps.
 
 ## License
 

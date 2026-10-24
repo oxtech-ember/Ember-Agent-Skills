@@ -182,6 +182,21 @@ Do not copy machine-local build logs, private network addresses or credentials
 into published examples or prompts.
 
 
+## SDK tool selection acceptance
+
+On **2026-10-24**, version **0.4.19** passed local consistency and all 24 validator regressions with Ruby **4.0.8**.
+All nine complete standalone bundles passed their metadata, prose, reference, and icon checks.
+Their skill payloads matched the reviewed source after the kernel and SDK guidance corrections.
+Codex CLI **0.163.0-alpha.11.2** discovered the package and resolved plugin and skill icon paths in isolated profiles.
+Grok Build **1.0.62** installed candidate `b0da713` and loaded all nine skills in a temporary profile.
+The evidence-only follow-up leaves those tested manifests and skill payloads unchanged.
+
+Independent review checked the native/target distinction, kernel-only inputs, current producer interfaces, diagnostic exceptions, and publication consent.
+The eight tool-selection scenarios above are review criteria; no new model behavior trial was performed.
+The checks do not establish a complete SDK build, executable fallback enforcement, or general assistant reliability.
+The [SDK policy](https://github.com/oxtech-ember/EmberBSD-SDK/blob/main/docs/tool-selection.md) records the remaining selector gap.
+Publish that SDK policy before merging this skill version.
+
 ## Shared dependency contribution acceptance
 
 On **2026-10-24**, version **0.4.18** passed local consistency and all 24 validator regressions
