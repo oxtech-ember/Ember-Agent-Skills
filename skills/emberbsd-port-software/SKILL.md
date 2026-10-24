@@ -29,10 +29,10 @@ Size build parallelism from host resources, not guest RAM.
 For runtime or media failures, read [runtime checks](references/runtime-checks.md).
 For known failures, read the matching [compatibility case](references/compatibility-cases.md).
 Reuse one current Ports version per dependency across the selected closure.
-Use the common GCC16 profile.
-Never install older compilers or libraries to satisfy dependency builds.
-Patch incompatible consumers instead of adding parallel legacy versions.
-Keep fixes in the owning recipe, not only in local build files or caches.
+Require SDK cross GCC16 for targets and SDK native GCC16 for generators.
+Reject system build tools and implicit PATH selection.
+Follow the [SDK tool policy](https://github.com/oxtech-ember/EmberBSD-SDK/blob/main/docs/tool-selection.md).
+Repair missing tools in SDK/Ports; reject private wrappers and legacy stacks.
 
 Use `emberbsd-build-kernel` for kernel compiler preparation.
 Use `emberbsd-personal-ports` for a personal application patch.

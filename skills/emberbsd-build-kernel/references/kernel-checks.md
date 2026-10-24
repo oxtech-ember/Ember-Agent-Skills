@@ -3,15 +3,19 @@
 Set `os` to the source checkout.
 Set `output` to an absolute directory outside the OS source tree.
 Use the same selected host compilers and resource limit.
+Set `sdk_python` to the verified absolute SDK Python path.
 
 ```sh
-HOST_CC=gcc HOST_CXX=g++ CC=gcc NETBSD2_JOBS="$jobs" \
+HOST_CC="$host_cc" HOST_CXX="$host_cxx" CC="$host_cc" NETBSD2_JOBS="$jobs" \
+    EMBER_BUILD_MODE=cross NETBSD2_PYTHON="$sdk_python" \
     EMBER_EXTERNAL_TOOLCHAIN="$work/toolchain" \
-    sh "$os/ember/build-kernel.sh" "$output" EMBER64
+    "$sdk_sh" "$os/ember/build-kernel.sh" "$output" EMBER64
 ```
 
 Inspect the builder before selecting another architecture or configuration.
 Verify cached compiler settings and the actual external prefix.
+Verify that host selectors do not replace target compiler settings in nested commands.
+Reject stale caches and system-tool selection before compiling.
 Check the real exit status and current logs.
 Reject stale artifacts from a failed build.
 Inspect ELF architecture, kernel configuration, modules, DTBs, and image hashes.
@@ -32,7 +36,7 @@ Keep firmware and hardware checks within the requested device scope.
 
 For linked applications, read the Ports recipe's application mode.
 It requires target libc, startup objects, headers, and the matching GCC16 runtime.
-Run its `compile-tests.sh` and target runner.
+Run its current `compile-tests.py` procedure and target runner.
 Preserve sysroot provenance and relative symlinks.
 Do not mix host libraries with target libraries.
 

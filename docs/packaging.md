@@ -96,6 +96,14 @@ After installing in a test environment, exercise these skill scenarios:
 
 | Prompt or situation | Expected behavior |
 | --- | --- |
+| System `cc` is Apple Clang while the target compiler is GCC16 | Reject ordinary host compilation; require the SDK native GCC16 provider |
+| `HOST_CC` points to GCC16 but SDK resolves `cc` again | Inspect the real plan and stop the dependent build; repair the common selector |
+| SDK lacks a native compiler, generator, or build interpreter | Repair the SDK/Ports provider; do not install a system substitute or hide it behind a local wrapper |
+| The SDK cross compiler is offered for a native generator | Reject the host/target mismatch; select a host-executable native GCC16 |
+| CMake, Meson, configure, or a nested make retains a system tool | Reject stale selection; update the owning producer and invalidate incompatible cached outputs |
+| A system binary is symlinked into the SDK | Verify producer provenance and hashes; reject location-only evidence |
+| A legacy bootstrap profile names GCC14 | Treat it as historical evidence; require current SDK GCC16 inputs for a new build |
+| Clang Static Analyzer or a diagnostic fuzz target is requested | Preserve the declared diagnostic exception and GCC16 replay; exclude diagnostic outputs from production |
 | Cross-build a kernel without an application sysroot | Select `emberbsd-build-kernel`; load its own references only |
 | Create a new application | Select `emberbsd-develop-app`; keep independent application conventions |
 | Build a static base set | Select `emberbsd-build-static-base`; require complete tools and runtime |
@@ -173,6 +181,21 @@ Update commands and compatibility cases when a verified change invalidates them.
 Do not copy machine-local build logs, private network addresses or credentials
 into published examples or prompts.
 
+
+## SDK tool selection acceptance
+
+On **2026-10-24**, version **0.4.19** passed local consistency and all 24 validator regressions with Ruby **4.0.8**.
+All nine complete standalone bundles passed their metadata, prose, reference, and icon checks.
+Their skill payloads matched the reviewed source after the kernel and SDK guidance corrections.
+Codex CLI **0.163.0-alpha.11.2** discovered the package and resolved plugin and skill icon paths in isolated profiles.
+Grok Build **1.0.62** installed candidate `b0da713` and loaded all nine skills in a temporary profile.
+The evidence-only follow-up leaves those tested manifests and skill payloads unchanged.
+
+Independent review checked the native/target distinction, kernel-only inputs, current producer interfaces, diagnostic exceptions, and publication consent.
+The eight tool-selection scenarios above are review criteria; no new model behavior trial was performed.
+The checks do not establish a complete SDK build, executable fallback enforcement, or general assistant reliability.
+The [SDK policy](https://github.com/oxtech-ember/EmberBSD-SDK/blob/main/docs/tool-selection.md) records the remaining selector gap.
+Publish that SDK policy before merging this skill version.
 
 ## Shared dependency contribution acceptance
 

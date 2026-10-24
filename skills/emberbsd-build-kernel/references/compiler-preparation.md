@@ -8,29 +8,26 @@ Follow the [shared dependency contract](https://github.com/oxtech-ember/EmberBSD
 Investigate a hash mismatch before extraction.
 
 Set `ports`, `pkgsrc`, `gcc_archive`, `tools`, and `work` to absolute paths.
+Set `host_cc`, `host_cxx`, and `sdk_sh` to verified absolute SDK native tool paths.
+Check provenance, hashes, native GCC16 versions, and host triplets before continuing.
+Do not substitute system tools when an SDK provider is absent.
 Use paths without whitespace, as the recipe requires.
 The `tools` directory must contain fork-built host tools and target binutils.
 Use a new compiler work directory.
 Set `jobs` from available CPU, RAM, and disk capacity.
 
-```sh
-set -e
-command -v gcc g++
-gcc -dumpfullversion
-gcc -dumpmachine
-g++ -dumpfullversion
-g++ -dumpmachine
-git -C "$ports" submodule status
-git -C "$ports" submodule update --init --depth 1 upstream/pkgsrc
-sh "$ports/scripts/prepare-pkgsrc.sh" "$pkgsrc" development-toolchain
-HOST_CC=gcc HOST_CXX=g++ CROSS_JOBS="$jobs" \
-    sh "$ports/profiles/development-toolchain/cross/build.sh" --kernel \
-    "$pkgsrc" "$gcc_archive" "$tools" "$work"
-"$work/toolchain/bin/aarch64--netbsd-gcc" -dumpfullversion
-"$work/toolchain/bin/aarch64--netbsd-gcc" -dumpmachine
-```
+Use the selected Ports revision's `profiles/development-toolchain/cross/build.py` interface.
+Run it with the verified absolute SDK Python path.
+Pass `--kernel` and the explicit `--sdk-source` checkout.
+Set `HOST_CC` and `HOST_CXX` to the verified SDK native compiler paths.
+Prepare the pkgsrc export and other inputs through the owning procedure.
+Use its current argument order instead of an older copied shell command.
+After preparation, verify the resulting cross GCC16 version, target triplet, provenance, and installed tool set.
+
 
 The export command requires a nonexistent destination.
+Compiler selectors do not select every nested tool.
+Inspect the producer's actual plan, configuration, and commands under the SDK tool selection policy.
 Omit it only for a verified export from the selected revisions.
 The recipe builds isolated host math libraries when no accepted prefix is supplied.
 Its README defines optional host math reuse.
