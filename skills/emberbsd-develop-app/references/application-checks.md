@@ -26,6 +26,15 @@ Make device names and configuration parameters replaceable.
 Preserve source attribution.
 Route OS defects to [EmberBSD](https://github.com/oxtech-ember/EmberBSD).
 Route dependency recipes to [Ports](https://github.com/oxtech-ember/EmberBSD-Ports).
+Check direct, transitive, build, and test dependencies against current Ports recipes.
+Include host tools using the [Ports update contract](https://github.com/oxtech-ember/EmberBSD-Ports/blob/main/docs/update-ports.md).
+Reuse those recipes and patches instead of copying old libraries.
+Adapt the application's build in its own repository.
+Keep shared dependency repairs in the owning Ports recipe.
+Prepare shared fixes and regressions separately from private application code.
+Follow the [contribution procedure](https://github.com/oxtech-ember/EmberBSD/blob/main/CONTRIBUTING.md) to submit an authorized PR.
+Without publication permission, present the prepared diff and checks before asking.
+Respect a refusal and report the repair as local.
 Keep standalone UI applications in their own repository or [Examples](https://github.com/oxtech-ember/EmberBSD-Examples).
 Keep common build orchestration, sysroots, and release kits in SDK.
 Do not place application code or its documentation inside OS subsystem guides.

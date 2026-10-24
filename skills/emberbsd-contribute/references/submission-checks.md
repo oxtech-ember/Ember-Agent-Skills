@@ -5,6 +5,11 @@ A GitHub mirror can accept only mailing-list patches or problem reports.
 Use a topic branch and a fork when upstream branch access is absent.
 Inspect remotes without exposing embedded credentials.
 Preserve unrelated changes, authorship, licenses, and private material.
+Keep shared dependency fixes in Ports, separate from private application behavior.
+Check existing PRs before preparing a duplicate repair.
+Submit through an authorized fork or topic branch after the required checks.
+Without publication permission, present the ready patch and evidence before requesting it.
+Respect a refusal without claiming the repair is publicly available.
 
 Retain a failing-before and passing-after regression for a code repair.
 A port needs build, installed-consumer, and runtime evidence.
@@ -18,6 +23,8 @@ Use the repository template.
 Include tested revision, platform, tools, commands, results, limits, and provenance.
 Address reviews in the same contribution.
 Report prepared, submitted, reviewed, merged, or released state accurately.
+Verify the normal build from clean source revisions without hidden files or manual patching.
+Reuse evidence only when the submitted revision retains the tested inputs.
 
 Keep EmberBSD integration in the project change.
 Prepare a minimal upstream patch against upstream's accepted base.

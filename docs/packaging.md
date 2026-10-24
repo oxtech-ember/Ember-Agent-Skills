@@ -103,6 +103,14 @@ After installing in a test environment, exercise these skill scenarios:
 | Operate a device or customize an existing app in personal Ports | Route to EmberBSD-User-Skills; do not require a contribution merely because source editing is involved |
 | Build an application in a user's own repository | Read its conventions, reuse real public interfaces/examples, and keep application code in that repository |
 | A private application discovers a reusable EmberBSD bug | Isolate the minimal fix; preserve private material and obtain publication permission if it is outside the task |
+| A shared dependency recipe already exists under `pkgsrc/` | Reuse that recipe and its complete patch set; do not search only profiles and probes |
+| An application bundles an old dependency or downloads another private copy | Adapt its build to the current Ports dependency; check affected consumers instead of preserving a separate old stack |
+| A patch exists only in extracted sources or a sysroot | Move it into the owning recipe with a regression; verify a clean normal build without hidden local inputs |
+| A user authorized a tested shared repair and its PR | Complete the authorized fork or topic-branch submission; do not stop at a local commit or request permission again |
+| A private application repair lacks publication permission | Prepare the public-owner diff and tests without private material, then request permission; do not push first |
+| A user declines publication of a prepared shared repair | Preserve the patch locally and report it as unsubmitted; do not repeat the request or claim a public fix |
+| Another contributor updates the same dependency | Recheck version, patches, options, ABI, and affected consumers; a text merge alone does not prove compatibility |
+| A shared repair has an open PR but no merge or release | Report the PR URL and pending state; do not claim availability to all users |
 | Contribute a tested port without upstream write access | Use a topic branch in a fork and open a PR against the correct target/base; never assume permission to push upstream main |
 | An independent application uses a different language or license | Preserve its choices; apply EmberBSD contribution conventions only to changes offered to EmberBSD repositories |
 | Add a standalone UART decoder demonstration | Inspect Examples and any required OS/SDK interfaces; identify actual build checks |
@@ -165,6 +173,20 @@ Update commands and compatibility cases when a verified change invalidates them.
 Do not copy machine-local build logs, private network addresses or credentials
 into published examples or prompts.
 
+
+## Shared dependency contribution acceptance
+
+On **2026-10-24**, version **0.4.18** passed local consistency and all 24 validator regressions
+with Ruby **4.0.8** on macOS arm64. All nine standalone bundles passed their local reference,
+prose, metadata, and icon checks. Their files matched the final skill sources.
+Codex CLI **0.163.0-alpha.11.2** discovered all nine skills and resolved plugin and skill icons.
+Grok Build **1.0.62** installed the committed candidate and loaded all nine skills in an isolated profile.
+
+Independent read-only review exercised four textual scenarios: an existing shared dependency,
+an authorized fork PR, missing publication permission, and an explicit refusal.
+The review checked owner selection, private application boundaries, and accurate submission states.
+These bounded checks do not establish actual agent execution, downstream builds, or PR acceptance.
+No user application or contribution was published by the scenario checks.
 
 ## Current port guidance acceptance
 
