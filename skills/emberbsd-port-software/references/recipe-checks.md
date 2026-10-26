@@ -42,7 +42,7 @@ Compare findings before and after patches with equivalent target settings.
 Separate inherited findings from errors introduced by the port.
 Keep reusable fixes and regression checks in Ports.
 Use actual target headers, macros, ABI, and compile options, preferably from a compilation database.
-Add GCC `-fanalyzer` for C and Clang Static Analyzer for C/C++ where supported.
+Add Clang Static Analyzer; use GCC `-fanalyzer` only for explicit GCC profiles.
 Check analyzer support in the selected compiler version.
 Run executable tests with Valgrind Memcheck on a supported platform.
 Enable leak and uninitialized-value checks with a nonzero error exit status.

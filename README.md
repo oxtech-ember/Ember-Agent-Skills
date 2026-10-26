@@ -2,7 +2,7 @@
 
 Task-specific instructions for AI agents working on [EmberBSD](https://github.com/oxtech-ember/EmberBSD).
 The package uses [Agent Plugins](https://agent-plugins.org/) and [Agent Skills](https://agentskills.io/specification).
-Version **0.4.21** contains nine independently installable skills.
+Version **0.4.22** contains nine independently installable skills.
 
 | Skill | Task |
 | --- | --- |
@@ -58,7 +58,7 @@ Respect a refusal and keep private application material outside the patch.
 Installing these skills grants no upstream write or merge permission.
 A local repair or pending PR is not a released fix.
 
-Development checks cover Cppcheck, GCC and Clang static analysis, and Valgrind Memcheck.
+Development checks cover Cppcheck, Clang Static Analyzer (GCC `-fanalyzer` for explicit GCC profiles), and Valgrind Memcheck.
 The guidance includes upstream-versus-patch comparisons for ports, justified suppressions,
 and explicit platform limits. Kernel contracts and hardware acceptance remain separate.
 Version and dependency migrations use a small pilot, explicit behavior contracts,
