@@ -46,16 +46,32 @@ class LauncherTests(unittest.TestCase):
         self.assertEqual((row['isolated'], row['no_site'], row['no_bytecode']), (1, 1, True))
         self.assertFalse((self.root / 'accidental-file').exists())
 
-    def test_sysroot_passes_selected_source_and_interpreter(self):
-        result = self.run_launcher('sysroot', '--plan', '--sdk', '/workspace')
+    def test_sysroot_passes_prefix_without_forcing_launcher_python(self):
+        result = self.run_launcher('sysroot', '--plan', '--sdk', '/workspace', '--host-prefix', '/native set')
         self.assertEqual(result.returncode, 0, result.stderr)
         arguments = json.loads(result.stdout)['args']
-        self.assertEqual(arguments[:3], ['--sdk-source', str(self.sdk), '--python'])
-        self.assertTrue(Path(arguments[3]).samefile(sys.executable))
-        self.assertEqual(arguments[4:], ['--plan', '--sdk', '/workspace'])
+        self.assertEqual(arguments, ['--sdk-source', str(self.sdk), '--plan', '--sdk', '/workspace', '--host-prefix', '/native set'])
+
+    def test_sysroot_preserves_explicit_python_alias(self):
+        result = self.run_launcher('sysroot', '--host-prefix', '/native', '--python', '/native/bin/python3')
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertEqual(json.loads(result.stdout)['args'], [
+            '--sdk-source', str(self.sdk), '--host-prefix', '/native', '--python', '/native/bin/python3'])
+
+    def test_workspace_operations_do_not_require_build_python_version(self):
+        runner = ('import runpy, sys; sys.version_info = (3, 14, 0); '
+                  'sys.argv = sys.argv[1:]; runpy.run_path(sys.argv[0], run_name="__main__")')
+        for operation in ('create', 'inspect'):
+            with self.subTest(operation=operation):
+                result = subprocess.run([
+                    sys.executable, '-B', '-I', '-S', '-c', runner, str(LAUNCHER),
+                    '--sdk-source', str(self.sdk), operation, '/workspace'],
+                    cwd=self.root, stdout=subprocess.PIPE, stderr=subprocess.PIPE, check=False)
+                self.assertEqual(result.returncode, 0, result.stderr)
+                self.assertEqual(json.loads(result.stdout)['args'], ['/workspace'])
 
     def test_sysroot_rejects_conflicting_selection(self):
-        for option in ('--sdk-source=/other', '--python', '--python=/other'):
+        for option in ('--sdk-source=/other', '--sdk-source'):
             with self.subTest(option=option):
                 result = self.run_launcher('sysroot', option)
                 self.assertEqual(result.returncode, 2)

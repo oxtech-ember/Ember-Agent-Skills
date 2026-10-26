@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "emberbsd-development",
-  "version": "0.4.19",
+  "version": "0.4.20",
   "description": "Task-specific AI skills for EmberBSD SDK workspaces, applications, kernels, boards, software ports, static base sets, and shared contributions.",
   "author": {
     "name": "neonix20b",

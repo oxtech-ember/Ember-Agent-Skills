@@ -2,7 +2,7 @@
 
 Task-specific instructions for AI agents working on [EmberBSD](https://github.com/oxtech-ember/EmberBSD).
 The package uses [Agent Plugins](https://agent-plugins.org/) and [Agent Skills](https://agentskills.io/specification).
-Version **0.4.19** contains nine independently installable skills.
+Version **0.4.20** contains nine independently installable skills.
 
 | Skill | Task |
 | --- | --- |
@@ -41,8 +41,10 @@ Keep the application's existing instructions when you install skills.
 
 Reuse one current Ports recipe and patch set for each shared dependency.
 Build with SDK tools under the [tool selection policy](https://github.com/oxtech-ember/EmberBSD-SDK/blob/main/docs/tool-selection.md).
-Use SDK cross GCC16 for EmberBSD outputs and SDK native GCC16 for host programs.
-Reject implicit system tools, including bootstrap and generator compilers.
+Use SDK cross GCC16 for EmberBSD outputs and `host-pkg-g16` native GCC16 for host programs.
+Build the native set with host GCC16 from current Ports recipes, then build the cross SDK with it.
+Initial acquisition and workspace inspection do not require a completed SDK.
+For compilation, keep selected tools inside their prefix and reject external host build-tool fallbacks.
 Check actual producer selections; a PATH change does not repair a missing shared selector.
 Include direct, transitive, and build dependencies when checking versions and affected consumers.
 Adapt consumers instead of adding old versions or copying patches into each application.
@@ -220,7 +222,7 @@ Shared changes require the affected stack checks.
 
 Review the [manual scenarios](docs/packaging.md#checks-and-evidence) after behavior changes.
 See the [shared dependency contribution checks](docs/packaging.md#shared-dependency-contribution-acceptance) for version **0.4.18** and their limits.
-See the [SDK tool selection checks](docs/packaging.md#sdk-tool-selection-acceptance) for version **0.4.19** and remaining enforcement gaps.
+See the [SDK tool selection checks](docs/packaging.md#sdk-tool-selection-acceptance) for acquisition and compilation boundaries.
 
 ## License
 

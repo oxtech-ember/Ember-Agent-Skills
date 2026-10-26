@@ -96,12 +96,16 @@ After installing in a test environment, exercise these skill scenarios:
 
 | Prompt or situation | Expected behavior |
 | --- | --- |
-| System `cc` is Apple Clang while the target compiler is GCC16 | Reject ordinary host compilation; require the SDK native GCC16 provider |
+| Inspect or create a workspace before acquiring the SDK | Use an installed Python accepted by the command; do not require a completed build tool set |
+| Acquire native tools before cross-building | Build `host-pkg-g16` with host GCC16 from current Ports recipes, then build the cross SDK with that set |
+| System `cc` is Apple Clang while the target compiler is GCC16 | Reject ordinary host compilation; select native GCC16 from `host-pkg-g16` |
 | `HOST_CC` points to GCC16 but SDK resolves `cc` again | Inspect the real plan and stop the dependent build; repair the common selector |
 | SDK lacks a native compiler, generator, or build interpreter | Repair the SDK/Ports provider; do not install a system substitute or hide it behind a local wrapper |
 | The SDK cross compiler is offered for a native generator | Reject the host/target mismatch; select a host-executable native GCC16 |
 | CMake, Meson, configure, or a nested make retains a system tool | Reject stale selection; update the owning producer and invalidate incompatible cached outputs |
-| A system binary is symlinked into the SDK | Verify producer provenance and hashes; reject location-only evidence |
+| A system binary is symlinked into the SDK | Resolve the symlink and reject the build tool outside the selected prefix |
+| Native tools require host system ABI headers or libraries | Allow these native inputs; keep them outside target searches |
+| The sysroot launcher runs with an external control Python | Pass `--host-prefix`; let SDK select its build Python without forcing the launcher's interpreter |
 | A legacy bootstrap profile names GCC14 | Treat it as historical evidence; require current SDK GCC16 inputs for a new build |
 | Clang Static Analyzer or a diagnostic fuzz target is requested | Preserve the declared diagnostic exception and GCC16 replay; exclude diagnostic outputs from production |
 | Cross-build a kernel without an application sysroot | Select `emberbsd-build-kernel`; load its own references only |
@@ -184,18 +188,16 @@ into published examples or prompts.
 
 ## SDK tool selection acceptance
 
-On **2026-10-24**, version **0.4.19** passed local consistency and all 24 validator regressions with Ruby **4.0.8**.
-All nine complete standalone bundles passed their metadata, prose, reference, and icon checks.
-Their skill payloads matched the reviewed source after the kernel and SDK guidance corrections.
-Codex CLI **0.163.0-alpha.11.2** discovered the package and resolved plugin and skill icon paths in isolated profiles.
-Grok Build **1.0.62** installed candidate `b0da713` and loaded all nine skills in a temporary profile.
-The evidence-only follow-up leaves those tested manifests and skill payloads unchanged.
+The [SDK policy](https://github.com/oxtech-ember/EmberBSD-SDK/blob/main/docs/tool-selection.md)
+owns acquisition, native prefix selection, and build checks.
+Review the scenarios above for the native/target distinction, prefix containment,
+host CPU compatibility, host ABI inputs, diagnostic exceptions, and publication scope.
+Acquisition and workspace commands do not need a separately qualified SDK or acceptance receipt.
 
-Independent review checked the native/target distinction, kernel-only inputs, current producer interfaces, diagnostic exceptions, and publication consent.
-The eight tool-selection scenarios above are review criteria; no new model behavior trial was performed.
-The checks do not establish a complete SDK build, executable fallback enforcement, or general assistant reliability.
-The [SDK policy](https://github.com/oxtech-ember/EmberBSD-SDK/blob/main/docs/tool-selection.md) records the remaining selector gap.
-Publish that SDK policy before merging this skill version.
+Run `python3 -B skills/emberbsd-prebuild-sdk/tests/test_launcher.py` for launcher transport checks.
+These cover workspace commands without a build Python version gate, explicit source selection,
+native-prefix forwarding, optional Python aliases, and standalone installation.
+Package checks and launcher fixtures do not establish a complete SDK build or general assistant reliability.
 
 ## Shared dependency contribution acceptance
 

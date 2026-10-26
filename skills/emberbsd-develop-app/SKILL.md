@@ -9,8 +9,8 @@ Read the application's instructions and build files.
 Keep its language, license, and publication scope.
 Read [application checks](references/application-checks.md).
 Read the [SDK tool selection policy](https://github.com/oxtech-ember/EmberBSD-SDK/blob/main/docs/tool-selection.md).
-Use SDK cross GCC16 for targets and SDK native GCC16 for generators.
-Reject system build tools and implicit PATH selection.
+Use SDK cross GCC16 for targets and `host-pkg-g16` native GCC16 for generators.
+For compilation, reject build tools outside the selected prefix.
 
 1. Identify the target image, architecture, dependencies, and available test access.
 2. Find a matching public example.

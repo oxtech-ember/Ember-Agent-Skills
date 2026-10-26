@@ -25,8 +25,6 @@ def main():
     parser.add_argument('arguments', nargs=argparse.REMAINDER)
     options = parser.parse_args()
     try:
-        if sys.implementation.name != 'cpython' or sys.version_info[:2] != (3, 15):
-            raise ValueError('the current SDK host profile requires CPython 3.15')
         source = options.sdk_source.resolve(strict=True)
         if not source.is_dir():
             raise ValueError('SDK source must be a directory')
@@ -38,9 +36,9 @@ def main():
         if arguments[:1] == ['--']:
             arguments = arguments[1:]
         if options.operation == 'sysroot':
-            if any(arg.split('=', 1)[0] in ('--sdk-source', '--python') for arg in arguments):
-                raise ValueError('the launcher selects --sdk-source and --python; do not repeat them')
-            arguments = ['--sdk-source', str(source), '--python', sys.executable, *arguments]
+            if any(arg.split('=', 1)[0] == '--sdk-source' for arg in arguments):
+                raise ValueError('the launcher selects --sdk-source; do not repeat it')
+            arguments = ['--sdk-source', str(source), *arguments]
         # Replace this process so the SDK CLI retains normal signal ownership.
         os.execv(sys.executable, [sys.executable, '-B', '-I', '-S', str(script), *arguments])
     except (OSError, ValueError) as error:

@@ -3,7 +3,7 @@
 Set `os` to the source checkout.
 Set `output` to an absolute directory outside the OS source tree.
 Use the same selected host compilers and resource limit.
-Set `sdk_python` to the verified absolute SDK Python path.
+Set `sdk_python` to the absolute Python path in the selected native prefix.
 
 ```sh
 HOST_CC="$host_cc" HOST_CXX="$host_cxx" CC="$host_cc" NETBSD2_JOBS="$jobs" \

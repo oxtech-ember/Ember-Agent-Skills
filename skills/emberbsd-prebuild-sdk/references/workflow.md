@@ -2,13 +2,13 @@
 
 Read the [SDK README](https://github.com/oxtech-ember/EmberBSD-SDK).
 Read the [layout contract](https://github.com/oxtech-ember/EmberBSD-SDK/blob/main/docs/prebuild-sdk.md).
-Read the [SDK tool selection policy](https://github.com/oxtech-ember/EmberBSD-SDK/blob/main/docs/tool-selection.md), including current enforcement gaps.
+Read the [SDK tool selection policy](https://github.com/oxtech-ember/EmberBSD-SDK/blob/main/docs/tool-selection.md).
 If an SDK source checkout exists, use it.
 
-The bundled `scripts/sdk.py` uses CPython 3.15 and its standard library.
-Set `sdk_python` to its verified absolute SDK interpreter path.
-It calls commands in the selected SDK checkout.
-The SDK owns their checks.
+Initial acquisition and workspace inspection do not require a completed SDK.
+Set `sdk_python` to an installed Python accepted by the selected command.
+The bundled `scripts/sdk.py` calls that SDK checkout.
+The SDK command owns interpreter requirements and build checks.
 From this skill directory, run these commands:
 
 ```sh
@@ -16,7 +16,9 @@ From this skill directory, run these commands:
 "$sdk_python" scripts/sdk.py --sdk-source /absolute/EmberBSD-SDK sysroot --help
 ```
 
-The launcher passes its interpreter and SDK source to the builder.
+The launcher passes the SDK source to the builder.
+For sysroot compilation, select the native set with `--host-prefix`.
+The builder selects build Python from that prefix.
 
 From the SDK checkout, use these commands to inspect or create a workspace:
 
@@ -50,15 +52,16 @@ Use the [Ports update contract](https://github.com/oxtech-ember/EmberBSD-Ports/b
 Move dependency repairs out of the sysroot or cache into Ports with their regressions.
 Use `emberbsd-contribute` or the [public contribution procedure](https://github.com/oxtech-ember/EmberBSD/blob/main/CONTRIBUTING.md) for authorized submissions.
 Prepare the shared patch before requesting any missing publication permission.
-Use SDK cross GCC16 for targets and SDK native GCC16 for host programs.
-Require SDK provenance for all build tools, including interpreters and generators.
-Reject ambient PATH, system compilers, and host package-manager substitutes.
-Check resolved paths, hashes, driver-selected tools, cached configuration, and nested commands before compilation.
+Build `host-pkg-g16` with host GCC16 from current Ports recipes.
+Build the cross SDK with that native set.
+Use native GCC16 for host programs and cross GCC16 for target programs.
+Before compilation, check host CPU compatibility and resolved tool paths, including symlinks and compiler-selected tools.
+Keep build tools within their selected prefix; reject external fallbacks.
+Check cached configuration and nested commands.
 HOST_CC/HOST_CXX do not suffice when the SDK overrides them.
-Missing selectors or tools require a shared SDK/Ports repair with refusal tests.
-Do not hide that gap with a local wrapper or PATH change.
-Keep host ABI inputs separate from target files.
-Record the source commits, tools, runtime receipts, configuration and output hashes.
+Repair missing selectors or tools in SDK/Ports with refusal tests.
+Host system ABI headers and libraries are allowed for native tools only.
+Keep them outside target searches.
 
 Use shared objects and packages for each target ABI.
 Do not create separate build roots for tasks or boards.
