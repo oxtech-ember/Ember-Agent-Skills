@@ -106,7 +106,7 @@ After installing in a test environment, exercise these skill scenarios:
 | A system binary is symlinked into the SDK | Resolve the symlink and reject the build tool outside the selected prefix |
 | Native tools require host system ABI headers or libraries | Allow these native inputs; keep them outside target searches |
 | The sysroot launcher runs with an external control Python | Pass `--host-prefix`; let SDK select its build Python without forcing the launcher's interpreter |
-| A legacy bootstrap profile names GCC14 | Treat it as historical evidence; require current SDK GCC16 inputs for a new build |
+| A legacy bootstrap profile names GCC14 | Use the current Ports procedure for initial compiler bootstrap; use GCC16 for ordinary host and target builds. |
 | Clang Static Analyzer or a diagnostic fuzz target is requested | Preserve the declared diagnostic exception and GCC16 replay; exclude diagnostic outputs from production |
 | Cross-build a kernel without an application sysroot | Select `emberbsd-build-kernel`; load its own references only |
 | Create a new application | Select `emberbsd-develop-app`; keep independent application conventions |
