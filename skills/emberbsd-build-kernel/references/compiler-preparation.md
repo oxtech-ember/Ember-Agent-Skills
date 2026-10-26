@@ -1,41 +1,36 @@
 # Prepare the compiler
 
-Read the [Ports cross-build procedure](https://github.com/oxtech-ember/EmberBSD-Ports/blob/main/profiles/development-toolchain/cross/README.md).
-Use its original archive URL and SHA256.
+Read the [SDK tool selection procedure](https://github.com/oxtech-ember/EmberBSD-SDK/blob/main/docs/tool-selection.md).
+Read the [native Clang procedure](https://github.com/oxtech-ember/EmberBSD-Ports/blob/main/profiles/development-toolchain/darwin-bootstrap.md) for a Darwin host.
+For an explicit GCC target, read the [GCC procedure](https://github.com/oxtech-ember/EmberBSD-Ports/blob/main/profiles/development-toolchain/cross/README.md).
 Verify the selected Ports and pkgsrc revisions.
-Use current Ports recipes for compiler prerequisites, transitive dependencies, and host tools.
-Follow the [shared dependency contract](https://github.com/oxtech-ember/EmberBSD-Ports/blob/main/docs/update-ports.md) when updating them.
-Investigate a hash mismatch before extraction.
+Use shared Ports recipes for compilers, prerequisites, transitive dependencies, and native tools.
+Check source archive hashes before extraction.
+Keep compiler patches and executable regressions in Ports.
 
-Set `ports`, `pkgsrc`, `gcc_archive`, `tools`, and `work` to absolute paths.
-Acquire `host-pkg-g16` through the [SDK tool selection procedure](https://github.com/oxtech-ember/EmberBSD-SDK/blob/main/docs/tool-selection.md).
-Set `host_cc`, `host_cxx`, and `sdk_sh` to absolute paths in that native set.
-Check native GCC16 versions, host CPU compatibility, and resolved paths, including symlinks.
-Reject external host build-tool fallbacks.
-Host system ABI headers and libraries are allowed for native tools only.
-Use paths without whitespace, as the recipe requires.
-The `tools` directory must contain fork-built host tools and target binutils.
-Use a new compiler work directory.
-Set `jobs` from available CPU, RAM, and disk capacity.
+Select Clang/LLVM by default.
+Use GCC only for an explicit platform requirement.
+Select host and target compiler families independently.
+A host generator needs the host OS and CPU, even when its output describes another target.
+Select the target triplet explicitly for Clang.
+Keep native ABI headers and libraries outside target searches.
 
-Use the selected Ports revision's `profiles/development-toolchain/cross/build.py` interface.
-Run it with Python from the selected native prefix.
-Pass `--kernel` and the explicit `--sdk-source` checkout.
-Set `HOST_CC` and `HOST_CXX` to the selected native compiler paths.
-Prepare the pkgsrc export and other inputs through the owning procedure.
-Use its current argument order instead of an older copied shell command.
-After preparation, check the cross GCC16 version, target triplet, and installed tool paths.
+Obtain initial tools through the declared Ports bootstrap procedure.
+Initial acquisition does not require a completed SDK.
+For ordinary builds, check resolved tool paths, host CPU, and compiler-selected components inside the selected prefix.
+Reject automatic fallback to system tools or another compiler family.
+Use the current producer interface and inspect its plan before compilation.
+A compiler environment variable does not select every nested tool.
 
+Kernel-only builds use the owning producer's target inputs without an application sysroot.
+Application builds additionally require target headers, libc, CRT, and the selected runtime.
+Compiler choice alone does not establish C++ ABI compatibility.
+Select jobs from available host CPU, memory, disk, and active builds.
+Use the shared object tree and keep incompatible configurations separate.
+Reuse compatible exports and installed tools without a new admission report.
 
-The export command requires a nonexistent destination.
-Compiler selectors do not select every nested tool.
-Inspect the producer's actual plan, configuration, and commands under the SDK tool selection policy.
-Omit it only for a verified export from the selected revisions.
-Reuse host prerequisites from `host-pkg-g16` through the recipe's current interface.
-Keep source hashes, patches, math repairs, and executable regressions in Ports.
-Submit tested shared repairs through the [contribution procedure](https://github.com/oxtech-ember/EmberBSD/blob/main/CONTRIBUTING.md) when publication is authorized.
-Without publication permission, present the tested patch before asking.
+Check actual command results, target objects, and relevant compiler tests.
+Keep build evidence separate from boot and hardware evidence.
+Submit authorized shared fixes through the [contribution procedure](https://github.com/oxtech-ember/EmberBSD/blob/main/CONTRIBUTING.md).
+Without publication permission, prepare the tested patch before asking.
 Respect a refusal and report the repair as unsubmitted.
-Do not copy a compiler workaround into skills.
-The installed split-DWARF check verifies the driver's target tool lookup.
-Keep compiler versions, triplets, and relevant test results.

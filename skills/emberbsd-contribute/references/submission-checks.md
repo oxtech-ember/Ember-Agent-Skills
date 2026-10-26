@@ -2,7 +2,8 @@
 
 Apply the [SDK tool selection policy](https://github.com/oxtech-ember/EmberBSD-SDK/blob/main/docs/tool-selection.md) to build evidence.
 Reject implicit system tools, including native host compilers.
-Keep Clang analysis and diagnostic fuzz evidence separate from ordinary GCC16 builds.
+Keep analysis and diagnostic fuzz evidence separate from ordinary production builds.
+Replay fuzz inputs with the selected production compiler and runtime.
 
 Read current upstream instructions before choosing a channel.
 A GitHub mirror can accept only mailing-list patches or problem reports.

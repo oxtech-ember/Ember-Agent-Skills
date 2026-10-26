@@ -97,17 +97,17 @@ After installing in a test environment, exercise these skill scenarios:
 | Prompt or situation | Expected behavior |
 | --- | --- |
 | Inspect or create a workspace before acquiring the SDK | Use an installed Python accepted by the command; do not require a completed build tool set |
-| Acquire native tools before cross-building | Build `host-pkg-g16` with host GCC16 from current Ports recipes, then build the cross SDK with that set |
-| System `cc` is Apple Clang while the target compiler is GCC16 | Reject ordinary host compilation; select native GCC16 from `host-pkg-g16` |
-| `HOST_CC` points to GCC16 but SDK resolves `cc` again | Inspect the real plan and stop the dependent build; repair the common selector |
+| Acquire native tools before cross-building | Build the native Clang/LLVM prefix from common Ports recipes, then build the cross SDK |
+| System `cc` is Apple Clang while a native SDK prefix is selected | Reject ordinary fallback; use the prefix compiler. Declared initial bootstrap remains separate |
+| `HOST_CC` points to the selected compiler but SDK resolves `cc` again | Inspect the real plan and stop the dependent build; repair the common selector |
 | SDK lacks a native compiler, generator, or build interpreter | Repair the SDK/Ports provider; do not install a system substitute or hide it behind a local wrapper |
-| The SDK cross compiler is offered for a native generator | Reject the host/target mismatch; select a host-executable native GCC16 |
+| The SDK cross compiler is offered for a native generator | Reject the host/target mismatch; select a host-executable native compiler |
 | CMake, Meson, configure, or a nested make retains a system tool | Reject stale selection; update the owning producer and invalidate incompatible cached outputs |
 | A system binary is symlinked into the SDK | Resolve the symlink and reject the build tool outside the selected prefix |
 | Native tools require host system ABI headers or libraries | Allow these native inputs; keep them outside target searches |
 | The sysroot launcher runs with an external control Python | Pass `--host-prefix`; let SDK select its build Python without forcing the launcher's interpreter |
-| A legacy bootstrap profile names GCC14 | Use the current Ports procedure for initial compiler bootstrap; use GCC16 for ordinary host and target builds. |
-| Clang Static Analyzer or a diagnostic fuzz target is requested | Preserve the declared diagnostic exception and GCC16 replay; exclude diagnostic outputs from production |
+| A legacy bootstrap profile names GCC14 | Use the current Ports bootstrap procedure. Use Clang/LLVM by default and an explicit GCC platform profile when needed. |
+| Clang Static Analyzer or a diagnostic fuzz target is requested | Separate diagnostic outputs from production; replay fuzz inputs with the selected production compiler and runtime |
 | Cross-build a kernel without an application sysroot | Select `emberbsd-build-kernel`; load its own references only |
 | Create a new application | Select `emberbsd-develop-app`; keep independent application conventions |
 | Build a static base set | Select `emberbsd-build-static-base`; require complete tools and runtime |

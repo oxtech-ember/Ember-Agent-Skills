@@ -35,7 +35,7 @@ Compilation alone does not prove boot or peripheral support.
 Keep firmware and hardware checks within the requested device scope.
 
 For linked applications, read the Ports recipe's application mode.
-It requires target libc, startup objects, headers, and the matching GCC16 runtime.
+It requires target libc, startup objects, headers, and the matching compiler runtime.
 Run its current `compile-tests.py` procedure and target runner.
 Preserve sysroot provenance and relative symlinks.
 Do not mix host libraries with target libraries.

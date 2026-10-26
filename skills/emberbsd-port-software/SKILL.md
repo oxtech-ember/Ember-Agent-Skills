@@ -28,8 +28,9 @@ Size build parallelism from host resources, not guest RAM.
 
 For runtime or media failures, read [runtime checks](references/runtime-checks.md).
 For known failures, read the matching [compatibility case](references/compatibility-cases.md).
-Reuse one current Ports version per dependency across the selected closure.
-Use SDK cross GCC16 for targets and `host-pkg-g16` native GCC16 for generators.
+Reuse one Ports version per dependency across the closure.
+Select native and target Clang/LLVM separately.
+Select GCC only for an explicit platform requirement.
 For compilation, reject build tools outside the selected prefix.
 Follow the [SDK tool policy](https://github.com/oxtech-ember/EmberBSD-SDK/blob/main/docs/tool-selection.md).
 Repair missing tools in SDK/Ports; reject private wrappers and legacy stacks.

@@ -1,6 +1,6 @@
 {
   "name": "emberbsd-development",
-  "version": "0.4.20",
+  "version": "0.4.21",
   "description": "Task-specific AI skills for EmberBSD SDK workspaces, applications, kernels, boards, software ports, static base sets, and shared contributions.",
   "keywords": [
     "emberbsd",
@@ -16,7 +16,7 @@
   "interface": {
     "displayName": "EmberBSD Development",
     "shortDescription": "Build EmberBSD applications and contribute tested fixes.",
-    "longDescription": "Select a small skill for Prebuild SDK workspaces, sysroot builds, application development, GCC16 kernels, boards, software ports, static base sets, submissions, or skill maintenance.",
+    "longDescription": "Select a small skill for Prebuild SDK workspaces, sysroot builds, application development, kernels, boards, software ports, static base sets, submissions, or skill maintenance.",
     "developerName": "neonix20b",
     "websiteURL": "https://github.com/oxtech-ember/Ember-Agent-Skills"
   },

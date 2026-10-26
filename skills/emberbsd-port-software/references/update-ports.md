@@ -11,7 +11,7 @@ These Python tools do not call an LLM or replace pkgsrc.
 3. Check current releases across direct, transitive, and build dependencies before adapting their shared recipes.
 4. Export evaluated candidate metadata with the Ports collector.
 5. Compare locks with the SDK planner.
-6. Run existing producers for ready nodes with the shared GCC16 toolchain.
+6. Run existing producers for ready nodes with the selected shared toolchain.
 7. Record explicit outcomes, logs, and output hashes.
 8. Inspect failures and repair the responsible shared recipe or consumer.
 9. Update the package revision when a patch changes its output.

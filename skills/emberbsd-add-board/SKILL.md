@@ -8,7 +8,8 @@ description: Use when adding an EmberBSD board or checking its kernel, boot, dev
 Read `README.ember.md` and `ember/development/adding-a-board.md` in the OS repository.
 Read [board evidence](references/board-evidence.md), including its DevBoards route for hardware profiles and current support.
 Read the [SDK tool selection policy](https://github.com/oxtech-ember/EmberBSD-SDK/blob/main/docs/tool-selection.md).
-Use SDK cross GCC16 for targets and `host-pkg-g16` native GCC16 for generators.
+Select native and target Clang/LLVM separately.
+Select GCC only for an explicit platform requirement.
 For compilation, reject build tools outside the selected prefix.
 
 1. Record the exact board model, revision, firmware, and boot path.
@@ -27,7 +28,7 @@ Record the boot chain, its image contract, and the console path before kernel co
 Continue source and build work when physical access is absent.
 State the missing hardware checks.
 
-Use `emberbsd-build-kernel` for GCC16 kernel builds.
+Use `emberbsd-build-kernel` for kernel builds.
 Use `emberbsd-contribute` for an authorized shared submission.
 Read the owning public procedure if either skill is absent.
 Keep flashing and reboot within the requested device scope.

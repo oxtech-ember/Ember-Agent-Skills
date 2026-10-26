@@ -12,7 +12,7 @@ Select one skill for the requested result.
 | --- | --- |
 | Prepare a shared SDK workspace or sysroot | `emberbsd-prebuild-sdk` |
 | Create or develop an application or example | `emberbsd-develop-app` |
-| Cross-build a GCC16 kernel | `emberbsd-build-kernel` |
+| Cross-build an EmberBSD kernel | `emberbsd-build-kernel` |
 | Change a shared third-party recipe | `emberbsd-port-software` |
 | Add or qualify a board | `emberbsd-add-board` |
 | Build a static base set | `emberbsd-build-static-base` |

@@ -51,10 +51,10 @@ Check direct, transitive, build, and test dependencies, including host tools.
 Use the [Ports update contract](https://github.com/oxtech-ember/EmberBSD-Ports/blob/main/docs/update-ports.md) for the shared graph and patch set.
 Move dependency repairs out of the sysroot or cache into Ports with their regressions.
 Use `emberbsd-contribute` or the [public contribution procedure](https://github.com/oxtech-ember/EmberBSD/blob/main/CONTRIBUTING.md) for authorized submissions.
-Prepare the shared patch before requesting any missing publication permission.
-Build `host-pkg-g16` with host GCC16 from current Ports recipes.
-Build the cross SDK with that native set.
-Use native GCC16 for host programs and cross GCC16 for target programs.
+Build the native Clang/LLVM prefix from current Ports recipes.
+Select host and target compiler families independently.
+Use Clang by default and GCC only for an explicit platform requirement.
+Keep the selected runtime consistent with the target ABI.
 Before compilation, check host CPU compatibility and resolved tool paths, including symlinks and compiler-selected tools.
 Keep build tools within their selected prefix; reject external fallbacks.
 Check cached configuration and nested commands.

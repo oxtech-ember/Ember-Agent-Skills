@@ -2,14 +2,14 @@
 
 Task-specific instructions for AI agents working on [EmberBSD](https://github.com/oxtech-ember/EmberBSD).
 The package uses [Agent Plugins](https://agent-plugins.org/) and [Agent Skills](https://agentskills.io/specification).
-Version **0.4.20** contains nine independently installable skills.
+Version **0.4.21** contains nine independently installable skills.
 
 | Skill | Task |
 | --- | --- |
 | [`emberbsd-repository-guide`](skills/emberbsd-repository-guide/SKILL.md) | Select a repository and task skill when ownership is unclear |
 | [`emberbsd-prebuild-sdk`](skills/emberbsd-prebuild-sdk/SKILL.md) | Create, inspect and reuse a shared workspace; build the EmberBSD sysroot |
 | [`emberbsd-develop-app`](skills/emberbsd-develop-app/SKILL.md) | Create or develop an application or public example using verified interfaces |
-| [`emberbsd-build-kernel`](skills/emberbsd-build-kernel/SKILL.md) | Prepare GCC16 tools and cross-build a kernel without an application sysroot |
+| [`emberbsd-build-kernel`](skills/emberbsd-build-kernel/SKILL.md) | Prepare SDK tools and cross-build a kernel without an application sysroot |
 | [`emberbsd-port-software`](skills/emberbsd-port-software/SKILL.md) | Port or modernize shared software and verify behavior against independent evidence |
 | [`emberbsd-add-board`](skills/emberbsd-add-board/SKILL.md) | Integrate board build and boot support with measured hardware evidence |
 | [`emberbsd-build-static-base`](skills/emberbsd-build-static-base/SKILL.md) | Build and inspect a static base set |
@@ -41,8 +41,8 @@ Keep the application's existing instructions when you install skills.
 
 Reuse one current Ports recipe and patch set for each shared dependency.
 Build with SDK tools under the [tool selection policy](https://github.com/oxtech-ember/EmberBSD-SDK/blob/main/docs/tool-selection.md).
-Use SDK cross GCC16 for EmberBSD outputs and `host-pkg-g16` native GCC16 for host programs.
-Build the native set with host GCC16 from current Ports recipes, then build the cross SDK with it.
+Select native and target Clang/LLVM separately. Select GCC only for an explicit platform requirement.
+Build the native set from current Ports recipes, then build the cross SDK with it.
 Initial acquisition and workspace inspection do not require a completed SDK.
 For compilation, keep selected tools inside their prefix and reject external host build-tool fallbacks.
 Check actual producer selections; a PATH change does not repair a missing shared selector.
@@ -98,9 +98,9 @@ Manual reading does not register automatic discovery.
 
 Verify that the client lists all nine task names. For example:
 
-> Use emberbsd-prebuild-sdk to reuse my shared SDK workspace and build the EmberBSD sysroot with GCC16.
+> Use emberbsd-prebuild-sdk to reuse my shared SDK workspace and build the EmberBSD sysroot with Clang/LLVM.
 
-> Use emberbsd-build-kernel to cross-build my AArch64 EmberBSD kernel with GCC16 on host and target.
+> Use emberbsd-build-kernel to cross-build my AArch64 EmberBSD kernel with Clang/LLVM on host and target, or an explicit GCC platform profile.
 
 > Use emberbsd-develop-app to create a UART decoder in my application repository and test synthetic input.
 
