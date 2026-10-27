@@ -31,6 +31,6 @@ Report an unsubmitted repair explicitly when publication is not authorized.
 
 For a release, follow the [SDK release procedure](https://github.com/oxtech-ember/EmberBSD-SDK/blob/main/docs/release-tags.md).
 Prepare the source `EMBER_VERSION` and source manifest before building.
-Bind the graph to that manifest with `--shared-input release-sources=FILE`.
-Finalize tags only after successful builds and the selected release checks.
+Finalize tags only after successful builds and the release checks.
+Tag creation and publication need a direct request from the user.
 Never update the source version after testing and tag the older output.
