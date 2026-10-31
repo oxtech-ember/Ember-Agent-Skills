@@ -11,7 +11,7 @@ rg -n "$board_or_soc" "$os/sys/arch" "$os/sys/dev" "$os/ember"
 Start with the [DevBoards reader guide](https://github.com/oxtech-ember/EmberBSD-DevBoards/blob/main/docs/reader-guide.md) and [catalog](https://github.com/oxtech-ember/EmberBSD-DevBoards/blob/main/catalog.json).
 Read exact board, carrier, SoC, and bootloader records.
 For missing profiles, inspect vendor sources and the closest OS implementation.
-Check revisions and applicability before reuse.
+Reuse records of the same board revision and carrier.
 For custom devices, read the design transfer notes.
 Keep hardware descriptions, boot layouts, and current support limits in DevBoards.
 Keep software contracts, builders, and executable checks beside their implementation.
@@ -25,7 +25,7 @@ Preserve bindings, ABIs, firmware licenses, and source attribution.
 Keep libraries in Ports and demonstrations in Examples.
 
 Use the architecture's documented builder.
-Record source, configuration, compiler, firmware, and artifact hashes.
+Record the [input key](https://github.com/oxtech-ember/EmberBSD-SDK/blob/main/docs/input-keys.md), firmware revision, and artifact hashes.
 Keep kernel, modules, and DTBs coherent.
 Identify the loader-selected kernel.
 QEMU `-kernel` can differ from guest `/netbsd`.
@@ -66,8 +66,7 @@ and [Valgrind platforms](https://valgrind.org/info/platforms.html).
 ## Board layer
 
 Update the board to the current package stack first.
-Reuse stack evidence only with matching revisions, ABI, package hashes, and checks.
-Repeat affected stack checks after shared changes.
+Reuse stack evidence when its input key matches; otherwise repeat the affected stack checks.
 Test the board's kernel, DTB, display, GPU driver, radio, and firmware integration.
 Shared SAE acceptance does not validate another radio chip.
 Install no development tools.

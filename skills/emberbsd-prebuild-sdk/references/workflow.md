@@ -7,7 +7,6 @@ If an SDK source checkout exists, use it.
 
 Initial acquisition and workspace inspection do not require a completed SDK.
 Set `sdk_python` to an installed Python accepted by the selected command.
-The bundled `scripts/sdk.py` calls that SDK checkout.
 The SDK command owns interpreter requirements and build checks.
 From this skill directory, run these commands:
 
@@ -43,7 +42,6 @@ The builder requires a matching declared target.
 
 For sysroot builds, read the
 [sysroot procedure](https://github.com/oxtech-ember/EmberBSD-SDK/blob/main/docs/sysroot.md).
-Before you select inputs, read the script's help.
 The SDK uses EmberBSD build rules and the verified Ports runtime.
 It does not supply a different libc or compiler recipe.
 Reuse current dependencies from the [common Ports recipes](https://github.com/oxtech-ember/EmberBSD-Ports/tree/main/pkgsrc).
@@ -69,8 +67,9 @@ Keep incompatible ABIs separate.
 Each developer maintains one current sysroot per target ABI.
 Build a stale sysroot's replacement alongside it.
 Replace the old sysroot after acceptance.
-Before object reuse, compare the recorded inputs with the current inputs.
-For compatible source changes, use the incremental build rules.
+Reuse objects by their [input key](https://github.com/oxtech-ember/EmberBSD-SDK/blob/main/docs/input-keys.md).
+Otherwise, or with a dirty worktree, build incrementally.
+Do not add checks that reread or rehash inputs that a git hash or input key already identifies.
 Use separate install stages for runtime and developer packages.
 Check which package owns each file.
 A failed build does not validate an older output at the same path.
@@ -82,4 +81,4 @@ Record the actual tests for each platform separately.
 
 Read the [distribution boundary](https://github.com/oxtech-ember/EmberBSD-SDK/blob/main/docs/distribution.md)
 before preparing a binary SDK.
-Publish only a verified SDK with matching binary packages.
+Publish the SDK with packages of its input key.

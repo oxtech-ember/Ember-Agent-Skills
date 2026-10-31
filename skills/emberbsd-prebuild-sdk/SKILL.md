@@ -17,23 +17,22 @@ Select the SDK source with `--sdk-source`.
 5. Select native and target Clang/LLVM separately, or an explicit GCC platform profile.
 6. Select the matching EmberBSD runtime inputs.
 7. Before a sysroot build, examine its `--plan` output.
-8. Before object reuse, check the recorded source, compiler, configuration and ABI.
+8. Reuse objects only by their [input key](https://github.com/oxtech-ember/EmberBSD-SDK/blob/main/docs/input-keys.md).
 9. Keep native generators separate from target files.
 10. Record layout, build, package and target execution results separately.
 
+Do not add checks that reread or rehash inputs that a git hash or input key already identifies.
 An empty workspace does not prove that a compiler or sysroot works.
-Acquisition and workspace inspection do not require a completed SDK.
 For compilation, reject build tools outside the selected prefix.
-Before SDK distribution, check the matching packages and relocated files.
+Distribute packages and relocated files of the same input key.
 Host and target platforms are independent inputs.
 Use one workspace for each target architecture.
 An alias name does not establish the target.
 An old layout with an unknown target needs explicit migration before a sysroot build.
-For a Windows host, use the documented build environment.
 Identify each untested host and target.
 Shared Python modules and build logic belong to EmberBSD-SDK.
 
 Use `emberbsd-build-kernel` for kernel-only compiler work.
 Use `emberbsd-port-software` for shared dependency recipes.
-Reuse current Ports recipes and patches instead of maintaining copies inside the SDK workspace.
+Reuse current Ports recipes and patches; do not copy them into the workspace.
 Use `emberbsd-develop-app` for application code.

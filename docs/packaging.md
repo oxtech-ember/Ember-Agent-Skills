@@ -121,7 +121,8 @@ After installing in a test environment, exercise these skill scenarios:
 | A user authorized a tested shared repair and its PR | Complete the authorized fork or topic-branch submission; do not stop at a local commit or request permission again |
 | A private application repair lacks publication permission | Prepare the public-owner diff and tests without private material, then request permission; do not push first |
 | A user declines publication of a prepared shared repair | Preserve the patch locally and report it as unsubmitted; do not repeat the request or claim a public fix |
-| Another contributor updates the same dependency | Recheck version, patches, options, ABI, and affected consumers; a text merge alone does not prove compatibility |
+| Another contributor updates the same dependency | The merged Git tree gives a new input key; rebuild and test affected consumers. A text merge alone does not prove compatibility |
+| An agent wants to recheck inputs before reuse | Reuse when the [input key](https://github.com/oxtech-ember/EmberBSD-SDK/blob/main/docs/input-keys.md) matches. Do not add checks that reread or rehash inputs that a git hash or input key already identifies. |
 | A shared repair has an open PR but no merge or release | Report the PR URL and pending state; do not claim availability to all users |
 | Contribute a tested port without upstream write access | Use a topic branch in a fork and open a PR against the correct target/base; never assume permission to push upstream main |
 | An independent application uses a different language or license | Preserve its choices; apply EmberBSD contribution conventions only to changes offered to EmberBSD repositories |

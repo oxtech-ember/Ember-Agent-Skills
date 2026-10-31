@@ -14,6 +14,8 @@ Keep all linked instructions, icons, and metadata inside the skill directory.
 Refer to another skill by name instead of linking to its files.
 Provide an owning public procedure when the other skill can be absent.
 Do not require private wiki pages, lab paths, or credentials.
+Link build reuse rules to the common [input key rule](https://github.com/oxtech-ember/EmberBSD-SDK/blob/main/docs/input-keys.md).
+Do not write rules that reread or rehash inputs that a git hash or input key already identifies.
 Route hardware, SoC, bootloader, layout, and current support guidance to DevBoards.
 Keep OS mechanism documentation beside its subsystem.
 Route common build orchestration, sysroots, and release kits to SDK.

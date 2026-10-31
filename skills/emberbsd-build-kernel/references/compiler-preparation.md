@@ -27,7 +27,8 @@ Application builds additionally require target headers, libc, CRT, and the selec
 Compiler choice alone does not establish C++ ABI compatibility.
 Select jobs from available host CPU, memory, disk, and active builds.
 Use the shared object tree and keep incompatible configurations separate.
-Reuse compatible exports and installed tools without a new admission report.
+Reuse exports and installed tools when their [input key](https://github.com/oxtech-ember/EmberBSD-SDK/blob/main/docs/input-keys.md) matches.
+Do not make a new admission report for them.
 
 Check actual command results, target objects, and relevant compiler tests.
 Keep build evidence separate from boot and hardware evidence.

@@ -12,7 +12,9 @@ An old pkgsrc pin or consumer requirement does not justify another legacy versio
 Update or adapt consumers to the common version.
 
 Reuse the canonical Ports recipe, source pin, hashes, and complete patch set.
-Reuse matching packages only after checking their source, patches, configuration, toolchain, and ABI.
+Reuse a package when its [input key](https://github.com/oxtech-ember/EmberBSD-SDK/blob/main/docs/input-keys.md) matches.
+The key contains the Ports tree hash, configuration, compiler key, ABI, and target.
+Do not add checks that reread or rehash inputs that a git hash or input key already identifies.
 Keep host and target artifacts separate without maintaining different dependency versions for each application or board.
 Replace bundled shared-library copies and private dependency downloads with the common Ports dependency.
 Repair missing consumer build support while preserving required upstream functionality.
@@ -25,7 +27,8 @@ Keep the regression with that implementation.
 Do not copy the same patch into applications, profiles, SDK scripts, or skills.
 Include affected direct and transitive consumers when updating the graph and package revisions.
 Remove replaced versions from the active graph after their consumers pass.
-Recheck versions, patches, options, and ABI after concurrent changes.
+After concurrent changes, the merged Git tree gives a new input key.
+Rebuild and test the affected consumers for that key.
 A conflict-free text merge does not prove compatibility.
 
 Verify the normal build from a clean source revision with documented prerequisites.

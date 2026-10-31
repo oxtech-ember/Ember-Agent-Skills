@@ -23,7 +23,7 @@ These Python tools do not call an LLM or replace pkgsrc.
 Keep host tools and target packages in separate graph nodes.
 Use pkgsrc to evaluate dependencies and match versions.
 Preserve baseline locks and failed results.
-Verify unchanged artifacts before reuse.
+Reuse an artifact when its [input key](https://github.com/oxtech-ember/EmberBSD-SDK/blob/main/docs/input-keys.md) matches; do not verify it again.
 Never record an old file as success after a failed producer.
 Do not weaken tests or introduce legacy dependencies to clear failures.
 Report artifact completion separately from installed behavior and hardware checks.

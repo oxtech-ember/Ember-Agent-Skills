@@ -2,7 +2,7 @@
 
 Task-specific instructions for AI agents working on [EmberBSD](https://github.com/oxtech-ember/EmberBSD).
 The package uses [Agent Plugins](https://agent-plugins.org/) and [Agent Skills](https://agentskills.io/specification).
-Version **0.4.23** contains nine independently installable skills.
+Version **0.4.24** contains nine independently installable skills.
 
 | Skill | Task |
 | --- | --- |
@@ -40,6 +40,8 @@ Independent applications keep their own conventions, language, license, and publ
 Keep the application's existing instructions when you install skills.
 
 Reuse one current Ports recipe and patch set for each shared dependency.
+Reuse builds, stages, and evidence by the [input key](https://github.com/oxtech-ember/EmberBSD-SDK/blob/main/docs/input-keys.md) alone.
+Do not add checks that reread or rehash inputs that a git hash or input key already identifies.
 Build with SDK tools under the [tool selection policy](https://github.com/oxtech-ember/EmberBSD-SDK/blob/main/docs/tool-selection.md).
 Select native and target Clang/LLVM separately. Select GCC only for an explicit platform requirement.
 Build the native set from current Ports recipes, then build the cross SDK with it.
@@ -217,8 +219,8 @@ See [Kimi Code manifest packaging](docs/packaging.md#kimi-code-manifest-packagin
 Version **0.4.9** added the Grok Build catalog.
 See [Grok Build marketplace packaging](docs/packaging.md#grok-build-marketplace-packaging) for evidence and limits.
 Current guidance separates target ABIs, shares package objects, and preserves sysroot replacement safety.
-Board checks reuse matching stack evidence and cover the device layer.
-Shared changes require the affected stack checks.
+Board checks reuse stack evidence with a matching input key and cover the device layer.
+A different key requires the affected stack checks.
 
 Review the [manual scenarios](docs/packaging.md#checks-and-evidence) after behavior changes.
 See the [shared dependency contribution checks](docs/packaging.md#shared-dependency-contribution-acceptance) for version **0.4.18** and their limits.

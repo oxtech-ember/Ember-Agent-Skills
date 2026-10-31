@@ -29,7 +29,7 @@ Include tested revision, platform, tools, commands, results, limits, and provena
 Address reviews in the same contribution.
 Report prepared, submitted, reviewed, merged, or released state accurately.
 Verify the normal build from clean source revisions without hidden files or manual patching.
-Reuse evidence only when the submitted revision retains the tested inputs.
+Reuse evidence when the submitted revision has the tested [input key](https://github.com/oxtech-ember/EmberBSD-SDK/blob/main/docs/input-keys.md).
 
 Keep EmberBSD integration in the project change.
 Prepare a minimal upstream patch against upstream's accepted base.

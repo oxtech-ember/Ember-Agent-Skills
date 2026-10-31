@@ -70,10 +70,9 @@ Examples:
 - Each developer maintains one current sysroot per target ABI.
   Build its replacement alongside it when packages or metadata become stale.
   Replace the old sysroot only after the new one passes acceptance.
-- Reuse stack acceptance only when its revisions, ABI, package hashes, and checks match.
+- Reuse stack acceptance when its [input key](https://github.com/oxtech-ember/EmberBSD-SDK/blob/main/docs/input-keys.md) matches; otherwise repeat the affected stack checks.
 - On each device, check its kernel, DTB, display, GPU driver, radio, and firmware integration.
   Shared SAE acceptance does not validate another radio chip.
-- Repeat affected stack checks after shared changes.
 - Split packages into runtime and development parts. Install only runtime parts on devices.
 - Make builds work on case-insensitive file systems, such as the default macOS volume.
   A failure only on such a file system is a recipe defect. Fix the recipe.

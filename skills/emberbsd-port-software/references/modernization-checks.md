@@ -60,9 +60,9 @@ Keep these checks in Ports, not in the skill package.
 
 ## Report evidence
 
-Record commands, input hashes, target identity, loaded libraries, counts, and outstanding gaps.
+Record commands, input keys, target identity, loaded libraries, counts, and outstanding gaps.
 Derive each scope's verified, partial, or unverified status from saved results.
 Build success does not prove runtime behavior, equivalence, or hardware support.
-Resume from recorded evidence only when source, configuration, tools, and inputs still match.
+Resume from recorded evidence when its [input key](https://github.com/oxtech-ember/EmberBSD-SDK/blob/main/docs/input-keys.md) matches.
 
 Method source: [Anthropic Code Modernization](https://github.com/anthropics/claude-plugins-official/blob/8f814f49002ff824e8a9ba43cf96112dc7f5948d/plugins/code-modernization/README.md).
