@@ -16,7 +16,8 @@ Submit through an authorized fork or topic branch after the required checks.
 Without publication permission, present the ready patch and evidence before requesting it.
 Respect a refusal without claiming the repair is publicly available.
 
-Retain a failing-before and passing-after regression for a code repair.
+Retain a failing-before and passing-after causal regression for a logic or behavior repair.
+Trivial fixes need none.
 A port needs build, installed-consumer, and runtime evidence.
 A package claim also needs install, remove, and reinstall checks.
 Documentation needs command and link checks.

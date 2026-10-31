@@ -2,7 +2,7 @@
 
 Task-specific instructions for AI agents working on [EmberBSD](https://github.com/oxtech-ember/EmberBSD).
 The package uses [Agent Plugins](https://agent-plugins.org/) and [Agent Skills](https://agentskills.io/specification).
-Version **0.4.24** contains nine independently installable skills.
+Version **0.4.25** contains nine independently installable skills.
 
 | Skill | Task |
 | --- | --- |
@@ -51,6 +51,9 @@ Check actual producer selections; a PATH change does not repair a missing shared
 Include direct, transitive, and build dependencies when checking versions and affected consumers.
 Adapt consumers instead of adding old versions or copying patches into each application.
 Keep reusable repairs and regressions at their owning public source.
+Add a causal regression test for a logic or behavior fix.
+A trivial fix needs no regression test: step order, typos, paths, and similar mechanical corrections.
+Such tests cost time and add no value.
 The [dependency workflow](skills/emberbsd-port-software/references/shared-dependencies.md) separates local preparation from public availability.
 
 EmberBSD welcomes pull requests from external users.

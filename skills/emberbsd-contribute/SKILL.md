@@ -19,6 +19,10 @@ For GitHub, read [PR commands](references/github-pr.md).
 6. Create or update the matching contribution.
 7. Report its returned URL and actual state.
 
+A logic or behavior fix needs a causal regression test.
+A trivial fix needs no regression test: step order, typos, paths, and similar mechanical corrections.
+Such tests cost time and add no value.
+
 EmberBSD welcomes external contributors through pull requests.
 Personal behavior changes do not require publication.
 Separate reusable platform repairs from those changes.

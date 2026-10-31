@@ -16,6 +16,8 @@ Provide an owning public procedure when the other skill can be absent.
 Do not require private wiki pages, lab paths, or credentials.
 Link build reuse rules to the common [input key rule](https://github.com/oxtech-ember/EmberBSD-SDK/blob/main/docs/input-keys.md).
 Do not write rules that reread or rehash inputs that a git hash or input key already identifies.
+Require a causal regression test only for a logic or behavior fix.
+Do not require a regression test for a trivial fix, such as step order, a typo, or a path.
 Route hardware, SoC, bootloader, layout, and current support guidance to DevBoards.
 Keep OS mechanism documentation beside its subsystem.
 Route common build orchestration, sysroots, and release kits to SDK.
