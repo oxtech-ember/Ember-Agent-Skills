@@ -58,6 +58,26 @@ class LauncherTests(unittest.TestCase):
         self.assertEqual(json.loads(result.stdout)['args'], [
             '--sdk-source', str(self.sdk), '--host-prefix', '/native', '--python', '/native/bin/python3'])
 
+    def test_sysroot_preserves_explicit_compiler_family(self):
+        for family in ('clang', 'gcc'):
+            with self.subTest(family=family):
+                result = self.run_launcher('sysroot', '--host-prefix', '/native',
+                                           '--host-compiler-family', family)
+                self.assertEqual(result.returncode, 0, result.stderr)
+                self.assertEqual(json.loads(result.stdout)['args'], [
+                    '--sdk-source', str(self.sdk), '--host-prefix', '/native',
+                    '--host-compiler-family', family])
+
+    def test_compiler_failure_is_returned_without_retry(self):
+        marker = self.root / 'invocations'
+        script = self.sdk / 'scripts' / 'build-sysroot.py'
+        script.write_text('from pathlib import Path\np = Path(' + repr(str(marker)) +
+                          ')\np.write_text(p.read_text() + "run\\n" if p.exists() else "run\\n")\n'
+                          'raise SystemExit(9)\n', encoding='utf-8')
+        result = self.run_launcher('sysroot', '--host-compiler-family', 'clang')
+        self.assertEqual(result.returncode, 9)
+        self.assertEqual(marker.read_text(), 'run\n')
+
     def test_workspace_operations_do_not_require_build_python_version(self):
         runner = ('import runpy, sys; sys.version_info = (3, 14, 0); '
                   'sys.argv = sys.argv[1:]; runpy.run_path(sys.argv[0], run_name="__main__")')
