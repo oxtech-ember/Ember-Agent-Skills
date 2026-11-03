@@ -2,12 +2,12 @@
 
 Task-specific instructions for AI agents working on [EmberBSD](https://github.com/oxtech-ember/EmberBSD).
 The package uses [Agent Plugins](https://agent-plugins.org/) and [Agent Skills](https://agentskills.io/specification).
-Version **0.4.26** contains nine independently installable skills.
+Version **0.4.27** contains nine independently installable skills.
 
 | Skill | Task |
 | --- | --- |
 | [`emberbsd-repository-guide`](skills/emberbsd-repository-guide/SKILL.md) | Select a repository and task skill when ownership is unclear |
-| [`emberbsd-prebuild-sdk`](skills/emberbsd-prebuild-sdk/SKILL.md) | Create, inspect and reuse a shared workspace; build the EmberBSD sysroot |
+| [`emberbsd-prebuild-sdk`](skills/emberbsd-prebuild-sdk/SKILL.md) | Install SDK components from signed binaries; prepare workspaces and build missing components |
 | [`emberbsd-develop-app`](skills/emberbsd-develop-app/SKILL.md) | Create or develop an application or public example using verified interfaces |
 | [`emberbsd-build-kernel`](skills/emberbsd-build-kernel/SKILL.md) | Prepare SDK tools and cross-build a kernel without an application sysroot |
 | [`emberbsd-port-software`](skills/emberbsd-port-software/SKILL.md) | Port or modernize shared software and verify behavior against independent evidence |
@@ -44,8 +44,9 @@ Reuse builds, stages, and evidence by the [input key](https://github.com/oxtech-
 Do not add checks that reread or rehash inputs that a git hash or input key already identifies.
 Build with SDK tools under the [tool selection policy](https://github.com/oxtech-ember/EmberBSD-SDK/blob/main/docs/tool-selection.md).
 Select native and target Clang/LLVM separately. Select GCC only for an explicit platform requirement.
-Build only the native tool roles required for the task from current Ports recipes.
-Build a sysroot only for the requested target/ABI when the task needs one.
+Prefer compatible installed components, then signed binaries from the SDK catalog.
+Build missing native tool roles from current Ports recipes.
+Prepare a sysroot only for the requested target/ABI when the task needs one.
 Do not build every platform or optional package group by default.
 Initial acquisition and workspace inspection do not require a completed SDK.
 For compilation, keep selected tools inside their prefix and reject external host build-tool fallbacks.

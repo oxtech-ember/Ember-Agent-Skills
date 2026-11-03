@@ -1,5 +1,6 @@
 # SDK workspace workflow
 
+First check [binary components](binary-components.md).
 Read the [SDK README](https://github.com/oxtech-ember/EmberBSD-SDK).
 Read the [layout contract](https://github.com/oxtech-ember/EmberBSD-SDK/blob/main/docs/prebuild-sdk.md).
 Read the [SDK tool selection policy](https://github.com/oxtech-ember/EmberBSD-SDK/blob/main/docs/tool-selection.md).
@@ -49,7 +50,7 @@ Check direct, transitive, build, and test dependencies, including host tools.
 Use the [Ports update contract](https://github.com/oxtech-ember/EmberBSD-Ports/blob/main/docs/update-ports.md) for the shared graph and patch set.
 Move dependency repairs out of the sysroot or cache into Ports with their regressions.
 Use `emberbsd-contribute` or the [public contribution procedure](https://github.com/oxtech-ember/EmberBSD/blob/main/CONTRIBUTING.md) for authorized submissions.
-Build the native Clang/LLVM prefix from current Ports recipes.
+Build missing native Clang/LLVM components from current Ports recipes.
 Select host and target compiler families independently.
 Use Clang by default and GCC only for an explicit platform requirement.
 Keep the selected runtime consistent with the target ABI.

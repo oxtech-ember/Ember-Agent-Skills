@@ -97,7 +97,7 @@ After installing in a test environment, exercise these skill scenarios:
 | Prompt or situation | Expected behavior |
 | --- | --- |
 | Inspect or create a workspace before acquiring the SDK | Use an installed Python accepted by the command; do not require a completed build tool set |
-| Acquire native tools before cross-building | Build the native Clang/LLVM prefix from common Ports recipes, then build the cross SDK |
+| Acquire native tools before cross-building | Reuse installed components, then signed SDK binaries; build unavailable components through common Ports |
 | System `cc` is Apple Clang while a native SDK prefix is selected | Reject ordinary fallback; use the prefix compiler. Declared initial bootstrap remains separate |
 | `HOST_CC` points to the selected compiler but SDK resolves `cc` again | Inspect the real plan and stop the dependent build; repair the common selector |
 | SDK lacks a native compiler, generator, or build interpreter | Repair the SDK/Ports provider; do not install a system substitute or hide it behind a local wrapper |
@@ -323,3 +323,24 @@ SDK input-key caches; it does not describe an unimplemented profile CLI.
 Local consistency, all 24 package-checker regressions, and native Codex plugin
 and skill discovery passed on macOS arm64 with Codex CLI **0.166.0-alpha.5.1**.
 These checks do not establish a full SDK build or target runtime acceptance.
+
+## Binary SDK acquisition (2026-11-03)
+
+Version **0.4.27** routes Prebuild SDK acquisition through the published minimal
+bootstrap and component client. The skill reads the current catalog before
+source preparation, retains signature failures as errors, and reuses the native
+prefix and cache across targets. Availability and CLI contracts remain in SDK.
+
+Review these scenarios with the complete standalone skill:
+
+- A supported host without Python starts from the authenticated minimal bootstrap.
+- A compatible installed component requires neither downloading nor rebuilding.
+- A published component uses the signed binary client without a Ports checkout.
+- An unpublished package uses configured Ports; a missing sysroot follows its owner workflow.
+- A signature or network error does not start a source build.
+- An additional target reuses native tools and the shared package cache.
+
+Local consistency, all 24 validator regressions, and isolated Codex discovery passed
+on macOS arm64 with Codex CLI **0.166.0-alpha.5.1**. Independent review checked
+all six scenarios against the SDK contracts and the complete standalone skill.
+These instruction checks do not establish compiler delivery or target execution.
