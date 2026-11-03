@@ -312,3 +312,14 @@ Local consistency and all 24 validator regressions passed for this candidate on 
 All 11 SDK launcher tests passed, including family forwarding and failure without retry.
 The launcher already forwards SDK options; no compiler-selection implementation was duplicated in skills.
 These checks do not establish a working LLVM target SDK, target execution, or hardware acceptance.
+
+## Minimal task scope (2026-11-03)
+
+Version **0.4.26** limits SDK and Ports guidance to selected native roles,
+target/ABI sysroots and explicit versionless package roots. It keeps optional
+Plasma, language, firmware, documentation and diagnostic groups outside the
+default task scope. The guidance reuses shared Ports dependency resolution and
+SDK input-key caches; it does not describe an unimplemented profile CLI.
+Local consistency, all 24 package-checker regressions, and native Codex plugin
+and skill discovery passed on macOS arm64 with Codex CLI **0.166.0-alpha.5.1**.
+These checks do not establish a full SDK build or target runtime acceptance.

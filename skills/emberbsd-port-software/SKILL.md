@@ -11,31 +11,22 @@ Read [recipe checks](references/recipe-checks.md).
 For version or dependency migrations, read [modernization checks](references/modernization-checks.md).
 For a Ports update request, read [agent-driven updates](references/update-ports.md).
 
-1. Find the current shared recipe, patches, and affected consumers in Ports.
-2. Reproduce the failure with the real build or runtime path.
-3. Validate one affected component as a pilot.
-4. Fix the cause in Ports or the owning upstream source.
-5. Rebuild the affected dependency set with the shared toolchain.
-6. Run upstream tests and local regressions against independent expected results.
-7. Compare observable behavior and test that the checks detect deliberate faults.
-8. Check installed consumers and package lifecycle operations.
-9. Record revisions, hashes, commands, test counts, results, and gaps.
-10. Prepare the shared fix for review and submit its PR when publication is authorized.
+1. Find the shared recipe, patch set, and affected consumers.
+2. Reproduce the issue through the real build or runtime path. Validate one pilot.
+3. Fix the owning source and add a causal regression for behavior changes.
+4. Build and test the affected dependency closure against independent results.
+5. Check installed consumers and package lifecycle operations.
+6. Prepare a focused change for review and authorized publication.
 
-Cross-build on the development host.
-Run target programs on the VM or board.
-Size build parallelism from host resources, not guest RAM.
+Select versionless `PKGPATH` roots through the shared Ports graph. Read [package scope](references/package-scope.md).
 
-For runtime or media failures, read [runtime checks](references/runtime-checks.md).
+Cross-build on host; run target programs on VM or board.
+Use SDK-selected capacity for parallelism.
+Select native and target Clang/LLVM separately. Select GCC only for an explicit platform requirement.
+For compilation, reject build tools outside the selected prefix. Repair missing tools in SDK or Ports.
+For runtime failures, read [runtime checks](references/runtime-checks.md).
 For known failures, read the matching [compatibility case](references/compatibility-cases.md).
-Reuse one Ports version per dependency across the closure.
-Select native and target Clang/LLVM separately.
-Select GCC only for an explicit platform requirement.
-For compilation, reject build tools outside the selected prefix.
-Follow the [SDK tool policy](https://github.com/oxtech-ember/EmberBSD-SDK/blob/main/docs/tool-selection.md).
-Repair missing tools in SDK/Ports; reject private wrappers and legacy stacks.
 
 Use `emberbsd-build-kernel` for kernel compiler preparation.
 Use `emberbsd-personal-ports` for a personal application patch.
-Use `emberbsd-contribute` or the public contribution procedure for authorized publication.
-Keep caches and binaries outside Git.
+Use `emberbsd-contribute` or the [public contribution procedure](https://github.com/oxtech-ember/EmberBSD/blob/main/CONTRIBUTING.md) for authorized publication.
