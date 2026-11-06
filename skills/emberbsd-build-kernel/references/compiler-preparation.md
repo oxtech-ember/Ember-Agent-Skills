@@ -1,5 +1,12 @@
 # Prepare the compiler
 
+Read the SDK [first installation](https://github.com/oxtech-ember/EmberBSD-SDK/blob/main/docs/bootstrap-client.md)
+and [component client](https://github.com/oxtech-ember/EmberBSD-SDK/blob/main/docs/sdk-client.md) procedures.
+Inspect an existing prefix and the authenticated catalog and client plan before compiling.
+Reuse compatible installed tools, then install matching signed binaries.
+Build only missing components. A network, signature, or integrity error does not permit source fallback.
+For a Linux host without a published bootstrap, follow the SDK [Linux bootstrap](https://github.com/oxtech-ember/EmberBSD-SDK/blob/main/docs/linux-bootstrap.md)
+and the Ports [initial native bootstrap](https://github.com/oxtech-ember/EmberBSD-Ports/blob/main/profiles/common-build-tools/cross/native-toolset.md#initial-linux-bootstrap).
 Read the [SDK tool selection procedure](https://github.com/oxtech-ember/EmberBSD-SDK/blob/main/docs/tool-selection.md).
 Read the [native Clang procedure](https://github.com/oxtech-ember/EmberBSD-Ports/blob/main/profiles/development-toolchain/darwin-bootstrap.md) for a Darwin host.
 For an explicit GCC target, read the [GCC procedure](https://github.com/oxtech-ember/EmberBSD-Ports/blob/main/profiles/development-toolchain/cross/README.md).

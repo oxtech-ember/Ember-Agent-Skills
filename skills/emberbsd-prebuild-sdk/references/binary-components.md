@@ -11,6 +11,11 @@ Select only components required by the user's task.
 Use the client's catalog and plan to check availability, host, target/ABI, dependencies, and download size.
 Do not assume that every compiler, sysroot, or host platform is already published.
 Follow the owner's current support boundaries.
+The first-install shell bootstrap currently selects Darwin arm64 only.
+On Linux, check for a compatible installed prefix and published components.
+If no host bootstrap exists, follow the SDK [Linux bootstrap](https://github.com/oxtech-ember/EmberBSD-SDK/blob/main/docs/linux-bootstrap.md).
+Acquire the initial native tools through Ports, then return to the client.
+The client's configured source path uses a prepared native prefix; it does not bootstrap its first compiler.
 
 Reuse compatible installed components first.
 Then install matching signed binaries through the client.

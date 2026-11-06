@@ -344,3 +344,21 @@ Local consistency, all 24 validator regressions, and isolated Codex discovery pa
 on macOS arm64 with Codex CLI **0.166.0-alpha.5.1**. Independent review checked
 all six scenarios against the SDK contracts and the complete standalone skill.
 These instruction checks do not establish compiler delivery or target execution.
+
+## Linux acquisition routing (2026-11-06)
+
+Version **0.4.28** applies the installed-tools and authenticated-binary checks
+to kernel compiler preparation. It links Linux hosts without a published
+bootstrap to the owning SDK and Ports initial native bootstrap procedures.
+The source fallback requires a prepared native prefix. It does not bootstrap
+the first compiler. Standalone references retain public owner links.
+
+Checked scenarios: a compatible installed prefix is reused; a matching binary
+is installed; an absent Linux bootstrap follows the documented source route;
+signature and network failures remain errors; an additional target shares the
+native prefix and cache. The catalog and plan determine actual availability.
+
+On Linux x86_64, local consistency, all 24 package-validator regressions and
+isolated plugin/skill discovery passed with Codex CLI **0.163.0**.
+These checks cover instructions and discovery. The complete native compiler
+bootstrap, OS build, target boot and hardware checks remain separate acceptance.
