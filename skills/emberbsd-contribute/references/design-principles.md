@@ -22,6 +22,21 @@ Extract missing shared behavior before adding consumers.
 Reuse [Ports dependencies](https://github.com/oxtech-ember/EmberBSD-Ports/blob/main/docs/update-ports.md).
 Matching function names do not justify a shared FullMAC firmware abstraction.
 
+## Keep hardware adapters thin
+
+Assign shared protocols, state machines, cryptography, retries, selection, and rendering policy to their existing subsystem or userland owner.
+Assign bus, register, DMA, interrupt, and vendor ABI translation to hardware drivers.
+Report hardware capabilities and errors through the subsystem contract.
+Enforce bounds and security at the hardware boundary.
+Expose hardware offload through the existing common contract and keep one owner for its policy and protocol.
+Keep device-specific GPU backends and asynchronous transports where hardware requires them.
+Keep their policy contract in the existing subsystem.
+When the common API is missing, extend its owner and adapt affected consumers.
+Remove duplicated policy as part of that API extension.
+Define adapter scope by hardware responsibilities and contract.
+Review shared-logic ownership alongside board behavior.
+Reuse common regressions and test the hardware boundary.
+
 ## Fix the cause
 
 Fix the component that causes the fault.
@@ -29,18 +44,9 @@ Do not add workarounds.
 
 ## Keep code modular and portable
 
-Allow each part to be disabled:
-
-- Use a kernel configuration option or an optional attach.
-- Do not add hard dependencies between optional parts.
-- Make userland features configurable.
-
-Allow each part to be reused:
-
-- Put common logic in shared subsystem helpers.
-- Use clean interfaces and operation tables between layers.
-- Do not test for a specific board or driver in shared code.
-  Use generic device properties such as `mac-address`.
+Keep optional parts disableable and userland features configurable.
+Put common logic in shared helpers with clean interfaces and operation tables.
+Represent platform configuration through generic device properties such as `mac-address`.
 
 ## Separate layers and responsibilities
 
@@ -61,18 +67,4 @@ Examples:
 - Wi-Fi: share net80211 behavior, firmware loading, MAC properties, and region handling.
   Keep chip firmware protocols separate.
 
-## Use one stack and one sysroot
-
-- Build one current package stack with shared objects and packages for each target ABI.
-- Keep incompatible ABIs in separate build roots.
-- Do not keep separate package sets or accepted snapshots for each device.
-- Update a device to the current stack before you test it.
-- Each developer maintains one current sysroot per target ABI.
-  Build its replacement alongside it when packages or metadata become stale.
-  Replace the old sysroot only after the new one passes acceptance.
-- Reuse stack acceptance when its [input key](https://github.com/oxtech-ember/EmberBSD-SDK/blob/main/docs/input-keys.md) matches; otherwise repeat the affected stack checks.
-- On each device, check its kernel, DTB, display, GPU driver, radio, and firmware integration.
-  Shared SAE acceptance does not validate another radio chip.
-- Split packages into runtime and development parts. Install only runtime parts on devices.
-- Make builds work on case-insensitive file systems, such as the default macOS volume.
-  A failure only on such a file system is a recipe defect. Fix the recipe.
+For build and package scope, also read [stack and sysroot rules](stack-and-sysroot.md).

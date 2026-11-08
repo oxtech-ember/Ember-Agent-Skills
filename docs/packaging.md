@@ -96,6 +96,9 @@ After installing in a test environment, exercise these skill scenarios:
 
 | Prompt or situation | Expected behavior |
 | --- | --- |
+| Add WPA3 support to a wireless driver | Assign SAE and handshake policy to net80211 or the shared supplicant; assign hardware/vendor ABI translation to the driver; reuse common regressions |
+| Add GPU rendering policy or a vendor offload | Assign rendering policy to the common graphics stack; expose offload through its contract and test the driver boundary |
+| A driver needs a missing common API | Extend the owning subsystem, adapt affected consumers, remove duplicate policy as part of the extension, then add the hardware adapter |
 | Inspect or create a workspace before acquiring the SDK | Use an installed Python accepted by the command; do not require a completed build tool set |
 | Acquire native tools before cross-building | Reuse installed components, then signed SDK binaries; build unavailable components through common Ports |
 | System `cc` is Apple Clang while a native SDK prefix is selected | Reject ordinary fallback; use the prefix compiler. Declared initial bootstrap remains separate |
@@ -362,3 +365,20 @@ On Linux x86_64, local consistency, all 24 package-validator regressions and
 isolated plugin/skill discovery passed with Codex CLI **0.163.0**.
 These checks cover instructions and discovery. The complete native compiler
 bootstrap, OS build, target boot and hardware checks remain separate acceptance.
+
+## Hardware adapter boundaries (2026-11-08)
+
+Version **0.4.29** assigns shared protocols, state machines and policy to their
+existing subsystem or userland owner. Drivers translate hardware and vendor
+interfaces; common contracts may expose hardware offload and device-specific
+backends, including asynchronous transports. A missing common API routes to its
+owner before an adapter duplicates behavior.
+
+Local consistency and all 24 package-validator regressions passed. Codex CLI
+**0.167.0-alpha.3.2** discovered the package and its skill icons. A fresh
+Luna review used only the standalone `emberbsd-add-board` skill. It assigned
+WPA/roaming policy to the common owner, vendor offload translation to the driver,
+and a missing API to the subsystem before adding the adapter. It also preserved
+device-specific backends and async transport, and selected common regressions
+plus a hardware-boundary test. This checks one instruction scenario, not hardware
+behavior or general agent reliability.

@@ -7,6 +7,7 @@ description: Use when adding, modernizing, or repairing shared EmberBSD Ports re
 
 Read the Ports README and owning profile.
 Read [shared dependencies and contributions](references/shared-dependencies.md).
+For shared protocol or subsystem changes, follow the local ownership rules in shared dependencies; `emberbsd-contribute` provides additional design guidance.
 Read [recipe checks](references/recipe-checks.md).
 For version or dependency migrations, read [modernization checks](references/modernization-checks.md).
 For a Ports update request, read [agent-driven updates](references/update-ports.md).

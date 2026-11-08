@@ -8,6 +8,7 @@ description: Use when preparing a target compiler or building an EmberBSD kernel
 Read the OS and Ports build guides.
 Read [compiler preparation](references/compiler-preparation.md).
 Read [kernel checks](references/kernel-checks.md).
+For driver changes, follow the local ownership rules in kernel checks; `emberbsd-contribute` provides additional design guidance.
 
 1. Identify the host, target architecture, source revision, and available resources.
 2. Inspect installed tools and the authenticated SDK catalog and plan. Reuse compatible tools, then install matching signed binaries.

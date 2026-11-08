@@ -4,12 +4,18 @@ Read the [Ports update contract](https://github.com/oxtech-ember/EmberBSD-Ports/
 Inspect current Ports sources and existing pull requests before creating another recipe or repair.
 Preserve local changes when updating the checkout.
 
+## Keep behavior at its common owner
+
+Assign protocol and state-machine policy to existing common owners.
+Drivers translate hardware/vendor interfaces and expose offload through common contracts.
+Extend missing APIs, adapt consumers, remove duplicate policy, then add the adapter.
+Test common regressions and the hardware boundary.
+
 ## One shared dependency
 
-Check versions for direct, transitive, build, and test dependencies in the requested closure.
-Select current stable upstream or a justified supported LTS with current fixes.
-An old pkgsrc pin or consumer requirement does not justify another legacy version.
-Update or adapt consumers to the common version.
+Check direct, transitive, build, and test dependencies in the requested closure against current stable upstream releases.
+Use a justified supported LTS when required, with current fixes.
+Treat old pins and consumer requirements as migration work; adapt consumers to the common version.
 
 Reuse the canonical Ports recipe, source pin, hashes, and complete patch set.
 Reuse a package when its [input key](https://github.com/oxtech-ember/EmberBSD-SDK/blob/main/docs/input-keys.md) matches.
