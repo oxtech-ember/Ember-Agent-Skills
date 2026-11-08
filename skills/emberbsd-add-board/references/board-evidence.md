@@ -59,5 +59,5 @@ Shared SAE acceptance does not validate another radio chip.
 Install no development tools.
 Put pins, power, reset, MAC, and region in DT or ACPI.
 Use `mmc-pwrseq-simple` for SDIO power.
-Do not test board or driver names in shared code.
+Pass hardware differences through generic properties and operation tables.
 Move logic that two drivers need into a shared helper first.

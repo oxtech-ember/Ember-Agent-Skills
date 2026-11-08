@@ -37,7 +37,7 @@ Without publication permission, present the prepared diff and checks before aski
 Respect a refusal and report the repair as local.
 Keep standalone UI applications in their own repository or [Examples](https://github.com/oxtech-ember/EmberBSD-Examples).
 Keep common build orchestration, sysroots, and release kits in SDK.
-Do not place application code or its documentation inside OS subsystem guides.
+Keep application code and documentation in the owning application repository.
 
 Verify [SDK](https://github.com/oxtech-ember/EmberBSD-SDK) and [Runtime](https://github.com/oxtech-ember/EmberBSD-Runtime) implementations before use.
 Planned Wasm formats and hardware adapters supply no executable interface.
@@ -54,10 +54,10 @@ Run executable tests with Valgrind Memcheck on a supported platform.
 Enable leak and uninitialized-value checks with a nonzero error exit status.
 Valgrind checks execution, not source text.
 If Valgrind is unavailable, record the platform gap and applicable ASan/UBSan or kernel checks.
-Do not label substitute checks as a Valgrind pass.
+Name each substitute check. Report any Valgrind run separately with its actual result.
 Fix confirmed defects with regressions.
 Track unresolved inherited findings with their owner and impact.
-Explain each targeted suppression; do not disable whole diagnostic categories.
+Keep diagnostic categories enabled. Explain each narrowly targeted suppression.
 Record tool versions, commands, scope, findings, and untested paths.
 Static analysis and memory checks supplement runtime and hardware acceptance.
 
@@ -70,6 +70,6 @@ and [Valgrind platforms](https://valgrind.org/info/platforms.html).
 
 Make optional features switchable through configuration.
 Use one script or service with parameters for all devices.
-Do not keep a copy for each device.
+Pass device differences as parameters to that shared implementation.
 Move repeated logic into a shared module before you add new code.
 Build on the development host; install only runtime files on the device.

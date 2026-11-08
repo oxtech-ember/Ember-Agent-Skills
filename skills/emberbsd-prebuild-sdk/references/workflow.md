@@ -63,14 +63,14 @@ Host system ABI headers and libraries are allowed for native tools only.
 Keep them outside target searches.
 
 Use shared objects and packages for each target ABI.
-Do not create separate build roots for tasks or boards.
+Place task configurations inside the shared build tree for their target ABI.
 Keep incompatible ABIs separate.
 Each developer maintains one current sysroot per target ABI.
 Build a stale sysroot's replacement alongside it.
 Replace the old sysroot after acceptance.
 Reuse objects by their [input key](https://github.com/oxtech-ember/EmberBSD-SDK/blob/main/docs/input-keys.md).
 Otherwise, or with a dirty worktree, build incrementally.
-Do not add checks that reread or rehash inputs that a git hash or input key already identifies.
+Reuse the recorded Git hash or input key as the input identity.
 Use separate install stages for runtime and developer packages.
 Check which package owns each file.
 A failed build does not validate an older output at the same path.

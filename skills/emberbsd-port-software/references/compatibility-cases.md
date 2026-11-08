@@ -22,7 +22,7 @@ One path does not establish the other paths.
 Read the [robotics provenance](https://github.com/neonix20b/EmberBSD-Ports/blob/23975050ad678e85e56d1379107f7bbc10c0a2b7/probes/robotics-foundations/PROVENANCE.md).
 The recorded GCC/NetBSD AArch64 case concerns NEON-FP16 baseline detection.
 Preserve the CPU guard.
-Do not advertise optional FP16 arithmetic, DotProd, BF16, or SVE from that result.
+Qualify optional FP16 arithmetic, DotProd, BF16, and SVE separately before reporting support.
 The patch had no upstream submission at the recorded revision.
 
 ## gpsd PTY failure

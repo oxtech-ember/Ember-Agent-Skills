@@ -15,7 +15,7 @@ Select the simplest structure.
 - Add or update a man page for each new interface.
 - Follow style(9) and NetBSD KNF.
 
-## Do not repeat code
+## Reuse shared code
 
 Use existing subsystem helpers first.
 Extract missing shared behavior before adding consumers.
@@ -40,7 +40,7 @@ Reuse common regressions and test the hardware boundary.
 ## Fix the cause
 
 Fix the component that causes the fault.
-Do not add workarounds.
+Repair the owning implementation and verify the affected contract.
 
 ## Keep code modular and portable
 
@@ -50,14 +50,14 @@ Represent platform configuration through generic device properties such as `mac-
 
 ## Separate layers and responsibilities
 
-| Layer | Contains | Does not contain |
+| Layer | Responsibility | Interface to other owners |
 | --- | --- | --- |
-| Chip driver | Chip and bus protocol, registers, firmware format | Subsystem logic, board facts |
-| Shared subsystem helper | Logic common to one device class | Chip or board names |
-| Board DT | Pins, power, reset, interrupts, MAC, region | Code |
-| Userland | One shared service or script with parameters | Copies for each board |
-| Build host and sysroot | Compilers, SDK files, headers, analyzers | Device runtime state |
-| Device | Runtime packages and its own hardware layer | Development tools |
+| Chip driver | Chip and bus protocol, registers, firmware format | Use subsystem APIs and board properties |
+| Shared subsystem helper | Logic common to one device class | Receive capabilities and generic properties |
+| Board DT | Pins, power, reset, interrupts, MAC, region | Supply declarative properties to drivers |
+| Userland | One shared service or script with parameters | Receive board differences as parameters |
+| Build host and sysroot | Compilers, SDK files, headers, analyzers | Produce target artifacts; keep runtime state on devices |
+| Device | Runtime packages and its own hardware layer | Keep development tools on the build host |
 
 Examples:
 

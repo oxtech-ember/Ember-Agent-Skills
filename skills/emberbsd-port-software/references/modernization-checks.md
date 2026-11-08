@@ -13,7 +13,7 @@ Define critical behavior as inputs, expected results, errors, and side effects.
 Cite the source or specification for each critical contract.
 Map each contract to an executable test.
 Record intentional differences, including security repairs.
-Do not reproduce a known defect to match old output.
+Preserve the corrected contract when historical output reflects a known defect.
 
 ## Build the pilot
 
@@ -21,7 +21,7 @@ Keep verified upstream sources unchanged.
 Apply reusable patches through the owning Ports recipe.
 Use fresh outputs after compiler, sysroot, or configuration changes.
 Build native generators for the host and libraries for the target.
-Use host CPU, RAM, and disk limits for compilation.
+Use the SDK's shared CPU capacity for compilation, with an explicit developer override.
 Use guest resources to size target execution tests.
 Complete the pilot before extending the migration to dependent components.
 Remove obsolete patches after their regression passes without them.
@@ -47,7 +47,7 @@ Use independent expected results; candidate output alone is not an oracle.
 
 If baseline execution is unavailable, use reviewed specifications or trusted captures with recorded provenance.
 Report the missing live comparison.
-Never install an obsolete toolchain to recreate it.
+Use reviewed specifications or trusted captures with the current supported toolchain.
 Keep target correctness and historical equivalence as separate claims.
 
 Rerun relevant suites from fresh outputs.

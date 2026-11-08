@@ -6,8 +6,7 @@ The full source catalog is not a request to build every package or platform.
 
 Plasma, additional languages, firmware, documentation, and diagnostics are
 optional package groups. Keep each group as roots over the common Ports
-recipes. Do not add recipe copies, version pins, another resolver, or a private
-prefix.
+recipes. Use the common resolver, version selection, and compatible prefix.
 
 Reuse compatible prefixes, sysroots, packages, and objects by the
 [SDK input key](https://github.com/oxtech-ember/EmberBSD-SDK/blob/main/docs/input-keys.md).

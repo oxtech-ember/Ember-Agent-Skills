@@ -20,7 +20,7 @@ Treat old pins and consumer requirements as migration work; adapt consumers to t
 Reuse the canonical Ports recipe, source pin, hashes, and complete patch set.
 Reuse a package when its [input key](https://github.com/oxtech-ember/EmberBSD-SDK/blob/main/docs/input-keys.md) matches.
 The key contains the Ports tree hash, configuration, compiler key, ABI, and target.
-Do not add checks that reread or rehash inputs that a git hash or input key already identifies.
+Reuse the recorded Git hash or input key as the input identity.
 Keep host and target artifacts separate without maintaining different dependency versions for each application or board.
 Replace bundled shared-library copies and private dependency downloads with the common Ports dependency.
 Repair missing consumer build support while preserving required upstream functionality.
@@ -30,7 +30,7 @@ Keep base-library integration in OS while consuming the common Ports sources.
 
 Move diagnostic edits from extracted sources, caches, or sysroots into the owning recipe or source repository.
 Keep the regression with that implementation.
-Do not copy the same patch into applications, profiles, SDK scripts, or skills.
+Keep one patch at its owner; route applications, profiles, SDK scripts, and skills to that implementation.
 Include affected direct and transitive consumers when updating the graph and package revisions.
 Remove replaced versions from the active graph after their consumers pass.
 After concurrent changes, the merged Git tree gives a new input key.
@@ -38,7 +38,7 @@ Rebuild and test the affected consumers for that key.
 A conflict-free text merge does not prove compatibility.
 
 Verify the normal build from a clean source revision with documented prerequisites.
-Do not require hidden local files or manual patching after checkout.
+Make the documented checkout and prerequisites sufficient for the normal build.
 Retain matching evidence when publication does not change the tested inputs.
 
 ## Offer the shared repair
@@ -48,11 +48,11 @@ Separate the reusable repair from personal application behavior and private mate
 Prepare a focused patch and its evidence for the correct public owner.
 Use `emberbsd-contribute` or the [public contribution procedure](https://github.com/oxtech-ember/EmberBSD/blob/main/CONTRIBUTING.md).
 When publication is authorized, push a topic branch to an authorized repository or fork and open the matching PR.
-Existing authorization remains valid; do not request it again.
+Reuse existing authorization within its granted scope.
 Otherwise, show the prepared diff and checks before asking permission to publish.
 If permission is declined, preserve the local patch and report that it remains unsubmitted.
-Do not repeat a declined publication request.
+Keep the declined submission local until the user changes that decision.
 Skill installation does not grant upstream write or merge permission.
-Do not push upstream `main` merely because the user can build EmberBSD.
+Push upstream `main` only with explicit authorization for that repository and action.
 Report prepared, submitted, merged, and released states separately.
-Do not describe a local repair or pending PR as available to all users.
+Report a local repair as local and an open PR as pending.

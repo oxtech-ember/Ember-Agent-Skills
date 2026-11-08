@@ -2,7 +2,7 @@
 
 Task-specific instructions for AI agents working on [EmberBSD](https://github.com/oxtech-ember/EmberBSD).
 The package uses [Agent Plugins](https://agent-plugins.org/) and [Agent Skills](https://agentskills.io/specification).
-Version **0.4.29** contains nine independently installable skills.
+Version **0.4.30** contains nine independently installable skills.
 
 | Skill | Task |
 | --- | --- |
@@ -41,13 +41,13 @@ Keep the application's existing instructions when you install skills.
 
 Reuse one current Ports recipe and patch set for each shared dependency.
 Reuse builds, stages, and evidence by the [input key](https://github.com/oxtech-ember/EmberBSD-SDK/blob/main/docs/input-keys.md) alone.
-Do not add checks that reread or rehash inputs that a git hash or input key already identifies.
+Reuse the recorded Git hash or input key as the input identity.
 Build with SDK tools under the [tool selection policy](https://github.com/oxtech-ember/EmberBSD-SDK/blob/main/docs/tool-selection.md).
 Select native and target Clang/LLVM separately. Select GCC only for an explicit platform requirement.
 Prefer compatible installed components, then signed binaries from the SDK catalog.
 Build missing native tool roles from current Ports recipes.
 Prepare a sysroot only for the requested target/ABI when the task needs one.
-Do not build every platform or optional package group by default.
+Select only the requested platforms and package groups.
 Initial acquisition and workspace inspection do not require a completed SDK.
 For compilation, keep selected tools inside their prefix and reject external host build-tool fallbacks.
 Check actual producer selections; a PATH change does not repair a missing shared selector.

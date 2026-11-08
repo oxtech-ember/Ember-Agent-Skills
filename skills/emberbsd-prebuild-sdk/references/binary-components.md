@@ -9,7 +9,7 @@ Inspect an existing SDK before installing another prefix.
 On a supported host, use the minimal bootstrap without requiring an existing Python, compiler, or Ports checkout.
 Select only components required by the user's task.
 Use the client's catalog and plan to check availability, host, target/ABI, dependencies, and download size.
-Do not assume that every compiler, sysroot, or host platform is already published.
+Confirm each required component and platform in the current catalog.
 Follow the owner's current support boundaries.
 The first-install shell bootstrap currently selects Darwin arm64 only.
 On Linux, check for a compatible installed prefix and published components.
@@ -21,11 +21,11 @@ Reuse compatible installed components first.
 Then install matching signed binaries through the client.
 Build missing packages through the client's configured Ports source path.
 Use the [workspace workflow](workflow.md) when source preparation or a sysroot build is necessary.
-Do not treat signature errors, corrupted archives, or network failures as missing binaries.
+Report signature, integrity, and network failures distinctly; repair them before continuing binary installation.
 Keep signature and integrity checks enabled.
 
 Share the native prefix and package cache across tasks.
 Keep one sysroot per target/ABI.
-Do not download another host toolchain for each target.
+Reuse the compatible host toolchain across targets.
 Use the client's supported operations for cache cleanup and component changes.
-Do not describe installation as an accepted compiler, application, or device check.
+Report installation separately from compiler, application, and device acceptance.

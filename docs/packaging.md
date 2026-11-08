@@ -48,7 +48,7 @@ that client. Record actual client names, versions and checks separately.
    instructions independent of a client's invocation syntax and private tools.
 4. Update the README and package version, then run the checks below.
 
-Do not maintain another source copy under a client's skill search directory.
+Keep this repository as the canonical editable source.
 Install or refresh from these canonical sources. Preserve users' application instructions.
 Retain the MIT notice when redistributing the package or a standalone skill.
 
@@ -88,8 +88,7 @@ the installed version and the skills that `grok inspect --json` loads.
 The [Codex guide](codex.md) describes that adapter. Record equivalent evidence
 before claiming another client's installation or behavior has been tested.
 
-Select the narrow skill directly from its description. Do not require the
-repository selector first. Install one complete skill directory in isolation
+Select the narrow skill directly from its description. Use the repository selector only when ownership is unclear. Install one complete skill directory in isolation
 and verify that its links, metadata, and icon remain usable.
 
 After installing in a test environment, exercise these skill scenarios:
@@ -99,11 +98,11 @@ After installing in a test environment, exercise these skill scenarios:
 | Add WPA3 support to a wireless driver | Assign SAE and handshake policy to net80211 or the shared supplicant; assign hardware/vendor ABI translation to the driver; reuse common regressions |
 | Add GPU rendering policy or a vendor offload | Assign rendering policy to the common graphics stack; expose offload through its contract and test the driver boundary |
 | A driver needs a missing common API | Extend the owning subsystem, adapt affected consumers, remove duplicate policy as part of the extension, then add the hardware adapter |
-| Inspect or create a workspace before acquiring the SDK | Use an installed Python accepted by the command; do not require a completed build tool set |
+| Inspect or create a workspace before acquiring the SDK | Use an installed Python accepted by the command; apply the selected command's bootstrap prerequisites |
 | Acquire native tools before cross-building | Reuse installed components, then signed SDK binaries; build unavailable components through common Ports |
 | System `cc` is Apple Clang while a native SDK prefix is selected | Reject ordinary fallback; use the prefix compiler. Declared initial bootstrap remains separate |
 | `HOST_CC` points to the selected compiler but SDK resolves `cc` again | Inspect the real plan and stop the dependent build; repair the common selector |
-| SDK lacks a native compiler, generator, or build interpreter | Repair the SDK/Ports provider; do not install a system substitute or hide it behind a local wrapper |
+| SDK lacks a native compiler, generator, or build interpreter | Repair the SDK/Ports provider and use its selected prefix tools |
 | The SDK cross compiler is offered for a native generator | Reject the host/target mismatch; select a host-executable native compiler |
 | CMake, Meson, configure, or a nested make retains a system tool | Reject stale selection; update the owning producer and invalidate incompatible cached outputs |
 | A system binary is symlinked into the SDK | Resolve the symlink and reject the build tool outside the selected prefix |
@@ -115,20 +114,20 @@ After installing in a test environment, exercise these skill scenarios:
 | Create a new application | Select `emberbsd-develop-app`; keep independent application conventions |
 | Build a static base set | Select `emberbsd-build-static-base`; require complete tools and runtime |
 | Edit AI discovery descriptions or icons | Select `emberbsd-maintain-skills`; check all standalone bundles |
-| Operate a device or customize an existing app in personal Ports | Route to EmberBSD-User-Skills; do not require a contribution merely because source editing is involved |
+| Operate a device or customize an existing app in personal Ports | Route personal source edits to EmberBSD-User-Skills; publish a shared contribution only when authorized |
 | Build an application in a user's own repository | Read its conventions, reuse real public interfaces/examples, and keep application code in that repository |
 | A private application discovers a reusable EmberBSD bug | Isolate the minimal fix; preserve private material and obtain publication permission if it is outside the task |
-| A shared dependency recipe already exists under `pkgsrc/` | Reuse that recipe and its complete patch set; do not search only profiles and probes |
+| A shared dependency recipe already exists under `pkgsrc/` | Search `pkgsrc/`, profiles, and probes; reuse the canonical recipe and its complete patch set |
 | An application bundles an old dependency or downloads another private copy | Adapt its build to the current Ports dependency; check affected consumers instead of preserving a separate old stack |
 | A patch exists only in extracted sources or a sysroot | Move it into the owning recipe with a regression; verify a clean normal build without hidden local inputs |
-| A user authorized a tested shared repair and its PR | Complete the authorized fork or topic-branch submission; do not stop at a local commit or request permission again |
-| A private application repair lacks publication permission | Prepare the public-owner diff and tests without private material, then request permission; do not push first |
-| A user declines publication of a prepared shared repair | Preserve the patch locally and report it as unsubmitted; do not repeat the request or claim a public fix |
+| A user authorized a tested shared repair and its PR | Complete the authorized fork or topic-branch submission within the granted scope |
+| A private application repair lacks publication permission | Prepare the public-owner diff and tests without private material; obtain publication permission before pushing |
+| A user declines publication of a prepared shared repair | Preserve the patch locally and report it as unsubmitted until the user changes that decision |
 | Another contributor updates the same dependency | The merged Git tree gives a new input key; rebuild and test affected consumers. A text merge alone does not prove compatibility |
-| An agent wants to recheck inputs before reuse | Reuse when the [input key](https://github.com/oxtech-ember/EmberBSD-SDK/blob/main/docs/input-keys.md) matches. Do not add checks that reread or rehash inputs that a git hash or input key already identifies. |
+| An agent wants to recheck inputs before reuse | Reuse when the [input key](https://github.com/oxtech-ember/EmberBSD-SDK/blob/main/docs/input-keys.md) matches. Reuse the recorded Git hash or input key as the input identity. |
 | A fix corrects step order, a typo, a path, or a similar mechanical error | Add no regression test; such a test costs time and adds no value. A logic or behavior fix still needs a causal regression test |
-| A shared repair has an open PR but no merge or release | Report the PR URL and pending state; do not claim availability to all users |
-| Contribute a tested port without upstream write access | Use a topic branch in a fork and open a PR against the correct target/base; never assume permission to push upstream main |
+| A shared repair has an open PR but no merge or release | Report the PR URL and pending state; report the exact submitted, merged, or released state and its available artifact |
+| Contribute a tested port without upstream write access | Use a topic branch in a fork and open a PR against the correct target/base |
 | An independent application uses a different language or license | Preserve its choices; apply EmberBSD contribution conventions only to changes offered to EmberBSD repositories |
 | Add a standalone UART decoder demonstration | Inspect Examples and any required OS/SDK interfaces; identify actual build checks |
 | Request an SDK command that is absent from the checkout | Report the missing interface without inventing a command or ABI |
@@ -144,30 +143,30 @@ After installing in a test environment, exercise these skill scenarios:
 | TinyGo's recipe builds a private LLVM fork | Inspect fork patches/targets before adopting a common LLVM; distinguish an available recipe from a tested compiler |
 | A new compiler introduces two libstdc++ versions in one process | Reject fake SONAME fixes; rebuild and test the coherent runtime/consumer set |
 | A tested port is ready for contribution | Prepare an EmberBSD PR and the reusable upstream change, respecting actual submission and provenance rules |
-| The GitHub target is only a mirror or restricts AI-generated code | Read current upstream policy; do not send to the wrong channel or hide provenance |
-| Required runtime tests are unavailable or fail | Keep the gap visible; do not present a ready PR or supported platform on build evidence alone |
+| The GitHub target is only a mirror or restricts AI-generated code | Read current upstream policy; use its accepted channel and disclose provenance |
+| Required runtime tests are unavailable or fail | Keep the gap visible; use a permitted draft and report the unverified runtime scope |
 | OpenCV builds but aborts before the application starts | Reproduce at runtime, check the pinned CPU-detection case, and test the remedy without disabling the baseline guard |
 | OpenCV videoio builds but a real file cannot be opened | Check the selected backend, its dependency linkage and the versioned media regressions; a build alone is insufficient |
 | A media fixture decodes every frame despite a truncated trailer | Check the trusted fixture length and decoder diagnostics as well as frames, timestamps and EOF |
-| A QEMU guest's `/netbsd` differs from the host's direct boot input | Record the loader-selected artifact and its hash; do not identify the running kernel from the guest file alone |
+| A QEMU guest's `/netbsd` differs from the host's direct boot input | Record the loader-selected artifact and its hash as the running kernel identity |
 | A gpsd PTY check fails in a single-user VM | Check PTY/ptyfs preparation before patching gpsd; synthetic tests do not establish receiver support |
 | A C/C++ port adds a memory warning | Compare pinned upstream and patched findings with the same target settings; repair the cause with a regression |
 | A Cppcheck run uses host headers for an EmberBSD target | Correct the compilation database, target ABI, macros and includes before interpreting the result |
-| Valgrind is unavailable for the host or target | Record the exact support gap and alternative memory checks; never report a Valgrind pass |
+| Valgrind is unavailable for the host or target | Record the exact support gap and named alternative checks; report any Valgrind run separately with its actual result |
 | Research a custom carrier using DevBoards | Read the exact carrier and board sources; check design transfer assumptions and keep implementation checks in OS/Ports |
 | Find shared release orchestration in OS | Route its implementation and contracts to SDK; retain OS source build rules with their subsystem |
 | Find a standalone desktop application in OS | Keep it in Examples or its own repository; keep dependency recipes in Ports |
 | Find hardware descriptions in OS image documentation | Move hardware applicability and boot layouts to DevBoards; retain image builder mechanics and software contracts in OS |
-| Record a new physical support result | Update the current DevBoards scenario and limits with provenance; do not append a test diary or duplicate catalog |
-| A related board has a different bootloader | Follow the selected board's loader contract; do not infer its image format from the SoC |
+| Record a new physical support result | Update the canonical DevBoards scenario, limits, and provenance |
+| A related board has a different bootloader | Select the image format from the exact board's loader contract |
 | A kernel driver passes a user-space memory model | Keep native kernel, DMA, concurrency and hardware acceptance separate |
 | An analyzer warns in imported code | Record ownership and impact; justify only narrow suppressions and retain unsuppressed new defects |
 | Upstream removes the reason for a workaround | Retest and remove obsolete patch/guidance; preserve the source and acceptance state |
 | Upgrade a shared dependency across an API or ABI change | Map used changes to consumers; complete one pilot before migrating the dependency closure |
 | The old release cannot run and trusted output is missing | Use independent target expectations; leave historical equivalence unverified without installing obsolete tools |
 | A migration check always reports success | Break a disposable candidate and alter a captured output byte; require both checks to detect the fault |
-| A small target VM is used for cross-build acceptance | Size compilation from host resources and target execution from guest resources |
-| A security repair intentionally changes malformed-input behavior | Test the supported contract and document the difference; do not restore the old defect |
+| A small target VM is used for cross-build acceptance | Use SDK capacity for compilation and guest resources for target execution |
+| A security repair intentionally changes malformed-input behavior | Test the corrected supported contract and document the intentional difference |
 
 These are manual acceptance scenarios. Package discovery alone does not prove
 that an assistant will satisfy them or improve over an unassisted baseline.

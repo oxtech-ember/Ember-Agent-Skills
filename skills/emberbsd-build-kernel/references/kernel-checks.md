@@ -14,7 +14,7 @@ HOST_CC="$host_cc" HOST_CXX="$host_cxx" CC="$host_cc" NETBSD2_JOBS="$jobs" \
 
 Inspect the builder before selecting another architecture or configuration.
 Verify cached compiler settings and the actual external prefix.
-Verify that host selectors do not replace target compiler settings in nested commands.
+Verify separate host and target compiler selections in nested commands.
 Reject stale caches and system-tool selection before compiling.
 Check the real exit status and current logs.
 Reject stale artifacts from a failed build.
@@ -38,7 +38,7 @@ For linked applications, read the Ports recipe's application mode.
 It requires target libc, startup objects, headers, and the matching compiler runtime.
 Run its current `compile-tests.py` procedure and target runner.
 Preserve sysroot provenance and relative symlinks.
-Do not mix host libraries with target libraries.
+Keep host libraries outside target library searches.
 
 ## Source and memory analysis
 
@@ -55,6 +55,6 @@ Reuse common regressions and test the hardware boundary.
 
 Attach drivers through autoconf(9); declare options and dependencies in `files.*`.
 Make each driver possible to disable with a configuration option.
-Do not add hard dependencies between optional drivers.
+Keep each optional driver usable when unrelated optional drivers are disabled.
 Use shared helpers such as firmload(9), net80211, and DRM helpers.
 Add a man page for a new driver and follow style(9).

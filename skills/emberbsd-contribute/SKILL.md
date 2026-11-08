@@ -29,10 +29,10 @@ Separate reusable platform repairs from those changes.
 If publication is authorized, complete submission instead of leaving the tested repair only in a local checkout.
 If permission is missing, prepare a reviewable patch and its checks before asking.
 Respect a refusal and report the patch as unsubmitted.
-Do not request authorization already granted.
+Reuse authorization within its granted scope.
 Keep private material outside the submission.
-Do not assume upstream write or merge permission.
-Do not overwrite another contributor's branch.
+Use upstream write or merge operations only within explicitly granted authority.
+Preserve other contributors' branches and changes.
 Merge only when authorized.
 Use a permitted draft for missing required validation.
 Keep failed tests visible.

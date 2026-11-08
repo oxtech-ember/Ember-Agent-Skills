@@ -2,7 +2,7 @@
 
 Build one current package stack with shared objects and packages for each target ABI.
 Keep incompatible ABIs in separate build roots.
-Do not keep separate package sets or accepted snapshots for each device.
+Share the current package set and matching acceptance across devices of the same target ABI.
 Update a device to the current stack before testing it.
 
 Maintain one current sysroot per target ABI.

@@ -16,12 +16,12 @@ Read the selected SDK command's help before execution.
 5. For source work, inspect the workspace and the sysroot builder's `--plan`.
 6. Reuse objects only when their [input key](https://github.com/oxtech-ember/EmberBSD-SDK/blob/main/docs/input-keys.md) matches.
 
-Build only the target sysroot required for the task. Do not build every target or package group by default.
+Build only the target sysroot required for the task. Select only the requested targets and package groups.
 Reuse a compatible native prefix and sysroot. Kernel-only work uses `emberbsd-build-kernel` and needs no application sysroot.
 An empty workspace does not prove that its compiler or sysroot works.
 SDK build logic and shared Python modules belong to EmberBSD-SDK.
 
-Reject build tools outside the selected prefix. Do not add checks that reread or rehash inputs already identified by Git or an input key.
+Reject build tools outside the selected prefix. Use Git or the input key as the recorded input identity.
 Keep native generators separate from target files. Report host and target checks separately.
 
 Use `emberbsd-build-kernel` for kernel-only compiler work.

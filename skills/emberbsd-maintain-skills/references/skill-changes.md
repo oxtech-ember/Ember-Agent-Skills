@@ -13,18 +13,18 @@ These limits support ASD-STE100 style; they do not certify dictionary compliance
 Keep all linked instructions, icons, and metadata inside the skill directory.
 Refer to another skill by name instead of linking to its files.
 Provide an owning public procedure when the other skill can be absent.
-Do not require private wiki pages, lab paths, or credentials.
+Make the skill usable with public documentation and user-selected local inputs.
 Link build reuse rules to the common [input key rule](https://github.com/oxtech-ember/EmberBSD-SDK/blob/main/docs/input-keys.md).
-Do not write rules that reread or rehash inputs that a git hash or input key already identifies.
+Use the recorded Git hash or input key as the input identity.
 Require a causal regression test only for a logic or behavior fix.
-Do not require a regression test for a trivial fix, such as step order, a typo, or a path.
+For a trivial order, typo, or path fix, verify the corrected text or operation directly.
 Route hardware, SoC, bootloader, layout, and current support guidance to DevBoards.
 Keep OS mechanism documentation beside its subsystem.
 Route common build orchestration, sysroots, and release kits to SDK.
 Route dependency recipes and upstream patches to Ports.
 Route standalone UI applications to Examples or their own repository.
 Keep skills concise; link to owner contracts instead of copying them.
-Do not use OS documentation as an umbrella for other projects.
+Keep each project's documentation at its implementation owner.
 
 For a compatibility lesson, record symptom, cause, affected versions, source, and checked revision.
 Add the verified remedy, check, limits, upstream state, and removal condition.

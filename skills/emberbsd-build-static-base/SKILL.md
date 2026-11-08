@@ -22,7 +22,7 @@ For compilation, reject build tools outside the selected prefix.
 
 Kernel compiler frontends alone cannot build a complete static base runtime.
 Keep normal file checks and `INSTALLSETS=base`.
-Do not retry compiler crashes as a substitute for diagnosis.
+Diagnose compiler crashes and select recovery from the findings; use retries only as part of that diagnosis or recovery.
 Use the owning recovery procedure for an authorized deployment.
 Record measured boot results instead of assuming a speed improvement.
 Keep build evidence and physical acceptance separate.

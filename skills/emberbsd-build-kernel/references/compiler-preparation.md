@@ -32,10 +32,10 @@ A compiler environment variable does not select every nested tool.
 Kernel-only builds use the owning producer's target inputs without an application sysroot.
 Application builds additionally require target headers, libc, CRT, and the selected runtime.
 Compiler choice alone does not establish C++ ABI compatibility.
-Select jobs from available host CPU, memory, disk, and active builds.
+Use the SDK's shared CPU capacity for jobs, with an explicit developer override.
 Use the shared object tree and keep incompatible configurations separate.
 Reuse exports and installed tools when their [input key](https://github.com/oxtech-ember/EmberBSD-SDK/blob/main/docs/input-keys.md) matches.
-Do not make a new admission report for them.
+Reuse their existing matching evidence.
 
 Check actual command results, target objects, and relevant compiler tests.
 Keep build evidence separate from boot and hardware evidence.

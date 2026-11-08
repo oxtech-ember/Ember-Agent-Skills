@@ -39,10 +39,10 @@ Run executable tests with Valgrind Memcheck on a supported platform.
 Enable leak and uninitialized-value checks with a nonzero error exit status.
 Valgrind checks execution, not source text.
 If Valgrind is unavailable, record the platform gap and applicable ASan/UBSan or kernel checks.
-Do not label substitute checks as a Valgrind pass.
+Name each substitute check. Report any Valgrind run separately with its actual result.
 Fix confirmed defects with regressions.
 Track unresolved inherited findings with their owner and impact.
-Explain each targeted suppression; do not disable whole diagnostic categories.
+Keep diagnostic categories enabled. Explain each narrowly targeted suppression.
 Record tool versions, commands, scope, findings, and untested paths.
 Static analysis and memory checks supplement runtime and hardware acceptance.
 

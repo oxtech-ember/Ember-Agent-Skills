@@ -21,7 +21,7 @@ For compilation, reject build tools outside the selected prefix.
 6. Record host results and target results separately.
 
 SDK provides workspace tools. Stable application contracts and Runtime remain separate work.
-Do not call a planned API as an implemented tool.
+Call APIs confirmed in current implementation or released tools.
 Ask for missing information only when it blocks the requested work.
 
 Use `emberbsd-port-software` for a shared dependency repair.

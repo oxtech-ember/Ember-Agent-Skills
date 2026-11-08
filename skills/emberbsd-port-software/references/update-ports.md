@@ -23,9 +23,9 @@ These Python tools do not call an LLM or replace pkgsrc.
 Keep host tools and target packages in separate graph nodes.
 Use pkgsrc to evaluate dependencies and match versions.
 Preserve baseline locks and failed results.
-Reuse an artifact when its [input key](https://github.com/oxtech-ember/EmberBSD-SDK/blob/main/docs/input-keys.md) matches; do not verify it again.
-Never record an old file as success after a failed producer.
-Do not weaken tests or introduce legacy dependencies to clear failures.
+Reuse an artifact when its [input key](https://github.com/oxtech-ember/EmberBSD-SDK/blob/main/docs/input-keys.md) matches; reuse its recorded verification.
+Record producer failure as failure, even when an older output exists.
+Repair failed behavior while preserving test strength and current shared dependencies.
 Report artifact completion separately from installed behavior and hardware checks.
 Report an unsubmitted repair explicitly when publication is not authorized.
 
@@ -33,4 +33,4 @@ For a release, follow the [SDK release procedure](https://github.com/oxtech-embe
 Prepare the source `EMBER_VERSION` and source manifest before building.
 Finalize tags only after successful builds and the release checks.
 Tag creation and publication need a direct request from the user.
-Never update the source version after testing and tag the older output.
+Tag the source version and output that passed the release checks together.

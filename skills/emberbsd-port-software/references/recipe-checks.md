@@ -16,7 +16,7 @@ Investigate changed hashes instead of replacing expected values without evidence
 Preserve licenses and required private-fork backends.
 Use ordinary pkgsrc recipes, staging, and package tools.
 
-Check CPU, RAM, and disk capacity before setting job limits.
+Use the SDK's shared CPU capacity for job limits, with an explicit developer override.
 Coordinate access to a shared build host.
 Use new outputs after compiler or configuration changes.
 Keep actual exit statuses.
@@ -48,10 +48,10 @@ Run executable tests with Valgrind Memcheck on a supported platform.
 Enable leak and uninitialized-value checks with a nonzero error exit status.
 Valgrind checks execution, not source text.
 If Valgrind is unavailable, record the platform gap and applicable ASan/UBSan or kernel checks.
-Do not label substitute checks as a Valgrind pass.
+Name substitute checks. Report actual Valgrind results separately.
 Fix confirmed defects with regressions.
 Track unresolved inherited findings with their owner and impact.
-Explain each targeted suppression; do not disable whole diagnostic categories.
+Keep diagnostic categories enabled. Explain each narrowly targeted suppression.
 Record tool versions, commands, scope, findings, and untested paths.
 Static analysis and memory checks supplement runtime and hardware acceptance.
 
@@ -66,12 +66,12 @@ Use shared objects, packages, and the current sysroot for the selected target AB
 Keep incompatible ABIs separate.
 Make builds work on case-insensitive file systems.
 Fix a recipe that fails only on such a file system.
-Do not create Mesa, Plasma, or other package variants for individual boards.
+Use the same Mesa, Plasma, and other package recipes across boards of each target ABI.
 Select only the runtime packages that the device needs.
 Split large toolchains into runtime and development packages.
-Target runtime packages must not depend on compilers, linkers, or test tools.
+Keep compiler, linker, and test-tool dependencies in development packages only.
 Rebuild in a clean work directory after a version or file-list change.
 Check that each `PROVIDES` entry names a file in the package's `+CONTENTS`.
-Do not keep stale packages in the sysroot.
+Replace stale sysroot packages through the accepted replacement sysroot.
 Build a replacement sysroot next to the old one; replace the old one after acceptance.
 Rebuild ABI consumers in the same change.

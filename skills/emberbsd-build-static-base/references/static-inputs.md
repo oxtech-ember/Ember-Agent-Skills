@@ -16,7 +16,7 @@ Target GCC libraries require generated headers, including `insn-constants.h`.
 Reuse the complete TOOLDIR with separate static object and destination trees.
 Regenerate `makewrapper` for that configuration.
 Inspect its actual TOOLDIR.
-Do not replace complete tools with a reduced tools build.
+Retain the complete tool set for this build.
 
 Check these historical generation failures in current OS make rules.
 
@@ -39,7 +39,7 @@ Fix generation dependencies at their source.
 For bounded recovery, invoke the real generation target through its make wrapper.
 Reuse generated outputs when their [input key](https://github.com/oxtech-ember/EmberBSD-SDK/blob/main/docs/input-keys.md) matches.
 A different key or a dirty worktree means a new generation.
-Do not add checks that reread or rehash inputs that a git hash or input key already identifies.
+Reuse the recorded Git hash or input key as the input identity.
 Inspect Ports host math dependencies when the host compiler crashes.
 Keep recovery commands in owning tools.
 
