@@ -14,11 +14,18 @@ These Python tools do not call an LLM or replace pkgsrc.
 6. Run existing producers for ready nodes with the selected shared toolchain.
 7. Record explicit outcomes, logs, and output hashes.
 8. Inspect failures and repair the responsible shared recipe or consumer.
-9. Update the package revision when a patch changes its output.
+9. Change the package revision only when the installed files change for that role and architecture.
 10. Review and test each repair before publication.
 11. Export changed inputs and make a new plan after each repair.
 12. Continue until the requested closure has the required evidence.
 13. Submit tested shared repairs through the authorized contribution channel.
+
+Follow the [package revision rules](https://github.com/oxtech-ember/EmberBSD-Ports/blob/main/README.md#package-revisions).
+A revision change makes every build host build or repackage the package again.
+Use a conditional revision for a change to one role or one architecture.
+Keep the revision for test, documentation, license-text and alignment changes.
+Keep consumer revisions when the provider ABI is unchanged.
+For an external rebuild reason, add a comment on the revision line: the comment makes the package compile again.
 
 Keep host tools and target packages in separate graph nodes.
 Use pkgsrc to evaluate dependencies and match versions.

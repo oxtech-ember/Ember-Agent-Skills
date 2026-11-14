@@ -2,7 +2,7 @@
 
 Task-specific instructions for AI agents working on [EmberBSD](https://github.com/oxtech-ember/EmberBSD).
 The package uses [Agent Plugins](https://agent-plugins.org/) and [Agent Skills](https://agentskills.io/specification).
-Version **0.4.30** contains nine independently installable skills.
+Version **0.4.31** contains nine independently installable skills.
 
 | Skill | Task |
 | --- | --- |
@@ -40,6 +40,7 @@ Independent applications keep their own conventions, language, license, and publ
 Keep the application's existing instructions when you install skills.
 
 Reuse one current Ports recipe and patch set for each shared dependency.
+Change a package revision only when the installed files of that package change.
 Reuse builds, stages, and evidence by the [input key](https://github.com/oxtech-ember/EmberBSD-SDK/blob/main/docs/input-keys.md) alone.
 Reuse the recorded Git hash or input key as the input identity.
 Build with SDK tools under the [tool selection policy](https://github.com/oxtech-ember/EmberBSD-SDK/blob/main/docs/tool-selection.md).

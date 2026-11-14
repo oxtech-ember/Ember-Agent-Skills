@@ -31,7 +31,8 @@ Keep base-library integration in OS while consuming the common Ports sources.
 Move diagnostic edits from extracted sources, caches, or sysroots into the owning recipe or source repository.
 Keep the regression with that implementation.
 Keep one patch at its owner; route applications, profiles, SDK scripts, and skills to that implementation.
-Include affected direct and transitive consumers when updating the graph and package revisions.
+Include affected direct and transitive consumers when updating the graph.
+Change a consumer revision only when its installed files change.
 Remove replaced versions from the active graph after their consumers pass.
 After concurrent changes, the merged Git tree gives a new input key.
 Rebuild and test the affected consumers for that key.
