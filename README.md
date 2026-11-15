@@ -4,6 +4,9 @@ Task-specific instructions for AI agents working on [EmberBSD](https://github.co
 The package uses [Agent Plugins](https://agent-plugins.org/) and [Agent Skills](https://agentskills.io/specification).
 Version **0.4.31** contains nine independently installable skills.
 
+Read the [EmberBSD Developer Guide](https://github.com/oxtech-ember/EmberBSD-Docs/blob/main/README.md)
+for architecture, module boundaries and configuration.
+
 | Skill | Task |
 | --- | --- |
 | [`emberbsd-repository-guide`](skills/emberbsd-repository-guide/SKILL.md) | Select a repository and task skill when ownership is unclear |
