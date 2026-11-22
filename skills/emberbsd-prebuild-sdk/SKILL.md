@@ -1,19 +1,20 @@
 ---
 name: emberbsd-prebuild-sdk
-description: Use when you install SDK components, prepare a Prebuild SDK workspace, or build an EmberBSD sysroot.
+description: Use when you install SDK components, prepare a Prebuild SDK workspace, or build an EmberBSD sysroot or development OS sets.
 ---
 
 # Prepare a Prebuild SDK
 
 Read [binary component installation](references/binary-components.md) first.
 For source builds, read the [workspace workflow](references/workflow.md).
+For development OS sets, read [build profiles](references/build-profile.md).
 Read the selected SDK command's help before execution.
 
 1. Identify the build host and requested target architecture.
 2. Select the required native tools, target ABI, compiler, and runtime.
 3. Reuse compatible installed components, then obtain signed binaries from the SDK's current catalog.
 4. Build unavailable components through their common Ports or OS producers.
-5. For source work, inspect the workspace and the sysroot builder's `--plan`.
+5. For source work, inspect the workspace and the plan of the selected build.
 6. Reuse objects only when their [input key](https://github.com/oxtech-ember/EmberBSD-SDK/blob/main/docs/input-keys.md) matches.
 
 Build only the target sysroot required for the task. Select only the requested targets and package groups.

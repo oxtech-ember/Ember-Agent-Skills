@@ -1,9 +1,24 @@
 # Build and check the kernel
 
+Set `sdk_python` to the absolute Python path in the selected native prefix.
+For a Clang kernel, use an SDK build profile.
+Read the [build profile procedure](https://github.com/oxtech-ember/EmberBSD-SDK/blob/main/docs/build-profile.md).
+Set `client` to the client configuration and `profile` to the profile file.
+Name the kernel configuration in `os.kernels` of the profile.
+Run the command from the SDK checkout:
+
+```sh
+"$sdk_python" scripts/packages.py --config "$client" profile-build --profile "$profile"
+```
+
+`profile-build` runs `ember/build-kernel.sh` with the selected tools and prepared sources.
+It writes the kernel to the `kernels` directory of the configured `work` directory.
+
+The profile supports only the Clang target toolchain.
+For an explicit GCC platform profile, run the OS kernel builder directly.
 Set `os` to the source checkout.
 Set `output` to an absolute directory outside the OS source tree.
 Use the same selected host compilers and resource limit.
-Set `sdk_python` to the absolute Python path in the selected native prefix.
 
 ```sh
 HOST_CC="$host_cc" HOST_CXX="$host_cxx" CC="$host_cc" NETBSD2_JOBS="$jobs" \

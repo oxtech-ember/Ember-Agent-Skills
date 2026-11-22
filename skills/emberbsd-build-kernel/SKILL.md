@@ -15,7 +15,7 @@ For driver changes, follow the local ownership rules in kernel checks; `emberbsd
 3. For missing components, follow the owning host bootstrap and prepare the pinned Ports export and compiler inputs.
 4. Use the owning Ports procedure for the selected compiler family and kernel target.
 5. Select the compiler family, target, and prefix through the current OS interface.
-6. Run the owning OS kernel builder.
+6. Build a Clang kernel with an SDK build profile. For GCC, run the OS kernel builder.
 7. Check its exit status, logs, contracts, and artifacts.
 
 Check each exit status before the next dependent command.
