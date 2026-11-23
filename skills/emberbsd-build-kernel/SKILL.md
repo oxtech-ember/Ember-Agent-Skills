@@ -26,7 +26,7 @@ Build missing native tools from common Ports recipes, then build the cross SDK w
 Initial acquisition does not require a completed SDK.
 For compilation, reject build tools outside the selected prefix.
 Read the [SDK tool selection policy](https://github.com/oxtech-ember/EmberBSD-SDK/blob/main/docs/tool-selection.md).
-Keep one general-purpose kernel for each functional task. Build a trial as a local configuration on top of it.
+Keep one general-purpose kernel for each functional task. Build a trial as a local configuration on top of it; do not keep it.
 Kernel mode needs no application sysroot.
 A kernel compiler supplies no complete target application runtime.
 Repair shared compatibility in Ports or OS.
