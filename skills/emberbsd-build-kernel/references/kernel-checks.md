@@ -39,16 +39,16 @@ Keep kernel, modules, and DTBs from coherent inputs.
 Run the owning portable contracts and applicable orchestration regression.
 Record native contract gaps explicitly.
 
-Identify the artifact that the loader actually selects.
+Identify the artifact the loader selects.
 For physical boot, read the exact [DevBoards](https://github.com/oxtech-ember/EmberBSD-DevBoards) profile.
 Locate it through the [reader guide](https://github.com/oxtech-ember/EmberBSD-DevBoards/blob/main/docs/reader-guide.md) and [catalog](https://github.com/oxtech-ember/EmberBSD-DevBoards/blob/main/catalog.json).
 Check its current support limits, boot layout, and selected loader contract.
-A shared SoC does not establish the image format.
-Read OS builder and image contracts beside their implementation.
-Apply them only to the hardware and boot layout identified by DevBoards.
+A shared SoC does not set the image format.
+Read OS builder and image contracts with their code.
+Apply them only to the hardware DevBoards identifies.
 QEMU `-kernel` can differ from the guest's `/netbsd` file.
-On a running efiboot AArch64 board, install with `ember/install-kernel.sh`; it keeps a recovery kernel.
-Compilation alone does not prove boot or peripheral support.
+Install on a running board with `ember/install-kernel.sh`.
+Compiling does not prove boot or peripheral support.
 Keep firmware and hardware checks within the requested device scope.
 
 For linked applications, read the Ports recipe's application mode.
