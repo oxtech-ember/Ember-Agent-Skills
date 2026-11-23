@@ -5,6 +5,7 @@ For a Clang kernel, use an SDK build profile.
 Read the [build profile procedure](https://github.com/oxtech-ember/EmberBSD-SDK/blob/main/docs/build-profile.md).
 Set `client` to the client configuration and `profile` to the profile file.
 Name the kernel configuration in `os.kernels` of the profile.
+Select a [general-purpose configuration](https://github.com/oxtech-ember/EmberBSD/blob/main/ember/development/kernel.md#kernel-configurations) or a DevBoards trial in `build.kernel_configs`.
 Run the command from the SDK checkout:
 
 ```sh
