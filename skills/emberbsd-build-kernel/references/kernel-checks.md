@@ -47,6 +47,7 @@ A shared SoC does not establish the image format.
 Read OS builder and image contracts beside their implementation.
 Apply them only to the hardware and boot layout identified by DevBoards.
 QEMU `-kernel` can differ from the guest's `/netbsd` file.
+On a running efiboot AArch64 board, install with `ember/install-kernel.sh`; it keeps a recovery kernel.
 Compilation alone does not prove boot or peripheral support.
 Keep firmware and hardware checks within the requested device scope.
 
