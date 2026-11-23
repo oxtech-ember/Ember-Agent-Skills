@@ -15,11 +15,12 @@ For compilation, reject build tools outside the selected prefix.
 
 1. Record the exact board model, revision, firmware, and boot path.
 2. Compare the closest platform with vendor wiring and interface documents.
-3. Integrate kernel, drivers, DTS/ACPI, build outputs, and boot selection.
+3. Integrate drivers as passive attachments of the general-purpose kernel, DTS/ACPI, build outputs, and boot selection.
 4. Run common regressions and available device checks.
 5. Update the canonical DevBoards profile and its support limits.
 6. Record source, build, VM, and physical results separately.
 
+Do not add a board kernel configuration.
 A shared SoC does not prove peripheral support.
 A DTS alone does not add an installed DTB or loader entry.
 When the platform has no fork support, run a first port.

@@ -9,6 +9,7 @@ Read the OS and Ports build guides.
 Read [compiler preparation](references/compiler-preparation.md).
 Read [kernel checks](references/kernel-checks.md).
 For driver changes, follow the local ownership rules in kernel checks; `emberbsd-contribute` provides additional design guidance.
+To extend or modify a kernel, read the [kernel extension mechanisms](https://github.com/oxtech-ember/EmberBSD/blob/main/ember/development/kernel.md#extend-the-kernel).
 
 1. Identify the host, target architecture, source revision, and available resources.
 2. Inspect installed tools and the authenticated SDK catalog and plan. Reuse compatible tools, then install matching signed binaries.
@@ -25,6 +26,7 @@ Build missing native tools from common Ports recipes, then build the cross SDK w
 Initial acquisition does not require a completed SDK.
 For compilation, reject build tools outside the selected prefix.
 Read the [SDK tool selection policy](https://github.com/oxtech-ember/EmberBSD-SDK/blob/main/docs/tool-selection.md).
+Keep one general-purpose kernel for each functional task. Build a trial as a local configuration on top of it.
 Kernel mode needs no application sysroot.
 A kernel compiler supplies no complete target application runtime.
 Repair shared compatibility in Ports or OS.
